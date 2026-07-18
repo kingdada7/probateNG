@@ -27,3 +27,4 @@ dist-ssr
 # node_modules
 Applicant/node_modules
 server/node_modules
+server/.env
