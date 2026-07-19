@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import {
   Mail,
   Key,
@@ -21,7 +21,7 @@ function CitizenLogin() {
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { updateUser } = useContext(UserContext);
+  // const { updateUser } = useContext(UserContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -157,7 +157,7 @@ function CitizenLogin() {
                   <LockKeyhole className="w-6 h-6 text-[#0b602a] text-3xl" />
                 </div>
               </div>
-              <form onSubmit={handleLogin} className="space-y-5">
+              <form className="space-y-5">
                 <div>
                   <label className=" text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
                     <Mail className="w-4 h-4" />
