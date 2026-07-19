@@ -1,15 +1,7 @@
+import { Menu, X } from "lucide-react";
 import React from "react";
-import {
-  Shield,
-  Home,
-  ChevronRight,
-  ArrowRight,
-  Mail,
-  Phone,
-  MapPin,
-  Menu,
-  X,
-} from "lucide-react";
+import { useState } from "react";
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
