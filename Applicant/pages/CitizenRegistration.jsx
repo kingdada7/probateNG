@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Mail,
   Key,
@@ -20,98 +20,94 @@ import { FaArrowRight } from "react-icons/fa";
 
 import { Link, useNavigate } from "react-router";
 
-
 function CitizenRegistration() {
+  const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
-
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [fullname, setFullName] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const { updateUser } = useContext(UserContext);
 
+  const [fullname, setFullName] = useState("");
 
   const navigate = useNavigate();
 
-//   const handleSignup = async (e) => {
-//     e.preventDefault();
+  //   const handleSignup = async (e) => {
+  //     e.preventDefault();
 
-//     if (!fullname.trim()) {
-//       setError("Please enter your full name");
-//       return;
-//     }
+  //     if (!fullname.trim()) {
+  //       setError("Please enter your full name");
+  //       return;
+  //     }
 
-//     if (!email.trim()) {
-//       setError("Please enter your email address");
-//       return;
-//     }
+  //     if (!email.trim()) {
+  //       setError("Please enter your email address");
+  //       return;
+  //     }
 
-//     if (!validateEmail(email)) {
-//       setError("Please enter a valid email address");
-//       return;
-//     }
+  //     if (!validateEmail(email)) {
+  //       setError("Please enter a valid email address");
+  //       return;
+  //     }
 
-//     if (!password) {
-//       setError("Please enter a password");
-//       return;
-//     }
+  //     if (!password) {
+  //       setError("Please enter a password");
+  //       return;
+  //     }
 
-//     if (password !== confirmPassword) {
-//       setError("Passwords do not match");
-//       return;
-//     }
+  //     if (password !== confirmPassword) {
+  //       setError("Passwords do not match");
+  //       return;
+  //     }
 
-//     try {
-//       setLoading(true);
-//       setError("");
+  //     try {
+  //       setLoading(true);
+  //       setError("");
 
-//       const response = await axiosInstance.post(API_ENDPOINT.AUTH.REGISTER, {
-//         email,
-//         password,
-//         name: fullname,
-//       });
+  //       const response = await axiosInstance.post(API_ENDPOINT.AUTH.REGISTER, {
+  //         email,
+  //         password,
+  //         name: fullname,
+  //       });
 
-//       const { token, role } = response.data;
+  //       const { token, role } = response.data;
 
-//       if (token) {
-//         updateUser(response.data);
+  //       if (token) {
+  //         updateUser(response.data);
 
-//         if (role === "citizen") {
-//           navigate("/citizen/dashboard");
-//         }
-//       }
-//     } catch (error) {
-//       if (error.response?.data?.message) {
-//         setError(error.response.data.message);
-//       } else {
-//         setError("An error occurred during registration.");
-//       }
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+  //         if (role === "citizen") {
+  //           navigate("/citizen/dashboard");
+  //         }
+  //       }
+  //     } catch (error) {
+  //       if (error.response?.data?.message) {
+  //         setError(error.response.data.message);
+  //       } else {
+  //         setError("An error occurred during registration.");
+  //       }
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-
-//   const [loading, setLoading] = useState(true);
-//   useEffect(() => {
-//     const timmer = setTimeout(() => {
-//       setLoading(false);
-//     }, 2000);
-//     return () => clearTimeout(timmer);
-//   }, []);
-//   if (loading) {
-//     return (
-//       <div className="min-h-screen flex items-center justify-center bg-[#F5F7F6]">
-//         <InfinitySpin width="200" color="#0b602a" />
-//       </div>
-//     );
-//   }
+  //   const [loading, setLoading] = useState(true);
+  //   useEffect(() => {
+  //     const timmer = setTimeout(() => {
+  //       setLoading(false);
+  //     }, 2000);
+  //     return () => clearTimeout(timmer);
+  //   }, []);
+  //   if (loading) {
+  //     return (
+  //       <div className="min-h-screen flex items-center justify-center bg-[#F5F7F6]">
+  //         <InfinitySpin width="200" color="#0b602a" />
+  //       </div>
+  //     );
+  //   }
   //handle signup
 
   return (
-    <div className="min-h-screen bg-[#f6f8f7] dark:bg-[#112117] flex flex-col ">
-     
+    <div className="min-h-screen bg-[#f6f8f7]  flex flex-col ">
       <main className="pt-20 flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5 pointer-events-none overflow-hidden">
           <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#0b602a] rounded-full"></div>
@@ -126,7 +122,7 @@ function CitizenRegistration() {
               Federal Capital Territory Abuja
             </p>
           </div>
-          <div className="bg-white dark:bg-[#1a2e21] rounded-lg shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden">
+          <div className="bg-white  rounded-lg shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden">
             <div className="bg-[#0b602a] h-2 w-full"></div>
             <div className="p-8">
               <div className="flex items-start justify-between mb-6">
@@ -140,7 +136,7 @@ function CitizenRegistration() {
                   </p>
                 </div>
               </div>
-              <form onSubmit={handleSignup} className="space-y-5">
+              <form className="space-y-5">
                 <div className="relative">
                   <label
                     htmlFor="fullname"
@@ -155,7 +151,7 @@ function CitizenRegistration() {
                     onChange={(e) => setFullName(e.target.value)}
                     type="text"
                     placeholder="Enter your full Legal Name"
-                    className=" w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] dark:bg-[#112117] text-[#0e1b13] dark:text-white placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
+                    className=" w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] text-[#0e1b13] placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
                   />
                 </div>
                 <div className="relative">
@@ -171,7 +167,7 @@ function CitizenRegistration() {
                     onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     placeholder="e.g. name@gmail.com"
-                    className="  w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] dark:bg-[#112117] text-[#0e1b13] dark:text-white placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
+                    className="  w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9]  text-[#0e1b13]  placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
                   />
                 </div>
 
@@ -189,7 +185,7 @@ function CitizenRegistration() {
                       onChange={(e) => setPassword(e.target.value)}
                       type={hidePassword ? "password" : "text"}
                       placeholder="Create a strong password "
-                      className=" w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] dark:bg-[#112117] text-[#0e1b13] dark:text-white placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
+                      className=" w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] bg-[#f8fcf9]  text-[#0e1b13]  placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
                     />
                     {hidePassword ? (
                       <EyeOff
@@ -223,8 +219,19 @@ function CitizenRegistration() {
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       type="password"
                       placeholder="Confirm your password"
-                      className="w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] dark:bg-[#112117] text-[#0e1b13] dark:text-white placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
+                      className="w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] text-[#0e1b13]  placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
                     />
+                    {hideConfirmPassword ? (
+                      <EyeOff
+                        onClick={() => setHideConfirmPassword(false)}
+                        className="absolute right-4 top-3.5 w-5 h-5 text-gray-500 cursor-pointer"
+                      />
+                    ) : (
+                      <Eye
+                        onClick={() => setHideConfirmPassword(true)}
+                        className="absolute right-4 top-3.5 w-5 h-5 text-gray-500 cursor-pointer"
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -251,44 +258,7 @@ function CitizenRegistration() {
             </div>
           </div>
         </div>
-        <div className="mt-8 text-center space-y-4">
-          <div className="flex items-center justify-center gap-2 text-xs text-gray-500 tracking-wider">
-            <ShieldCheck className="w-4 h-4 text-[#1a5c3a]" />
-            <span>END-TO-END ENCRYPTED SECURE PORTAL</span>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-12 h-12 bg-gray-400  flex items-center justify-center bg-no-repeat bg-contain">
-              <div className="w-8 h-8 bg-gray-500 ">
-                <img
-                  className=""
-                  src="/src/assets/coa.png"
-                  alt="Nigeria Coat of Arms"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
       </main>
-
-      <footer className="bg-white border-t border-gray-200 py-6">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between text-sm text-gray-600">
-          <p>
-            © 2026 Federal Capital Territory Customary Court of Nigeria. All
-            Rights Reserved.
-          </p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-gray-900">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-gray-900">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-gray-900">
-              Legal Disclaimer
-            </a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
