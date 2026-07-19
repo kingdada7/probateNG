@@ -1,7 +1,6 @@
-import { Menu, X } from "lucide-react";
+import { Landmark, Menu, X } from "lucide-react";
 import React from "react";
 import { useState } from "react";
-
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,7 +9,10 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 shrink-0">
-          <div className="w-9 h-9 flex items-center justify-center"></div>
+          <div className="w-9 h-9 flex items-center justify-center">
+            {" "}
+            <Landmark className="text-[#1a5c2a]" />
+          </div>
           <div>
             <div className="font-bold text-gray-900 text-sm leading-tight">
               FCT Customary Court of Nigeria
