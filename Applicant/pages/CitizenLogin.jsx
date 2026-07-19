@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Mail,
   Key,
@@ -87,46 +87,7 @@ function CitizenLogin() {
   // }
 
   return (
-    <div className="min-h-screen bg-[#f6f8f7] dark:bg-[#112117] flex flex-col ">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#0b602a] rounded-sm flex items-center justify-center">
-              <Landmark className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-lg font-bold text-gray-900">
-                FCT Customary Court of Appeal
-              </h1>
-              <p className="text-[#0b602a] text-xs">OFFICAL PORTAL</p>
-            </div>
-          </div>
-          <nav className="hidden md:flex items-center gap-8">
-            <a
-              href="#"
-              className="text-sm font-medium text-gray-900 hover:text-[#0b602a]"
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="text-sm font-medium text-gray-900 hover:text-[#0b602a]"
-            >
-              About Probate
-            </a>
-            <a
-              href="#"
-              className="text-sm font-medium text-gray-900 hover:text-[#0b602a]"
-            >
-              Help Center
-            </a>
-
-            <button className="bg-[#0b602a] text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition-colors">
-              Support
-            </button>
-          </nav>
-        </div>
-      </header>
+    <div className="min-h-screen bg-[#f6f8f7] flex flex-col ">
       <main className="pt-20 flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5 pointer-events-none overflow-hidden">
           <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#0b602a] rounded-full"></div>
@@ -141,7 +102,7 @@ function CitizenLogin() {
               Federal Capital Territory Abuja
             </p>
           </div>
-          <div className="bg-white dark:bg-[#1a2e21] rounded-lg shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden">
+          <div className="bg-white rounded-lg shadow-lg border border-gray-100  overflow-hidden">
             <div className="bg-[#0b602a] h-2 w-full"></div>
             <div className="p-8">
               <div className="flex items-start justify-between mb-6">
@@ -225,23 +186,6 @@ function CitizenLogin() {
                     Register here
                   </a>
                 </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-8 text-center space-y-4">
-          <div className="flex items-center justify-center gap-2 text-xs text-gray-500 tracking-wider">
-            <ShieldCheck className="w-4 h-4 text-[#1a5c3a]" />
-            <span>END-TO-END ENCRYPTED SECURE PORTAL</span>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-12 h-12 bg-gray-400  flex items-center justify-center bg-no-repeat bg-contain">
-              <div className="w-8 h-8 bg-gray-500 ">
-                <img
-                  className=""
-                  src="/src/assets/coa.png"
-                  alt="Nigeria Coat of Arms"
-                />
               </div>
             </div>
           </div>
