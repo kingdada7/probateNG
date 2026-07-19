@@ -9,11 +9,11 @@ import {
   EyeOff,
   Landmark,
 } from "lucide-react";
-import { InfinitySpin } from "react-loader-spinner";
-import { validateEmail } from "../../../utils/helper.js";
-import { API_ENDPOINT } from "../../../utils/apiPaths.js";
-import axiosInstance from "../../../utils/axiosInstance";
-import { UserContext } from "../../../context/userContext.jsx";
+// import { InfinitySpin } from "react-loader-spinner";
+// import { validateEmail } from "../../../utils/helper.js";
+// import { API_ENDPOINT } from "../../../utils/apiPaths.js";
+// import axiosInstance from "../../../utils/axiosInstance";
+// import { UserContext } from "../../../context/userContext.jsx";
 
 import { Link, useNavigate } from "react-router";
 
@@ -25,66 +25,66 @@ function CitizenLogin() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
 
-    if (!email.trim()) {
-      setError("Please enter your email address");
-      return;
-    }
+  //   if (!email.trim()) {
+  //     setError("Please enter your email address");
+  //     return;
+  //   }
 
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address");
-      return;
-    }
+  //   if (!validateEmail(email)) {
+  //     setError("Please enter a valid email address");
+  //     return;
+  //   }
 
-    if (!password) {
-      setError("Please enter a password");
-      return;
-    }
+  //   if (!password) {
+  //     setError("Please enter a password");
+  //     return;
+  //   }
 
-    try {
-      setLoading(true);
-      setError("");
+  //   try {
+  //     setLoading(true);
+  //     setError("");
 
-      const response = await axiosInstance.post(API_ENDPOINT.AUTH.LOGIN, {
-        email,
-        password,
-      });
+  //     const response = await axiosInstance.post(API_ENDPOINT.AUTH.LOGIN, {
+  //       email,
+  //       password,
+  //     });
 
-      const { role } = response.data;
+  //     const { role } = response.data;
 
-      // Update context with user info
-      updateUser(response.data);
+  //     // Update context with user info
+  //     updateUser(response.data);
 
-      if (role === "citizen") {
-        navigate("/citizen/dashboard");
-      }
-    } catch (error) {
-      if (error.response?.data?.message) {
-        setError(error.response.data.message);
-      } else {
-        setError("An error occurred during login.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     if (role === "citizen") {
+  //       navigate("/citizen/dashboard");
+  //     }
+  //   } catch (error) {
+  //     if (error.response?.data?.message) {
+  //       setError(error.response.data.message);
+  //     } else {
+  //       setError("An error occurred during login.");
+  //     }
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const timmer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-    return () => clearTimeout(timmer);
-  }, []);
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F5F7F6]">
-        <InfinitySpin width="200" color="#0b602a" />
-      </div>
-    );
-  }
+  // const [loading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   const timmer = setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  //   return () => clearTimeout(timmer);
+  // }, []);
+  // if (loading) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center bg-[#F5F7F6]">
+  //       <InfinitySpin width="200" color="#0b602a" />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen bg-[#f6f8f7] dark:bg-[#112117] flex flex-col ">
@@ -164,8 +164,8 @@ function CitizenLogin() {
                     Email Address
                   </label>
                   <input
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    // value={email}
+                    // onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     placeholder="e.g. name@gmail.com"
                     className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm "
@@ -181,8 +181,8 @@ function CitizenLogin() {
 
                   <div className="relative">
                     <input
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      // value={password}
+                      // onChange={(e) => setPassword(e.target.value)}
                       type={hidePassword ? "password" : "text"}
                       placeholder="Enter your password "
                       className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm"
@@ -247,26 +247,6 @@ function CitizenLogin() {
           </div>
         </div>
       </main>
-
-      <footer className="bg-white border-t border-gray-200 py-6">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between text-sm text-gray-600">
-          <p>
-            © 2026 Federal Capital Territory Customary Court of Nigeria. All
-            Rights Reserved.
-          </p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-gray-900">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-gray-900">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-gray-900">
-              Legal Disclaimer
-            </a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
