@@ -7,7 +7,7 @@ const HeroSection = () => {
         {/* Image */}
         <div className="w-full lg:w-[45%] shrink-0">
           <img
-            src="https://images.pexels.com/photos/1464580/pexels-photo-1464580.jpeg?auto=compress&cs=tinysrgb&w=800"
+            src="https://fctcca.gov.ng/uploads/THE%20COURT.jpeg"
             alt="FCT Customary Court Building"
             className="w-full h-[260px] sm:h-[320px] lg:h-[360px] object-cover rounded-lg shadow-md"
           />
