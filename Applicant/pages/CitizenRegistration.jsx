@@ -1,0 +1,296 @@
+import React, {useContext, useEffect, useState } from "react";
+import {
+  Mail,
+  Key,
+  User,
+  LockKeyhole,
+  ShieldCheck,
+  LogIn,
+  Eye,
+  EyeOff,
+  Landmark,
+} from "lucide-react";
+import { MdOutlineLockReset } from "react-icons/md";
+import { FaArrowRight } from "react-icons/fa";
+// import { InfinitySpin } from "react-loader-spinner";
+// import { validateEmail } from "../../../utils/helper.js";
+// import { API_ENDPOINT } from "../../../utils/apiPaths.js";
+// import axiosInstance from "../../../utils/axiosInstance";
+// import { UserContext } from "../../../context/userContext.jsx";
+
+import { Link, useNavigate } from "react-router";
+
+
+function CitizenRegistration() {
+  const [hidePassword, setHidePassword] = useState(true);
+
+  const [error, setError] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullname, setFullName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const { updateUser } = useContext(UserContext);
+
+
+  const navigate = useNavigate();
+
+//   const handleSignup = async (e) => {
+//     e.preventDefault();
+
+//     if (!fullname.trim()) {
+//       setError("Please enter your full name");
+//       return;
+//     }
+
+//     if (!email.trim()) {
+//       setError("Please enter your email address");
+//       return;
+//     }
+
+//     if (!validateEmail(email)) {
+//       setError("Please enter a valid email address");
+//       return;
+//     }
+
+//     if (!password) {
+//       setError("Please enter a password");
+//       return;
+//     }
+
+//     if (password !== confirmPassword) {
+//       setError("Passwords do not match");
+//       return;
+//     }
+
+//     try {
+//       setLoading(true);
+//       setError("");
+
+//       const response = await axiosInstance.post(API_ENDPOINT.AUTH.REGISTER, {
+//         email,
+//         password,
+//         name: fullname,
+//       });
+
+//       const { token, role } = response.data;
+
+//       if (token) {
+//         updateUser(response.data);
+
+//         if (role === "citizen") {
+//           navigate("/citizen/dashboard");
+//         }
+//       }
+//     } catch (error) {
+//       if (error.response?.data?.message) {
+//         setError(error.response.data.message);
+//       } else {
+//         setError("An error occurred during registration.");
+//       }
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+
+//   const [loading, setLoading] = useState(true);
+//   useEffect(() => {
+//     const timmer = setTimeout(() => {
+//       setLoading(false);
+//     }, 2000);
+//     return () => clearTimeout(timmer);
+//   }, []);
+//   if (loading) {
+//     return (
+//       <div className="min-h-screen flex items-center justify-center bg-[#F5F7F6]">
+//         <InfinitySpin width="200" color="#0b602a" />
+//       </div>
+//     );
+//   }
+  //handle signup
+
+  return (
+    <div className="min-h-screen bg-[#f6f8f7] dark:bg-[#112117] flex flex-col ">
+     
+      <main className="pt-20 flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5 pointer-events-none overflow-hidden">
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#0b602a] rounded-full"></div>
+          <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#0b602a] rounded-full"></div>
+        </div>
+        <div className="relative z-10 w-full max-w-fit">
+          <div className="text-center ">
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">
+              Probate Application Portal
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Federal Capital Territory Abuja
+            </p>
+          </div>
+          <div className="bg-white dark:bg-[#1a2e21] rounded-lg shadow-lg border border-gray-100 dark:border-gray-800 overflow-hidden">
+            <div className="bg-[#0b602a] h-2 w-full"></div>
+            <div className="p-8">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-[#0e1b13] mb-1">
+                    Create Your Account
+                  </h3>
+                  <p className="text-sm text-[#4e9769]">
+                    Complete the form below to create your account and start
+                    your Application
+                  </p>
+                </div>
+              </div>
+              <form onSubmit={handleSignup} className="space-y-5">
+                <div className="relative">
+                  <label
+                    htmlFor="fullname"
+                    className=" text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2"
+                  >
+                    Official Full Name
+                  </label>
+                  <User className="absolute left-4 top-10.5 w-5 h-5 text-[#4e9769]" />
+
+                  <input
+                    value={fullname}
+                    onChange={(e) => setFullName(e.target.value)}
+                    type="text"
+                    placeholder="Enter your full Legal Name"
+                    className=" w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] dark:bg-[#112117] text-[#0e1b13] dark:text-white placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
+                  />
+                </div>
+                <div className="relative">
+                  <label
+                    htmlFor="email"
+                    className=" text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2"
+                  >
+                    Email Address
+                  </label>
+                  <Mail className="absolute left-4 top-11 w-5 h-5 text-[#4e9769]" />
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="email"
+                    placeholder="e.g. name@gmail.com"
+                    className="  w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] dark:bg-[#112117] text-[#0e1b13] dark:text-white placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className=" text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                      Password
+                    </label>
+                  </div>
+
+                  <div className="relative">
+                    <LockKeyhole className="absolute left-4 top-4 w-5 h-5 text-[#4e9769]" />
+                    <input
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      type={hidePassword ? "password" : "text"}
+                      placeholder="Create a strong password "
+                      className=" w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] dark:bg-[#112117] text-[#0e1b13] dark:text-white placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
+                    />
+                    {hidePassword ? (
+                      <EyeOff
+                        onClick={() => setHidePassword(false)}
+                        className="absolute right-4 top-3.5 w-5 h-5 text-gray-500 cursor-pointer"
+                      />
+                    ) : (
+                      <Eye
+                        onClick={() => setHidePassword(true)}
+                        className="absolute right-4 top-3.5 w-5 h-5 text-gray-500 cursor-pointer"
+                      />
+                    )}
+                  </div>
+                  <div className="mt-2 flex gap-1 items-center">
+                    <div className="h-1 flex-1 bg-[#0b602a] rounded-full"></div>
+                    <div className="h-1 flex-1 bg-[#0b602a] rounded-full"></div>
+                    <div className="h-1 flex-1 bg-[#d0e7d8] dark:bg-[#2a4433] rounded-full"></div>
+                    <div className="h-1 flex-1 bg-[#d0e7d8] dark:bg-[#2a4433] rounded-full"></div>
+                    <span className="text-[10px] text-[#4e9769] ml-2 font-medium uppercase tracking-wider">
+                      Moderate
+                    </span>
+                  </div>
+
+                  <div className=" relative items-center justify-between mb-2">
+                    <label className=" text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                      Confirm Password
+                    </label>
+                    <MdOutlineLockReset className="w-5 h-5 absolute left-4 top-10.5 text-[#4e9769]" />
+                    <input
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      type="password"
+                      placeholder="Confirm your password"
+                      className="w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] dark:bg-[#112117] text-[#0e1b13] dark:text-white placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-[#1a5c3a] text-white py-3.5 rounded-md font-semibold hover:bg-[#154d2f] transition-colors flex items-center justify-center gap-2 mt-18"
+                >
+                  Register Account <FaArrowRight className="w-5 h-5" />
+                </button>
+                {error && <p className="text-sm text-red-600">{error}</p>}
+              </form>
+
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-700">
+                  Already Have an Account?
+                  <a
+                    href="/CitizenLogin"
+                    className="text-[#1a5c3a] font-semibold hover:underline pl-3"
+                  >
+                    Log in here
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="mt-8 text-center space-y-4">
+          <div className="flex items-center justify-center gap-2 text-xs text-gray-500 tracking-wider">
+            <ShieldCheck className="w-4 h-4 text-[#1a5c3a]" />
+            <span>END-TO-END ENCRYPTED SECURE PORTAL</span>
+          </div>
+          <div className="flex justify-center">
+            <div className="w-12 h-12 bg-gray-400  flex items-center justify-center bg-no-repeat bg-contain">
+              <div className="w-8 h-8 bg-gray-500 ">
+                <img
+                  className=""
+                  src="/src/assets/coa.png"
+                  alt="Nigeria Coat of Arms"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer className="bg-white border-t border-gray-200 py-6">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between text-sm text-gray-600">
+          <p>
+            © 2026 Federal Capital Territory Customary Court of Nigeria. All
+            Rights Reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            <a href="#" className="hover:text-gray-900">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-gray-900">
+              Terms of Service
+            </a>
+            <a href="#" className="hover:text-gray-900">
+              Legal Disclaimer
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default CitizenRegistration;
