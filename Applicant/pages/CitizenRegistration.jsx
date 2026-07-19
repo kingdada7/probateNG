@@ -224,12 +224,12 @@ function CitizenRegistration() {
                     {hideConfirmPassword ? (
                       <EyeOff
                         onClick={() => setHideConfirmPassword(false)}
-                        className="absolute right-4 top-3.5 w-5 h-5 text-gray-500 cursor-pointer"
+                        className="absolute right-4 top-10.5 w-5 h-5 text-gray-500 cursor-pointer"
                       />
                     ) : (
                       <Eye
                         onClick={() => setHideConfirmPassword(true)}
-                        className="absolute right-4 top-3.5 w-5 h-5 text-gray-500 cursor-pointer"
+                        className="absolute right-4 top-10.5 w-5 h-5 text-gray-500 cursor-pointer"
                       />
                     )}
                   </div>
