@@ -179,12 +179,12 @@ function CitizenLogin() {
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-700">
                   Don't have an account?{" "}
-                  <a
-                    href="/CitizenRegistration"
+                  <Link
+                    to="/CitizenRegistration"
                     className="text-[#1a5c3a] font-semibold hover:underline"
                   >
                     Register here
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
