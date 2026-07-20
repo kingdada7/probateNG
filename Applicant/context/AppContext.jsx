@@ -29,7 +29,7 @@ export const AppProvider = ({ children }) => {
   // Fetch logged-in user
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get("/api/citizen/get-profile");
+      const { data } = await axios.get("/api/citizen/get-user");
 
       if (data.success) {
         setUser(data.user);
