@@ -13,9 +13,6 @@ export const userRegister = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-
-
-
     const normalizedEmail = email.toLowerCase().trim();
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,5 +34,11 @@ export const userRegister = async (req, res) => {
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
+
+    const user = await User.create({
+      fullName: fullName.trim(),
+      email: normalizedEmail,
+      password: hashedPassword,
+    });
   } catch (error) {}
 };
