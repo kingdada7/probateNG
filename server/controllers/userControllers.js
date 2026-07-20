@@ -6,9 +6,6 @@ export const userRegister = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
 
-    // Hash password
-    const userSalt = await bcrypt.genSalt(10);
-
     if (!fullName?.trim() || !email?.trim() || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
@@ -20,20 +17,21 @@ export const userRegister = async (req, res) => {
       return res.status(400).json({ message: "Invalid email format" });
     }
 
+    // Check if user exists
+    const userExists = await User.findOne({ email: normalizedEmail });
+    if (userExists) {
+      return res.status(409).json({ message: "User already exists" });
+    }
+
     // Password validation
     if (password.length < 8) {
       return res.status(400).json({
         message: "Password must be at least 8 characters",
       });
     }
-    //hash password
-    const hashedPassword = await bcrypt.hash(password, userSalt);
+    // Hash password
 
-    // Check if user exists
-    const userExists = await User.findOne({ email: normalizedEmail });
-    if (userExists) {
-      return res.status(400).json({ message: "User already exists" });
-    }
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
       fullName: fullName.trim(),
@@ -49,9 +47,8 @@ export const userRegister = async (req, res) => {
       success: true,
       message: "Registration successful",
       token,
-      user,
     });
-  } catch {
+  } catch (error) {
     console.error(error);
 
     return res.status(500).json({
