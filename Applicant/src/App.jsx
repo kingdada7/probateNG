@@ -15,8 +15,11 @@ const App = () => {
       <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="" element={token ? <Layout /> : <CitizenLogin />}>
-        <Route path="/citizendashboard" element={CitizenDashboard}/>
+        <Route
+          path="citizenportal"
+          element={token ? <Layout /> : <CitizenLogin />}
+        >
+          <Route path="/citizendashboard" element={CitizenDashboard} />
         </Route>
         <Route path="/citizenregistration" element={<CitizenRegistration />} />
       </Routes>
