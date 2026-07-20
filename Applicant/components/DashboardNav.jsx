@@ -5,10 +5,19 @@ import { useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
 
 const DashboardNav = () => {
-  const { user } = useAppContext();
+  const { user, axios ,setToken} = useAppContext();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    delete axios.defaults.headers.common["Authorization"];
+
+    setToken(null);
+    setUser(null);
+
+    navigate("/citizenportal");
+  };
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
@@ -34,7 +43,7 @@ const DashboardNav = () => {
             {user?.fullName}
           </button>
           <button
-            onClick={() => navigate("/citizenportal")}
+            onClick={logout}
             className="bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2 rounded-md hover:bg-[#164d23] transition-colors cursor-pointer"
           >
             Logout
@@ -62,7 +71,7 @@ const DashboardNav = () => {
           </button>
 
           <button
-            onClick={() => navigate("/citizenportal")}
+            onClick={(logout) => navigate("/citizenportal")}
             className="w-full bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-[#164d23] transition-colors mt-2 cursor-pointer"
           >
             Logout
