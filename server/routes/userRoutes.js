@@ -10,6 +10,6 @@ const userRouter = express.Router();
 
 userRouter.post("/citizenregistration", userRegister);
 userRouter.post("/citizenlogin", userLogin);
-userRouter.get("/get-profile", auth, getUser);
+userRouter.get("/get-user", auth, getUser);
 
 export default userRouter;
