@@ -40,5 +40,23 @@ export const userRegister = async (req, res) => {
       email: normalizedEmail,
       password: hashedPassword,
     });
-  } catch (error) {}
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Registration successful",
+      token,
+      user,
+    });
+  } catch {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
 };
