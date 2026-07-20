@@ -16,9 +16,10 @@ import { FaArrowRight } from "react-icons/fa";
 
 import { Link, useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 function CitizenRegistration() {
-  const { axios, navigate } = useAppContext;
+  const { axios, navigate } = useAppContext();
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -37,7 +38,7 @@ function CitizenRegistration() {
         fullName,
         email,
         password,
-        confirmPassword
+        confirmPassword,
       });
     } catch (error) {
       toast.error(error.message);
@@ -190,7 +191,7 @@ function CitizenRegistration() {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#1a5c3a] text-white py-3.5 rounded-md font-semibold hover:bg-[#154d2f] transition-colors flex items-center justify-center gap-2 mt-18"
+                  className="w-full bg-[#1a5c3a] text-white py-3.5 rounded-md font-semibold hover:bg-[#154d2f] transition-colors flex items-center justify-center cursor-pointer gap-2 mt-18"
                 >
                   Register Account <FaArrowRight className="w-5 h-5" />
                 </button>
