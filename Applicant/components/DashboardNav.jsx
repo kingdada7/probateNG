@@ -3,12 +3,9 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-import { useAppContext } from "../context/AppContext";
-
 const DashboardNav = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user } = useAppContext();
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -32,7 +29,7 @@ const DashboardNav = () => {
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-8">
           <button className="bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2 rounded-md hover:bg-[#164d23] transition-colors cursor-pointer">
-            {user?.fullName}
+            john snow
           </button>
           <button
             onClick={() => navigate("/citizenportal")}

@@ -20,8 +20,6 @@ export const AppProvider = ({ children }) => {
     setToken,
     input,
     setInput,
-    user,
-    setUser
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
