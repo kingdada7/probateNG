@@ -103,6 +103,11 @@ export const userLogin = async (req, res) => {
       success: true,
       message: "Login successful",
       token,
+      user: {
+        id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+      },
     });
   } catch (error) {
     console.error(error);
