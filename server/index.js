@@ -4,6 +4,7 @@ import cors from "cors";
 import express from "express";
 
 import connectDB from "./config/db.js";
+import userRouter from "./routes/userRoutes.js";
 
 // Connect DB
 connectDB();
@@ -18,7 +19,8 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
-
+app.get("/", (req, res) => res.send("API is working"));
+app.use("/api/user", userRouter);
 
 const PORT = process.env.PORT || 5000;
 
