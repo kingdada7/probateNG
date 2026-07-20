@@ -16,75 +16,44 @@ import {
 // import { UserContext } from "../../../context/userContext.jsx";
 
 import { Link, useNavigate } from "react-router";
+import { useAppContext } from "../context/AppContext";
 
 function CitizenLogin() {
+  const { axios, navigate } = useAppContext;
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const { updateUser } = useContext(UserContext);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
+ const { axios, setToken, navigate } = useAppContext();
 
-  //   if (!email.trim()) {
-  //     setError("Please enter your email address");
-  //     return;
-  //   }
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-  //   if (!validateEmail(email)) {
-  //     setError("Please enter a valid email address");
-  //     return;
-  //   }
+  try {
+    const { data } = await axios.post("/api/citizen/citizenlogin", {
+      email,
+      password,
+    });
 
-  //   if (!password) {
-  //     setError("Please enter a password");
-  //     return;
-  //   }
+    if (data.success) {
+      toast.success(data.message);
 
-  //   try {
-  //     setLoading(true);
-  //     setError("");
+      setToken(data.token);
+      localStorage.setItem("token", data.token);
 
-  //     const response = await axiosInstance.post(API_ENDPOINT.AUTH.LOGIN, {
-  //       email,
-  //       password,
-  //     });
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${data.token}`;
 
-  //     const { role } = response.data;
+      navigate("/dashboard"); // or your desired route
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.message || error.message);
+  }
+};
 
-  //     // Update context with user info
-  //     updateUser(response.data);
 
-  //     if (role === "citizen") {
-  //       navigate("/citizen/dashboard");
-  //     }
-  //   } catch (error) {
-  //     if (error.response?.data?.message) {
-  //       setError(error.response.data.message);
-  //     } else {
-  //       setError("An error occurred during login.");
-  //     }
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // const [loading, setLoading] = useState(true);
-  // useEffect(() => {
-  //   const timmer = setTimeout(() => {
-  //     setLoading(false);
-  //   }, 2000);
-  //   return () => clearTimeout(timmer);
-  // }, []);
-  // if (loading) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center bg-[#F5F7F6]">
-  //       <InfinitySpin width="200" color="#0b602a" />
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="min-h-screen bg-[#f6f8f7] flex flex-col ">
