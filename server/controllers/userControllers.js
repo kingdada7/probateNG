@@ -4,10 +4,16 @@ import bcrypt from "bcrypt";
 
 export const userRegister = async (req, res) => {
   try {
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, confirmPassword } = req.body;
 
     if (!fullName?.trim() || !email?.trim() || !password) {
       return res.status(400).json({ message: "All fields are required" });
+    }
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Passwords do not match",
+      });
     }
 
     const normalizedEmail = email.toLowerCase().trim();

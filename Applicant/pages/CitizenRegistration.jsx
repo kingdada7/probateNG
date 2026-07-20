@@ -13,82 +13,36 @@ import {
 import { MdOutlineLockReset } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
 // import { InfinitySpin } from "react-loader-spinner";
-// import { validateEmail } from "../../../utils/helper.js";
-// import { API_ENDPOINT } from "../../../utils/apiPaths.js";
-// import axiosInstance from "../../../utils/axiosInstance";
-// import { UserContext } from "../../../context/userContext.jsx";
 
 import { Link, useNavigate } from "react-router";
+import { useAppContext } from "../context/AppContext";
 
 function CitizenRegistration() {
+  const { axios, navigate } = useAppContext;
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      return toast.error("Passwords do not match");
+    }
 
-  const [fullname, setFullName] = useState("");
-
-  const navigate = useNavigate();
-
-  //   const handleSignup = async (e) => {
-  //     e.preventDefault();
-
-  //     if (!fullname.trim()) {
-  //       setError("Please enter your full name");
-  //       return;
-  //     }
-
-  //     if (!email.trim()) {
-  //       setError("Please enter your email address");
-  //       return;
-  //     }
-
-  //     if (!validateEmail(email)) {
-  //       setError("Please enter a valid email address");
-  //       return;
-  //     }
-
-  //     if (!password) {
-  //       setError("Please enter a password");
-  //       return;
-  //     }
-
-  //     if (password !== confirmPassword) {
-  //       setError("Passwords do not match");
-  //       return;
-  //     }
-
-  //     try {
-  //       setLoading(true);
-  //       setError("");
-
-  //       const response = await axiosInstance.post(API_ENDPOINT.AUTH.REGISTER, {
-  //         email,
-  //         password,
-  //         name: fullname,
-  //       });
-
-  //       const { token, role } = response.data;
-
-  //       if (token) {
-  //         updateUser(response.data);
-
-  //         if (role === "citizen") {
-  //           navigate("/citizen/dashboard");
-  //         }
-  //       }
-  //     } catch (error) {
-  //       if (error.response?.data?.message) {
-  //         setError(error.response.data.message);
-  //       } else {
-  //         setError("An error occurred during registration.");
-  //       }
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+    try {
+      const { data } = await axios.post("/api/citizen/citizenregistration", {
+        fullName,
+        email,
+        password,
+        confirmPassword
+      });
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   //   const [loading, setLoading] = useState(true);
   //   useEffect(() => {
@@ -104,7 +58,6 @@ function CitizenRegistration() {
   //       </div>
   //     );
   //   }
-  //handle signup
 
   return (
     <div className="min-h-screen bg-[#f6f8f7]  flex flex-col ">
@@ -136,7 +89,7 @@ function CitizenRegistration() {
                   </p>
                 </div>
               </div>
-              <form className="space-y-5">
+              <form onSubmit={handleRegister} className="space-y-5">
                 <div className="relative">
                   <label
                     htmlFor="fullname"
@@ -147,7 +100,7 @@ function CitizenRegistration() {
                   <User className="absolute left-4 top-10.5 w-5 h-5 text-[#4e9769]" />
 
                   <input
-                    value={fullname}
+                    value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     type="text"
                     placeholder="Enter your full Legal Name"
