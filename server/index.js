@@ -10,6 +10,9 @@ import userRouter from "./routes/userRoutes.js";
 connectDB();
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 app.use(
   cors({
@@ -20,7 +23,7 @@ app.use(
   }),
 );
 app.get("/", (req, res) => res.send("API is working"));
-app.use("/api/user", userRouter);
+app.use("/api/citizen", userRouter);
 
 const PORT = process.env.PORT || 5000;
 
