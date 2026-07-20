@@ -24,7 +24,7 @@ function CitizenLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const { axios, setToken, navigate } = useAppContext();
+  const { axios, setToken, navigate ,setUser} = useAppContext();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -37,6 +37,7 @@ function CitizenLogin() {
 
       if (data.success) {
         setToken(data.token);
+        setUser(data.user)
         localStorage.setItem("token", data.token);
         axios.defaults.headers.common["Authorization"] = data.token;
       } else {
