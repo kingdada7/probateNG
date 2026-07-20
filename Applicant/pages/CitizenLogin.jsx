@@ -19,41 +19,33 @@ import { Link, useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
 
 function CitizenLogin() {
-  const { axios, navigate } = useAppContext;
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
- const { axios, setToken, navigate } = useAppContext();
+  const { axios, setToken, navigate } = useAppContext();
 
-const handleLogin = async (e) => {
-  e.preventDefault();
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-  try {
-    const { data } = await axios.post("/api/citizen/citizenlogin", {
-      email,
-      password,
-    });
+    try {
+      const { data } = await axios.post("/api/citizen/citizenlogin", {
+        email,
+        password,
+      });
 
-    if (data.success) {
-      toast.success(data.message);
-
-      setToken(data.token);
-      localStorage.setItem("token", data.token);
-
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${data.token}`;
-
-      navigate("/dashboard"); // or your desired route
+      if (data.success) {
+        setToken(data.token);
+        localStorage.setItem("token", data.token);
+        axios.defaults.headers.common["Authorization"] = data.token;
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
     }
-  } catch (error) {
-    toast.error(error.response?.data?.message || error.message);
-  }
-};
-
-
+  };
 
   return (
     <div className="min-h-screen bg-[#f6f8f7] flex flex-col ">
