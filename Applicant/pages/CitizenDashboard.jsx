@@ -1,9 +1,10 @@
 import React from "react";
+import DashboardHeader from "../components/DashboardNav";
 
 const CitizenDashboard = () => {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <DashboardHeader />
     </div>
   );
 };

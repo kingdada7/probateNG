@@ -11,6 +11,7 @@ export const AppProvider = ({ children }) => {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
   const [input, setInput] = useState("");
+  const [user, setUser] = useState(null);
 
   const value = {
     axios,
@@ -19,6 +20,8 @@ export const AppProvider = ({ children }) => {
     setToken,
     input,
     setInput,
+    user,
+    setUser
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
