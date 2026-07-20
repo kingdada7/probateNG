@@ -17,6 +17,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
+import PasswordStrength from "../components/PasswordStrength";
 
 function CitizenRegistration() {
   const { axios, navigate } = useAppContext();
@@ -138,15 +139,7 @@ function CitizenRegistration() {
                       />
                     )}
                   </div>
-                  <div className="mt-2 flex gap-1 items-center">
-                    <div className="h-1 flex-1 bg-[#0b602a] rounded-full"></div>
-                    <div className="h-1 flex-1 bg-[#0b602a] rounded-full"></div>
-                    <div className="h-1 flex-1 bg-[#d0e7d8] dark:bg-[#2a4433] rounded-full"></div>
-                    <div className="h-1 flex-1 bg-[#d0e7d8] dark:bg-[#2a4433] rounded-full"></div>
-                    <span className="text-[10px] text-[#4e9769] ml-2 font-medium uppercase tracking-wider">
-                      Moderate
-                    </span>
-                  </div>
+                  <PasswordStrength password={password} />
 
                   <div className=" relative items-center justify-between mb-2">
                     <label className=" text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
