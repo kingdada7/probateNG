@@ -13,6 +13,10 @@ export const userRegister = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+
+
+
+    const normalizedEmail = email.toLowerCase().trim();
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(normalizedEmail)) {
@@ -25,7 +29,7 @@ export const userRegister = async (req, res) => {
         message: "Password must be at least 8 characters",
       });
     }
-    //has password
+    //hash password
     const hashedPassword = await bcrypt.hash(password, userSalt);
 
     // Check if user exists
