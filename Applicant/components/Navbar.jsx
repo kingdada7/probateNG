@@ -51,7 +51,7 @@ const Navbar = () => {
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-3">
           <button
-            onClick={() => navigate("/citizenlogin")}
+            onClick={() => navigate("/citizenportal")}
             className="bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2 rounded-md hover:bg-[#164d23] transition-colors cursor-pointer"
           >
             Login
@@ -93,7 +93,7 @@ const Navbar = () => {
             Track Application
           </a>
           <button
-            onClick={() => navigate("/citizenlogin")}
+            onClick={() => navigate("/citizenportal")}
             className="w-full bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-[#164d23] transition-colors mt-2 cursor-pointer"
           >
             Login

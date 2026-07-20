@@ -141,7 +141,7 @@ function CitizenLogin() {
                 <p className="text-sm text-gray-700">
                   Don't have an account?{" "}
                   <Link
-                    to="/CitizenRegistration"
+                    to="/citizenregistration"
                     className="text-[#1a5c3a] font-semibold hover:underline"
                   >
                     Register here

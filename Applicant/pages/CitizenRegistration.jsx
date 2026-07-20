@@ -41,10 +41,9 @@ function CitizenRegistration() {
         confirmPassword,
       });
     } catch (error) {
-     toast.error(error.response?.data?.message || error.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
-
 
   return (
     <div className="min-h-screen bg-[#f6f8f7]  flex flex-col ">
@@ -186,13 +185,13 @@ function CitizenRegistration() {
 
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-700">
-                  Already Have an Account?
-                  <a
-                    href="/CitizenLogin"
-                    className="text-[#1a5c3a] font-semibold hover:underline pl-3"
+                  Already have an account?{" "}
+                  <Link
+                    to="/citizenportal"
+                    className="text-[#1a5c3a] font-semibold hover:underline"
                   >
                     Log in here
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
