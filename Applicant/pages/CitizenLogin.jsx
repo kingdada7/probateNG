@@ -79,15 +79,15 @@ function CitizenLogin() {
                   <LockKeyhole className="w-6 h-6 text-[#0b602a] text-3xl" />
                 </div>
               </div>
-              <form className="space-y-5">
+              <form onSubmit={handleLogin} className="space-y-5">
                 <div>
                   <label className=" text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
                     <Mail className="w-4 h-4" />
                     Email Address
                   </label>
                   <input
-                    // value={email}
-                    // onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     placeholder="e.g. name@gmail.com"
                     className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm "
@@ -103,8 +103,8 @@ function CitizenLogin() {
 
                   <div className="relative">
                     <input
-                      // value={password}
-                      // onChange={(e) => setPassword(e.target.value)}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       type={hidePassword ? "password" : "text"}
                       placeholder="Enter your password "
                       className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm"
