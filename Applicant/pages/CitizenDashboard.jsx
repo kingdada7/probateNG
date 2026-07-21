@@ -8,7 +8,6 @@ const CitizenDashboard = () => {
     <div>
       <DashboardNav />
       <div className="min-h-screen bg-gray-50 font-sans p-4">
-        
         <DashboardHeader />
       </div>
     </div>
