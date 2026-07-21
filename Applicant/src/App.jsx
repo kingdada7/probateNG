@@ -23,7 +23,7 @@ const App = () => {
           path="citizenportal"
           element={token ? <Layout /> : <CitizenLogin />}
         >
-          <Route path="citizendashboard" element={<CitizenDashboard />} />
+          <Route index element={<CitizenDashboard />} />
           <Route
             path="applicationinformation"
             element={<ApplicantInformation />}
