@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
 
 const DashboardNav = () => {
-  const { user, axios ,setToken} = useAppContext();
+  const { user, axios, setToken } = useAppContext();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -39,9 +39,6 @@ const DashboardNav = () => {
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-8">
-          <button className="bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2 rounded-md hover:bg-[#164d23] transition-colors cursor-pointer">
-            {user?.fullName}
-          </button>
           <button
             onClick={logout}
             className="bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2 rounded-md hover:bg-[#164d23] transition-colors cursor-pointer"
