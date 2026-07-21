@@ -1,6 +1,55 @@
 import React from "react";
 
 const DashboardTable = () => {
+  const applications = [
+    {
+      refId: "#FCT-PR-2023-0089",
+      estateName: "Estate of Late Samuel Okoro",
+      submissionDate: "Oct 24, 2023",
+      status: "Pending Review",
+      action: "View Details",
+    },
+    {
+      refId: "#FCT-PR-2023-0054",
+      estateName: "Estate of Late Amina Bello",
+      submissionDate: "Sep 12, 2023",
+      status: "Approved",
+      action: "Download Grant",
+    },
+    {
+      refId: "#FCT-PR-2023-0042",
+      estateName: "Estate of Late Chinedu Azikiwe",
+      submissionDate: "Aug 30, 2023",
+      status: "Rejected",
+      action: "View Reasons",
+    },
+  ];
+
+  function statusBadge(status) {
+    if (status === "Pending Review") {
+      return (
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
+          Pending Review
+        </span>
+      );
+    }
+    if (status === "Approved") {
+      return (
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-200">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0"></span>
+          Approved
+        </span>
+      );
+    }
+    return (
+      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200">
+        <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
+        Rejected
+      </span>
+    );
+  }
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
       <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
@@ -8,7 +57,7 @@ const DashboardTable = () => {
           Recent Application Activity
         </h2>
         <button
-          style={{ color: GREEN }}
+          //   style={{ color: GREEN }}
           className="text-sm font-semibold hover:underline"
         >
           View All
@@ -52,7 +101,7 @@ const DashboardTable = () => {
                 <td className="px-6 py-4">{statusBadge(app.status)}</td>
                 <td className="px-6 py-4">
                   <button
-                    style={{ color: GREEN }}
+                    // style={{ color: GREEN }}
                     className="text-sm font-bold hover:underline whitespace-nowrap"
                   >
                     {app.action}
@@ -84,7 +133,7 @@ const DashboardTable = () => {
                 {app.submissionDate}
               </span>
               <button
-                style={{ color: GREEN }}
+                // style={{ color: GREEN }}
                 className="text-sm font-bold hover:underline"
               >
                 {app.action}
