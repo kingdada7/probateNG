@@ -3,7 +3,7 @@ import React from "react";
 
 const DashboardHeader = () => {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-5">
+    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-5 mt-6">
       <div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight">
           Dashboard
@@ -13,7 +13,7 @@ const DashboardHeader = () => {
         </p>
       </div>
       <div className="flex flex-col xs:flex-row gap-3 shrink-0">
-        <button className="inline-flex items-center justify-center gap-2 text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:opacity-90 transition-opacity whitespace-nowrap">
+        <button className="inline-flex items-center justify-center gap-2 text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:opacity-90 transition-opacity whitespace-nowrap bg-[#1a5c2a]">
           <Plus size={16} strokeWidth={2.5} />
           New Probate Application
         </button>

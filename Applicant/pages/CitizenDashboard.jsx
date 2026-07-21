@@ -7,7 +7,10 @@ const CitizenDashboard = () => {
   return (
     <div>
       <DashboardNav />
-      <DashboardHeader />
+      <div className="min-h-screen bg-gray-50 font-sans p-4">
+        
+        <DashboardHeader />
+      </div>
     </div>
   );
 };
