@@ -29,7 +29,7 @@ const DashboardHeader = () => {
           </h1>
         </div>
         <div className="flex flex-col xs:flex-row gap-3 shrink-0">
-          <Link to="" className="inline-flex items-center justify-center gap-2 text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:opacity-90 transition-opacity whitespace-nowrap bg-[#1a5c2a]">
+          <Link to="/citzenportal/applicationinformation" className="inline-flex items-center justify-center gap-2 text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:opacity-90 transition-opacity whitespace-nowrap bg-[#1a5c2a]">
             <Plus size={16} strokeWidth={2.5} />
             
             New Probate Application
