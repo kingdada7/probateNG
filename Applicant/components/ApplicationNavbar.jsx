@@ -38,13 +38,13 @@ const ApplicationNavbar = () => {
             href="#"
             className="text-sm text-gray-700 hover:text-[#1a5c2a] font-medium transition-colors"
           >
-            Apply for Probate
+            Dashboard
           </a>
           <a
             href="#"
             className="text-sm text-gray-700 hover:text-[#1a5c2a] font-medium transition-colors"
           >
-            Track Application
+            support
           </a>
         </div>
 
