@@ -44,18 +44,8 @@ const ApplicationNavbar = () => {
             href="#"
             className="text-sm text-gray-700 hover:text-[#1a5c2a] font-medium transition-colors"
           >
-            support
+            Support
           </a>
-        </div>
-
-        {/* Desktop Actions */}
-        <div className="hidden md:flex items-center gap-3">
-          <button
-            onClick={() => navigate("/citizenportal")}
-            className="bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2 rounded-md hover:bg-[#164d23] transition-colors cursor-pointer"
-          >
-            Login
-          </button>
         </div>
 
         {/* Mobile hamburger */}
@@ -84,20 +74,14 @@ const ApplicationNavbar = () => {
             href="#"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
-            Apply for Probate
+            Dashboard
           </a>
           <a
             href="#"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
-            Track Application
+            Support
           </a>
-          <button
-            onClick={() => navigate("/citizenportal")}
-            className="w-full bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-[#164d23] transition-colors mt-2 cursor-pointer"
-          >
-            Login
-          </button>
         </div>
       )}
     </header>
