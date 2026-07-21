@@ -7,6 +7,7 @@ import CitizenDashboard from "../pages/CitizenDashboard";
 import Layout from "../pages/Layout";
 import { Toaster } from "react-hot-toast";
 import { useAppContext } from "../context/AppContext";
+import ApplicantInformation from "../pages/ApplicantInformation";
 
 const App = () => {
   const { token } = useAppContext();
@@ -22,16 +23,14 @@ const App = () => {
           path="citizenportal"
           element={token ? <Layout /> : <CitizenLogin />}
         >
+          <Route path="citizendashboard" element={<CitizenDashboard />} />
           <Route
-            path="citizendashboard"
-            element={<CitizenDashboard />}
+            path="applicationinformation"
+            element={<ApplicantInformation />}
           />
         </Route>
 
-        <Route
-          path="/citizenregistration"
-          element={<CitizenRegistration />}
-        />
+        <Route path="/citizenregistration" element={<CitizenRegistration />} />
       </Routes>
     </div>
   );
