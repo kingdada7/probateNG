@@ -8,6 +8,7 @@ import Layout from "./pages/Layout";
 import { Toaster } from "react-hot-toast";
 import { useAppContext } from "./context/AppContext";
 import ApplicantInformation from "./pages/ApplicantInformation";
+import DeceasedInfromation from "./pages/DeceasedInfromation";
 
 const App = () => {
   const { token } = useAppContext();
@@ -24,10 +25,13 @@ const App = () => {
           element={token ? <Layout /> : <CitizenLogin />}
         >
           <Route index element={<CitizenDashboard />} />
+
           <Route
             path="applicationinformation"
             element={<ApplicantInformation />}
           />
+
+          <Route path="deceasedinformation" element={<DeceasedInfromation />} />
         </Route>
 
         <Route path="/citizenregistration" element={<CitizenRegistration />} />
