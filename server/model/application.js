@@ -6,8 +6,14 @@ const applicantSchema = new mongoose.Schema({
   phoneNumber: String,
   address: String,
   occupation: String,
-  nationality: String,
-  identificationType: String,
+  relationshipToDeceased: {
+    type: String,
+    enum: ["Spouse", "Child", "Parent", "Sibling"],
+  },
+  identificationType: {
+    type: String,
+    enum: ["NIN", "Voters Card", "International Passport", "Driver's License"],
+  },
   identificationNumber: String,
 });
 
@@ -25,11 +31,7 @@ const deceasedSchema = new mongoose.Schema({
 const applicationTypeSchema = new mongoose.Schema({
   applicationType: {
     type: String,
-    enum: [
-      "Letters of Administration",
-      "Probate",
-      "Will Annexed",
-    ],
+    enum: ["Letters of Administration", "Probate", "Will Annexed"],
   },
   hasWill: Boolean,
   executorName: String,
@@ -55,12 +57,7 @@ const applicationSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: [
-        "Draft",
-        "Pending Review",
-        "Approved",
-        "Rejected",
-      ],
+      enum: ["Draft", "Pending Review", "Approved", "Rejected"],
       default: "Draft",
     },
 
@@ -77,7 +74,7 @@ const applicationSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.model("Application", applicationSchema);
