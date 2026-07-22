@@ -31,7 +31,7 @@ const ApplicantInformation = () => {
 
             {/* Form */}
             <div className="flex-1 min-w-0">
-              <ApplicationInformationForm  />
+              <ApplicationInformationForm />
             </div>
           </div>
         </div>

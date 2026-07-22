@@ -1,7 +1,6 @@
 import React from "react";
-import { services } from "../src/assets/assests";
+import { services } from "../assets/assests";
 import { ArrowRight } from "lucide-react";
-
 
 const ServiceSection = () => {
   return (
@@ -10,7 +9,7 @@ const ServiceSection = () => {
         <div className="flex items-center gap-3 mb-10">
           <div className="w-1 h-7 bg-[#1a5c2a] rounded-full"></div>
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            Our Services & Requirements
+            Our Services & Requirements 
           </h2>
         </div>
 

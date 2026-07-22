@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-import Home from "../pages/Home";
-import CitizenLogin from "../pages/CitizenLogin";
-import CitizenRegistration from "../pages/CitizenRegistration";
-import CitizenDashboard from "../pages/CitizenDashboard";
-import Layout from "../pages/Layout";
+import Home from "./pages/Home";
+import CitizenLogin from "./pages/CitizenLogin";
+import CitizenRegistration from "./pages/CitizenRegistration";
+import CitizenDashboard from "./pages/CitizenDashboard";
+import Layout from "./pages/Layout";
 import { Toaster } from "react-hot-toast";
-import { useAppContext } from "../context/AppContext";
-import ApplicantInformation from "../pages/ApplicantInformation";
+import { useAppContext } from "./context/AppContext";
+import ApplicantInformation from "./pages/ApplicantInformation";
 
 const App = () => {
   const { token } = useAppContext();
