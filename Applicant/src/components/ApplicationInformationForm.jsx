@@ -1,10 +1,18 @@
 import { AlertCircle, FileText, Lock } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import ApplicationFooter from "./ApplicationFooter";
 import { useAppContext } from "../context/AppContext";
 
 const ApplicationInformationForm = () => {
   const { axios, navigate } = useAppContext();
+  const [applicantFullName, setApplicantFullName] = useState("");
+const [applicantEmail, setApplicantEmail] = useState("");
+const [applicantPhoneNumber, setApplicantPhoneNumber] = useState("");
+const [applicantAddress, setApplicantAddress] = useState("");
+const [applicantOccupation, setApplicantOccupation] = useState("");
+const [relationshipToDeceased, setRelationshipToDeceased] = useState("");
+const [identificationType, setIdentificationType] = useState("");
+const [identificationNumber, setIdentificationNumber] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -37,7 +45,7 @@ const ApplicationInformationForm = () => {
 
   return (
     <div>
-      <form className="col-span-3">
+      <form onSubmit={submitHandler} className="col-span-3">
         <div className="col-span-3">
           <div className="bg-white rounded-lg border border-gray-200 p-8">
             <div className="flex items-center gap-3 mb-6">
@@ -55,8 +63,8 @@ const ApplicationInformationForm = () => {
                   </label>
                   <input
                     type="text"
-                    // value={fullName}
-                    // onChange={(e) => setFullName(e.target.value)}
+                    value={applicantFullName}
+                    onChange={(e) => setFullName(e.target.value)}
                     placeholder="Surname First, Middle Name, Last Name"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
                   />
