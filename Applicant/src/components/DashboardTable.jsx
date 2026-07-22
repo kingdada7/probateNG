@@ -26,30 +26,40 @@ const DashboardTable = () => {
   ];
 
   function statusBadge(status) {
-    if (status === "Pending Review") {
-      return (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
-          Pending Review
-        </span>
-      );
-    }
-    if (status === "Approved") {
-      return (
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-200">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0"></span>
-          Approved
-        </span>
-      );
-    }
-    return (
-      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200">
-        <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
-        Rejected
-      </span>
-    );
-  }
+    switch (status) {
+      case "Draft":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-300">
+            <span className="w-1.5 h-1.5 rounded-full bg-gray-500 shrink-0"></span>
+            Draft
+          </span>
+        );
 
+      case "Pending Review":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
+            Pending Review
+          </span>
+        );
+
+      case "Approved":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0"></span>
+            Approved
+          </span>
+        );
+
+      case "Rejected":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
+            Rejected
+          </span>
+        );
+    }
+  }
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
       <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
