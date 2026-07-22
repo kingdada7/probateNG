@@ -1,4 +1,4 @@
-import Application from "../model/application";
+import Application from "../model/application.js";
 
 export const applicantInformation = async (req, res) => {
   try {
