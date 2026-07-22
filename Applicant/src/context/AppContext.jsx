@@ -16,7 +16,11 @@ export const AppProvider = ({ children }) => {
 
   const [input, setInput] = useState("");
   const [user, setUser] = useState(null);
+  const [applicationId, setApplicationId] = useState(() => {
+    return localStorage.getItem("applicationId");
+  });
 
+  const [application, setApplication] = useState(null);
   // Set Authorization header whenever token changes
   useEffect(() => {
     if (token) {
@@ -25,6 +29,14 @@ export const AppProvider = ({ children }) => {
       delete axios.defaults.headers.common["Authorization"];
     }
   }, [token]);
+
+  useEffect(() => {
+    if (applicationId) {
+      localStorage.setItem("applicationId", applicationId);
+    } else {
+      localStorage.removeItem("applicationId");
+    }
+  }, [applicationId]);
 
   // Fetch logged-in user
   const fetchUser = async () => {
@@ -59,6 +71,11 @@ export const AppProvider = ({ children }) => {
     setInput,
     user,
     setUser,
+    applicationId,
+    setApplicationId,
+
+    application,
+    setApplication,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
