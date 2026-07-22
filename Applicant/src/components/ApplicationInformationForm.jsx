@@ -1,8 +1,40 @@
 import { AlertCircle, FileText, Lock } from "lucide-react";
 import React from "react";
 import ApplicationFooter from "./ApplicationFooter";
+import { useAppContext } from "../context/AppContext";
 
 const ApplicationInformationForm = () => {
+  const { axios, navigate } = useAppContext();
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await axios.post(
+        "/api/application/application-information",
+        {
+          applicantFullName,
+          applicantEmail,
+          applicantPhoneNumber,
+          applicantAddress,
+          applicantOccupation,
+          relationshipToDeceased,
+          identificationType,
+          identificationNumber,
+        },
+      );
+
+      if (data.success) {
+        // save application id
+        localStorage.setItem("applicationId", data.application._id);
+
+        navigate("/citizenportal/deceasedinformation");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <form className="col-span-3">
