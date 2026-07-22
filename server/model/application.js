@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 const applicantSchema = new mongoose.Schema({
-  fullName: String,
-  email: String,
-  phoneNumber: String,
-  address: String,
-  occupation: String,
+  applicantFullName: String,
+  applicantEmail: String,
+  applicantPhoneNumber: String,
+  applicantAddress: String,
+  applicantOccupation: String,
   relationshipToDeceased: {
     type: String,
     enum: ["Spouse", "Child", "Parent", "Sibling"],
