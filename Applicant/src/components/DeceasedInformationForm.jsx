@@ -106,82 +106,155 @@ const DeceasedInformationForm = () => {
     annualIncome: "",
   });
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      const applicationId = localStorage.getItem("applicationId");
+
+      if (!applicationId) {
+        alert("Application not found. Please start a new application.");
+        return;
+      }
+
+      const { data } = await axios.patch(
+        `/api/application/${applicationId}/deceased-information`,
+        {
+          deceasedName,
+          dateOfDeath,
+          placeOfDeath,
+          dateOfMarriage,
+          spouseName,
+          occupationAndPlaceOfWork,
+          formOfMarriage,
+          identificationType,
+          identificationNumber,
+          lastAddress,
+
+          nextOfKin,
+          children,
+
+          nameAndAgeOfMinorChildren,
+          nameAndAddressOfGuardianOfMinorChildren,
+
+          family,
+
+          bankAccounts,
+
+          personalChattel,
+          insurancePolicy,
+          companyShare,
+
+          pensionManager,
+          pensionAccountNumber,
+
+          landedProperty,
+          addressOfProperty,
+          rent,
+          nameOfTenant,
+
+          suretyA,
+          suretyB,
+        },
+      );
+
+      if (data.success) {
+        navigate("/citizenportal/applicationtype"); // or your next page
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <DeceasedInfo
-        deceasedName={deceasedName}
-        setDeceasedName={setDeceasedName}
-        dateOfDeath={dateOfDeath}
-        setDateOfDeath={setDateOfDeath}
-        placeOfDeath={placeOfDeath}
-        setPlaceOfDeath={setPlaceOfDeath}
-        dateOfMarriage={dateOfMarriage}
-        setDateOfMarriage={setDateOfMarriage}
-        spouseName={spouseName}
-        setSpouseName={setSpouseName}
-        occupationAndPlaceOfWork={occupationAndPlaceOfWork}
-        setOccupationAndPlaceOfWork={setOccupationAndPlaceOfWork}
-        formOfMarriage={formOfMarriage}
-        setFormOfMarriage={setFormOfMarriage}
-        identificationType={identificationType}
-        setIdentificationType={setIdentificationType}
-        identificationNumber={identificationNumber}
-        setIdentificationNumber={setIdentificationNumber}
-        lastAddress={lastAddress}
-        setLastAddress={setLastAddress}
-      />
-      <NextofKin
-        nextOfKin={nextOfKin}
-        setNextOfKin={setNextOfKin}
-        children={children}
-        setChildren={setChildren}
-      />
+      <form onSubmit={submitHandler}>
+        <DeceasedInfo
+          deceasedName={deceasedName}
+          setDeceasedName={setDeceasedName}
+          dateOfDeath={dateOfDeath}
+          setDateOfDeath={setDateOfDeath}
+          placeOfDeath={placeOfDeath}
+          setPlaceOfDeath={setPlaceOfDeath}
+          dateOfMarriage={dateOfMarriage}
+          setDateOfMarriage={setDateOfMarriage}
+          spouseName={spouseName}
+          setSpouseName={setSpouseName}
+          occupationAndPlaceOfWork={occupationAndPlaceOfWork}
+          setOccupationAndPlaceOfWork={setOccupationAndPlaceOfWork}
+          formOfMarriage={formOfMarriage}
+          setFormOfMarriage={setFormOfMarriage}
+          identificationType={identificationType}
+          setIdentificationType={setIdentificationType}
+          identificationNumber={identificationNumber}
+          setIdentificationNumber={setIdentificationNumber}
+          lastAddress={lastAddress}
+          setLastAddress={setLastAddress}
+        />
+        <NextofKin
+          nextOfKin={nextOfKin}
+          setNextOfKin={setNextOfKin}
+          children={children}
+          setChildren={setChildren}
+        />
 
-      <FamilyInfo family={family} setFamily={setFamily} />
+        <FamilyInfo
+          family={family}
+          setFamily={setFamily}
+          nameAndAgeOfMinorChildren={nameAndAgeOfMinorChildren}
+          setNameAndAgeOfMinorChildren={setNameAndAgeOfMinorChildren}
+          nameAndAddressOfGuardianOfMinorChildren={
+            nameAndAddressOfGuardianOfMinorChildren
+          }
+          setNameAndAddressOfGuardianOfMinorChildren={
+            setNameAndAddressOfGuardianOfMinorChildren
+          }
+        />
 
-      <Assets
-        bankAccounts={bankAccounts}
-        setBankAccounts={setBankAccounts}
-        personalChattel={personalChattel}
-        setPersonalChattel={setPersonalChattel}
-        insurancePolicy={insurancePolicy}
-        setInsurancePolicy={setInsurancePolicy}
-        companyShare={companyShare}
-        setCompanyShare={setCompanyShare}
-        pensionManager={pensionManager}
-        setPensionManager={setPensionManager}
-        pensionAccountNumber={pensionAccountNumber}
-        setPensionAccountNumber={setPensionAccountNumber}
-        landedProperty={landedProperty}
-        setLandedProperty={setLandedProperty}
-        addressOfProperty={addressOfProperty}
-        setAddressOfProperty={setAddressOfProperty}
-        rent={rent}
-        setRent={setRent}
-        nameOfTenant={nameOfTenant}
-        setNameOfTenant={setNameOfTenant}
-        suretyA={suretyA}
-        setSuretyA={setSuretyA}
-        suretyB={suretyB}
-        setSuretyB={setSuretyB}
-      />
+        <Assets
+          bankAccounts={bankAccounts}
+          setBankAccounts={setBankAccounts}
+          personalChattel={personalChattel}
+          setPersonalChattel={setPersonalChattel}
+          insurancePolicy={insurancePolicy}
+          setInsurancePolicy={setInsurancePolicy}
+          companyShare={companyShare}
+          setCompanyShare={setCompanyShare}
+          pensionManager={pensionManager}
+          setPensionManager={setPensionManager}
+          pensionAccountNumber={pensionAccountNumber}
+          setPensionAccountNumber={setPensionAccountNumber}
+          landedProperty={landedProperty}
+          setLandedProperty={setLandedProperty}
+          addressOfProperty={addressOfProperty}
+          setAddressOfProperty={setAddressOfProperty}
+          rent={rent}
+          setRent={setRent}
+          nameOfTenant={nameOfTenant}
+          setNameOfTenant={setNameOfTenant}
+          suretyA={suretyA}
+          setSuretyA={setSuretyA}
+          suretyB={suretyB}
+          setSuretyB={setSuretyB}
+        />
 
-      <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6">
-        <button
-          type="button"
-          className="px-6 py-3 text-gray-600 text-sm font-bold border border-gray-300 rounded-lg hover:bg-gray-50"
-        >
-          Previous
-        </button>
+        <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6">
+          <button
+            type="button"
+            className="px-6 py-3 text-gray-600 text-sm font-bold border border-gray-300 rounded-lg hover:bg-gray-50"
+          >
+            Previous
+          </button>
 
-        <button
-          type="submit"
-          className="px-6 py-3 bg-[#1a5c3a] text-white text-sm font-bold rounded-lg hover:bg-[#154d2f] flex items-center justify-center gap-2"
-        >
-          Save & Continue
-          <span>→</span>
-        </button>
-      </div>
+          <button
+            type="submit"
+            className="px-6 py-3 bg-[#1a5c3a] text-white text-sm font-bold rounded-lg hover:bg-[#154d2f] flex items-center justify-center gap-2"
+          >
+            Save & Continue
+            <span>→</span>
+          </button>
+        </div>
+      </form>
     </>
   );
 };
