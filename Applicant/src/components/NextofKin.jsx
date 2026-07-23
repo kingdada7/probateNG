@@ -3,33 +3,27 @@ import React from "react";
 
 const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
   const addChild = () => {
-    setChildren((prev) => ({
+    setChildren((prev) => [
       ...prev,
-      children: [
-        ...prev.children,
-        {
-          childName: "",
-          age: "",
-          motherName: "",
-          motherPhone: "",
-        },
-      ],
-    }));
+      {
+        childName: "",
+        age: "",
+        motherName: "",
+        motherPhone: "",
+      },
+    ]);
   };
+
   const removeChild = (index) => {
-    setChildren((prev) => ({
-      ...prev,
-      children: prev.children.filter((_, i) => i !== index),
-    }));
+    setChildren((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleChildChange = (index, field, value) => {
-    setChildren((prev) => ({
-      ...prev,
-      children: prev.children.map((child, i) =>
+    setChildren((prev) =>
+      prev.map((child, i) =>
         i === index ? { ...child, [field]: value } : child,
       ),
-    }));
+    );
   };
   return (
     <div className="space-y-6">
@@ -63,8 +57,13 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
             Relationship to Deceased
           </label>
           <select
-            // value={nextOfKinRelationship}
-            // onChange={(e) => setNextOfKinRelationship(e.target.value)}
+            value={nextOfKin.relationship}
+            onChange={(e) =>
+              setNextOfKin({
+                ...nextOfKin,
+                relationship: e.target.value,
+              })
+            }
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
           >
             <option value="Spouse">Spouse</option>
@@ -121,8 +120,13 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
             />
             <input
               type="text"
-              //   value={nextOfKinPhone}
-              //   onChange={(e) => setNextOfKinPhone(e.target.value)}
+              value={nextOfKin.phone}
+              onChange={(e) =>
+                setNextOfKin({
+                  ...nextOfKin,
+                  phone: e.target.value,
+                })
+              }
               placeholder="8012345678"
               className="flex-1 px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
             />
@@ -156,10 +160,10 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
 
               <input
                 type="text"
-                // value={child.childName}
-                // onChange={(e) =>
-                //   handleChildChange(index, "childName", e.target.value)
-                // }
+                value={child.childName}
+                onChange={(e) =>
+                  handleChildChange(index, "childName", e.target.value)
+                }
                 placeholder="Surname First, Middle Name, Last N"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
               />
@@ -172,10 +176,10 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
 
               <input
                 type="number"
-                // value={child.age}
-                // onChange={(e) =>
-                //   handleChildChange(index, "age", e.target.value)
-                // }
+                value={child.age}
+                onChange={(e) =>
+                  handleChildChange(index, "age", e.target.value)
+                }
                 placeholder="Enter age"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
               />
@@ -188,10 +192,10 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
 
               <input
                 type="text"
-                // value={child.motherName}
-                // onChange={(e) =>
-                //   handleChildChange(index, "motherName", e.target.value)
-                // }
+                value={child.motherName}
+                onChange={(e) =>
+                  handleChildChange(index, "motherName", e.target.value)
+                }
                 placeholder="Surname First, Middle Name, Last Name"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
               />
@@ -204,10 +208,10 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
 
               <input
                 type="text"
-                // value={child.motherPhone}
-                // onChange={(e) =>
-                //   handleChildChange(index, "motherPhone", e.target.value)
-                // }
+                value={child.motherPhone}
+                onChange={(e) =>
+                  handleChildChange(index, "motherPhone", e.target.value)
+                }
                 placeholder="8012345678"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
               />
