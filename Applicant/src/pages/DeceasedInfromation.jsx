@@ -33,6 +33,19 @@ const ApplicantInformation = () => {
             {/* Form */}
             <div className="flex-1 min-w-0">
               <DeceasedInformationForm />
+              <div className="flex gap-4 ml-90">
+                <button className="px-6 py-3 text-gray-600 text-sm font-bold border border-gray-300 rounded-lg hover:bg-gray-50">
+                  Previous
+                </button>
+
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-[#1a5c3a] text-white text-sm font-bold rounded-lg hover:bg-[#154d2f] flex items-center gap-2"
+                >
+                  Save & Continue
+                  <span>→</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
