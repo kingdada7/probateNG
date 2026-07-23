@@ -67,15 +67,10 @@ const Assets = ({
             <input
               type="text"
               value={account.bankName}
-              //   onChange={(e) => {
-              //     const newBankDetails = [...bankAccounts.bankDetails];
-              //     newBankDetails[index].bankName = e.target.value;
-
-              //     setBankAccounts({
-              //       ...bankAccounts,
-              //       bankDetails: newBankDetails,
-              //     });
-              //   }}
+              value={account.accountNumber}
+              onChange={(e) =>
+                handleBankChange(index, "accountNumber", e.target.value)
+              }
               placeholder="e.g. First Bank, GTBank, Zenith Bank"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
             />
@@ -88,15 +83,9 @@ const Assets = ({
             <input
               type="text"
               value={account.accountNumber}
-              //   onChange={(e) => {
-              //     const newBankDetails = [...bankAccounts.bankDetails];
-              //     newBankDetails[index].accountNumber = e.target.value;
-
-              //     setBankAccounts({
-              //       ...bankAccounts,
-              //       bankDetails: newBankDetails,
-              //     });
-              //   }}
+              onChange={(e) =>
+                handleBankChange(index, "accountNumber", e.target.value)
+              }
               placeholder="Account Number"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
             />
@@ -106,7 +95,7 @@ const Assets = ({
             <div className="col-span-2">
               <button
                 type="button"
-                // onClick={() => removeBank(index)}
+                onClick={() => removeBank(index)}
                 className="mt-2 text-sm text-[#dc2626] font-bold hover:underline flex items-center gap-1 cursor-pointer"
               >
                 - Remove bank account
@@ -118,7 +107,7 @@ const Assets = ({
 
       <button
         type="button"
-        // onClick={addBank}
+        onClick={addBank}
         className="mt-2 text-sm text-[#1a5c3a] font-bold hover:underline flex items-center gap-1 cursor-pointer"
       >
         + Add another bank account
@@ -129,8 +118,8 @@ const Assets = ({
         </label>
         <input
           type="text"
-          //   value={personalChattel}
-          //   onChange={(e) => setPersonalChattel(e.target.value)}
+          value={personalChattel}
+          onChange={(e) => setPersonalChattel(e.target.value)}
           placeholder="List any personal chattel (e.g. vehicles, jewelry, electronics) owned by the deceased that may be relevant to the probate application. If there are no personal chattel, please write 'None'."
           className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
         />
@@ -142,8 +131,8 @@ const Assets = ({
         </label>
         <input
           type="text"
-          //   value={insurancePolicy}
-          //   onChange={(e) => setInsurancePolicy(e.target.value)}
+          value={insurancePolicy}
+          onChange={(e) => setInsurancePolicy(e.target.value)}
           placeholder="List any insurance policies (e.g. life insurance, health insurance) held by the deceased that may be relevant to the probate application. Include the name of the insurance company and policy number if available. If there are no insurance policies, please write 'None'."
           className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
         />
@@ -155,8 +144,8 @@ const Assets = ({
         </label>
         <input
           type="text"
-          //   value={companyShare}
-          //   onChange={(e) => setCompanyShare(e.target.value)}
+          value={companyShare}
+          onChange={(e) => setCompanyShare(e.target.value)}
           placeholder="List any shares in companies or businesses owned by the deceased that may be relevant to the probate application. Include the name of the company, type of business, and percentage of ownership if available. If there are no shares in companies, please write 'None'."
           className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
         />
@@ -169,8 +158,8 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={pensionManager}
-            // onChange={(e) => setPensionManager(e.target.value)}
+            value={pensionManager}
+            onChange={(e) => setPensionManager(e.target.value)}
             placeholder="Name of the Pension Manager"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -181,8 +170,8 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={pensionAccountNumber}
-            // onChange={(e) => setPensionAccountNumber(e.target.value)}
+            value={pensionAccountNumber}
+            onChange={(e) => setPensionAccountNumber(e.target.value)}
             placeholder="Pension Account Number"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -194,8 +183,8 @@ const Assets = ({
         </label>
         <input
           type="text"
-          //   value={landedProperty}
-          //   onChange={(e) => setLandedProperty(e.target.value)}
+          value={landedProperty}
+          onChange={(e) => setLandedProperty(e.target.value)}
           placeholder="Enter the name of the property/IES"
           className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
         />
@@ -207,8 +196,8 @@ const Assets = ({
         </label>
         <input
           type="text"
-          //   value={addressOfProperty}
-          //   onChange={(e) => setAddressOfProperty(e.target.value)}
+          value={addressOfProperty}
+          onChange={(e) => setAddressOfProperty(e.target.value)}
           placeholder="Enter the address of the property/IES"
           className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
         />
@@ -220,8 +209,8 @@ const Assets = ({
         </label>
         <input
           type="text"
-          //   value={rent}
-          //   onChange={(e) => setRent(e.target.value)}
+          value={rent}
+          onChange={(e) => setRent(e.target.value)}
           placeholder="Enter the annual rent amount"
           className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
         />
@@ -233,8 +222,8 @@ const Assets = ({
         </label>
         <input
           type="text"
-          //   value={nameOfTenant}
-          //   onChange={(e) => setNameOfTenant(e.target.value)}
+          value={nameOfTenant}
+          onChange={(e) => setNameOfTenant(e.target.value)}
           placeholder="Enter the name of the tenant"
           className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
         />
@@ -254,10 +243,13 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={suretyA.details}
-            // onChange={(e) =>
-            //   setSuretyA({ ...suretyA, details: e.target.value })
-            // }
+            value={suretyA.details}
+            onChange={(e) =>
+              setSuretyA({
+                ...suretyA,
+                details: e.target.value,
+              })
+            }
             placeholder="Enter the name, phone number and address of the sureties"
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -269,13 +261,13 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={suretyA.occupation}
-            // onChange={(e) =>
-            //   setSuretyA({
-            //     ...suretyA,
-            //     occupation: e.target.value,
-            //   })
-            // }
+            value={suretyA.occupation}
+            onChange={(e) =>
+              setSuretyA({
+                ...suretyA,
+                occupation: e.target.value,
+              })
+            }
             placeholder="Enter the occupation of the surety"
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -288,12 +280,12 @@ const Assets = ({
           <input
             type="text"
             value={suretyA.bankDetails}
-            // onChange={(e) =>
-            //   setSuretyA({
-            //     ...suretyA,
-            //     bankDetails: e.target.value,
-            //   })
-            // }
+            onChange={(e) =>
+              setSuretyA({
+                ...suretyA,
+                bankDetails: e.target.value,
+              })
+            }
             placeholder="Enter the name and account number of the bank"
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -305,14 +297,14 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={suretyA.propertyValue}
-            // onChange={(e) =>
-            //   setSuretyA({
-            //     ...suretyA,
-            //     propertyValue: e.target.value,
-            //   })
-            // }
-            placeholder=" Enter the value of the real property "
+            value={suretyA.propertyValue}
+            onChange={(e) =>
+              setSuretyA({
+                ...suretyA,
+                propertyValue: e.target.value,
+              })
+            }
+            placeholder="Enter the value of the real property"
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
         </div>
@@ -323,9 +315,14 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={suretyA.salary}
-            // onChange={(e) => setSuretyA({ ...suretyA, salary: e.target.value })}
-            placeholder=" Enter the salary/income per annum of the surety"
+            value={suretyA.annualIncome}
+            onChange={(e) =>
+              setSuretyA({
+                ...suretyA,
+                annualIncome: e.target.value,
+              })
+            }
+            placeholder="Enter the salary/income per annum of the surety"
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
         </div>
@@ -337,10 +334,13 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={suretyB.fullName}
-            // onChange={(e) =>
-            //   setSuretyB({ ...suretyB, fullName: e.target.value })
-            // }
+            value={suretyB.details}
+            onChange={(e) =>
+              setSuretyA({
+                ...suretyB,
+                details: e.target.value,
+              })
+            }
             placeholder="Enter the name, phone number and address of the sureties"
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -352,13 +352,13 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={suretyB.occupation}
-            // onChange={(e) =>
-            //   setSuretyB({
-            //     ...suretyB,
-            //     occupation: e.target.value,
-            //   })
-            // }
+            value={suretyB.occupation}
+            onChange={(e) =>
+              setSuretyB({
+                ...suretyB,
+                occupation: e.target.value,
+              })
+            }
             placeholder="Enter the occupation of the surety"
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -370,10 +370,13 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={suretyB.bankName}
-            // onChange={(e) =>
-            //   setSuretyB({ ...suretyB, bankName: e.target.value })
-            // }
+            value={suretyB.bankDetails}
+            onChange={(e) =>
+              setSuretyB({
+                ...suretyB,
+                bankDetails: e.target.value,
+              })
+            }
             placeholder="Enter the name and account number of the bank"
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -385,14 +388,14 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={suretyB.propertyValue}
-            // onChange={(e) =>
-            //   setSuretyB({
-            //     ...suretyB,
-            //     propertyValue: e.target.value,
-            //   })
-            // }
-            placeholder=" Enter the value of the real property "
+            value={suretyB.propertyValue}
+            onChange={(e) =>
+              setSuretyB({
+                ...suretyB,
+                propertyValue: e.target.value,
+              })
+            }
+            placeholder="Enter the value of the real property"
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
         </div>
@@ -403,9 +406,14 @@ const Assets = ({
           </label>
           <input
             type="text"
-            // value={suretyB.salary}
-            // onChange={(e) => setSuretyB({ ...suretyB, salary: e.target.value })}
-            placeholder=" Enter the salary/income per annum of the surety"
+            value={suretyB.annualIncome}
+            onChange={(e) =>
+              setSuretyB({
+                ...suretyB,
+                annualIncome: e.target.value,
+              })
+            }
+            placeholder="Enter the salary/income per annum of the surety"
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
         </div>
