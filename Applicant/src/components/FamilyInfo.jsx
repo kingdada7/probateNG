@@ -1,6 +1,13 @@
 import React from "react";
 
-const FamilyInfo = () => {
+const FamilyInfo = ({
+  family,
+  setFamily,
+  nameAndAddressOfGuardianOfMinorChildren,
+  setNameAndAddressOfGuardianOfMinorChildren,
+  nameAndAgeOfMinorChildren,
+  setNameAndAgeOfMinorChildren,
+}) => {
   return (
     <div>
       <div>
@@ -8,8 +15,8 @@ const FamilyInfo = () => {
           Name and Age of Minor Children of the Deceased
         </label>
         <textarea
-          //   value={nameAndAgeOfMinorChildren}
-          //   onChange={(e) => setNameAndAgeOfMinorChildren(e.target.value)}
+          value={nameAndAgeOfMinorChildren}
+          onChange={(e) => setNameAndAgeOfMinorChildren(e.target.value)}
           placeholder="Provide the full names and ages of any minor children of the deceased. If there are no minor children, please write 'None'."
           className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400 resize-none"
           rows={3}
@@ -21,10 +28,10 @@ const FamilyInfo = () => {
           Name and Address of the Guardian of Minor Children (if applicable)
         </label>
         <textarea
-          //   value={nameAndAddressOfGuardianOfMinorChildren}
-          //   onChange={(e) =>
-          //     setNameAndAddressOfGuardianOfMinorChildren(e.target.value)
-          //   }
+          value={nameAndAddressOfGuardianOfMinorChildren}
+          onChange={(e) =>
+            setNameAndAddressOfGuardianOfMinorChildren(e.target.value)
+          }
           placeholder="Provide the full names and addresses of the guardians of any minor children of the deceased. If there are no minor children, please write 'None'."
           className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400 resize-none"
           rows={3}
@@ -37,8 +44,16 @@ const FamilyInfo = () => {
           </label>
           <input
             type="text"
-            // value={fatherName}
-            // onChange={(e) => setFatherName(e.target.value)}
+            value={family.father.name}
+            onChange={(e) =>
+              setFamily({
+                ...family,
+                father: {
+                  ...family.father,
+                  name: e.target.value,
+                },
+              })
+            }
             placeholder="Surname First, Middle Name, Last N"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -50,8 +65,16 @@ const FamilyInfo = () => {
           </label>
           <input
             type="text"
-            // value={fatherAddress}
-            // onChange={(e) => setFatherAddress(e.target.value)}
+            value={family.father.address}
+            onChange={(e) =>
+              setFamily({
+                ...family,
+                father: {
+                  ...family.father,
+                  address: e.target.value,
+                },
+              })
+            }
             placeholder="Street name, City, LGA, State"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -63,8 +86,16 @@ const FamilyInfo = () => {
           </label>
           <input
             type="text"
-            // value={motherName}
-            // onChange={(e) => setMotherName(e.target.value)}
+            value={family.mother.name}
+            onChange={(e) =>
+              setFamily({
+                ...family,
+                mother: {
+                  ...family.mother,
+                  name: e.target.value,
+                },
+              })
+            }
             placeholder="Surname First, Middle Name, Last N"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -76,8 +107,16 @@ const FamilyInfo = () => {
           </label>
           <input
             type="text"
-            // value={motherAddress}
-            // onChange={(e) => setMotherAddress(e.target.value)}
+            value={family.mother.address}
+            onChange={(e) =>
+              setFamily({
+                ...family,
+                mother: {
+                  ...family.mother,
+                  address: e.target.value,
+                },
+              })
+            }
             placeholder="Street name, City, LGA, State"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -89,8 +128,16 @@ const FamilyInfo = () => {
           </label>
           <input
             type="text"
-            // value={brotherName}
-            // onChange={(e) => setBrotherName(e.target.value)}
+            value={family.brother.name}
+            onChange={(e) =>
+              setFamily({
+                ...family,
+                brother: {
+                  ...family.brother,
+                  name: e.target.value,
+                },
+              })
+            }
             placeholder="Surname First, Middle Name, Last N"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -102,8 +149,16 @@ const FamilyInfo = () => {
           </label>
           <input
             type="text"
-            // value={brotherAddress}
-            // onChange={(e) => setBrotherAddress(e.target.value)}
+            value={family.brother.address}
+            onChange={(e) =>
+              setFamily({
+                ...family,
+                brother: {
+                  ...family.brother,
+                  address: e.target.value,
+                },
+              })
+            }
             placeholder="Street name, City, LGA, State"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -115,8 +170,16 @@ const FamilyInfo = () => {
           </label>
           <input
             type="text"
-            // value={sisterName}
-            // onChange={(e) => setSisterName(e.target.value)}
+            value={family.sister.name}
+            onChange={(e) =>
+              setFamily({
+                ...family,
+                sister: {
+                  ...family.sister,
+                  name: e.target.value,
+                },
+              })
+            }
             placeholder="Surname First, Middle Name, Last N"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -128,8 +191,16 @@ const FamilyInfo = () => {
           </label>
           <input
             type="text"
-            // value={sisterAddress}
-            // onChange={(e) => setSisterAddress(e.target.value)}
+            value={family.sister.address}
+            onChange={(e) =>
+              setFamily({
+                ...family,
+                sister: {
+                  ...family.sister,
+                  address: e.target.value,
+                },
+              })
+            }
             placeholder="Street name, City, LGA, State"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />

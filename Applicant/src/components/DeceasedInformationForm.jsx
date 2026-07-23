@@ -44,10 +44,23 @@ const DeceasedInformationForm = () => {
   ] = useState("");
   // Family
   const [family, setFamily] = useState({
-    father: [{ name: "", address: "" }],
-    mother: [{ name: "", address: "" }],
-    brothers: [{ name: "", address: "" }],
-    sisters: [{ name: "", address: "" }],
+    father: {
+      name: "",
+      address: "",
+    },
+    mother: {
+      name: "",
+      address: "",
+    },
+    brother: {
+      name: "",
+      address: "",
+    },
+
+    sister: {
+      name: "",
+      address: "",
+    },
   });
 
   // // Bank Accounts
