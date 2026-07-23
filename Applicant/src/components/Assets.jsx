@@ -1,34 +1,60 @@
 import { FileText } from "lucide-react";
 import React, { useState } from "react";
 
-const Assets = () => {
-  // // Surety A
-  const [suretyA, setSuretyA] = useState({
-    details: "",
-    occupation: "",
-    bankDetails: "",
-    propertyValue: "",
-    annualIncome: "",
-  });
+const Assets = ({
+  bankAccounts,
+  setBankAccounts,
+  personalChattel,
+  setPersonalChattel,
+  insurancePolicy,
+  setInsurancePolicy,
+  companyShare,
+  setCompanyShare,
+  pensionManager,
+  setPensionManager,
+  pensionAccountNumber,
+  setPensionAccountNumber,
+  landedProperty,
+  setLandedProperty,
+  addressOfProperty,
+  setAddressOfProperty,
+  rent,
+  setRent,
+  nameOfTenant,
+  setNameOfTenant,
+  suretyA,
+  setSuretyA,
+  suretyB,
+  setSuretyB,
+}) => {
+  const addBank = () => {
+    setBankAccounts((prev) => ({
+      ...prev,
+      bankDetails: [
+        ...prev.bankDetails,
+        {
+          bankName: "",
+          accountNumber: "",
+        },
+      ],
+    }));
+  };
 
-  // Surety B
-  const [suretyB, setSuretyB] = useState({
-    details: "",
-    occupation: "",
-    bankDetails: "",
-    propertyValue: "",
-    annualIncome: "",
-  });
+  const removeBank = (index) => {
+    setBankAccounts((prev) => ({
+      ...prev,
+      bankDetails: prev.bankDetails.filter((_, i) => i !== index),
+    }));
+  };
 
-  // // Bank Accounts
-  const [bankAccounts, setBankAccounts] = useState({
-    bankDetails: [
-      {
-        bankName: "",
-        accountNumber: "",
-      },
-    ],
-  });
+  const handleBankChange = (index, field, value) => {
+    setBankAccounts((prev) => ({
+      ...prev,
+      bankDetails: prev.bankDetails.map((account, i) =>
+        i === index ? { ...account, [field]: value } : account,
+      ),
+    }));
+  };
   return (
     <div className="space-y-6">
       {/* //bank and account no */}
@@ -383,22 +409,6 @@ const Assets = () => {
             className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
         </div>
-      </div>
-      <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6">
-        <button
-          type="button"
-          className="px-6 py-3 text-gray-600 text-sm font-bold border border-gray-300 rounded-lg hover:bg-gray-50"
-        >
-          Previous
-        </button>
-
-        <button
-          type="submit"
-          className="px-6 py-3 bg-[#1a5c3a] text-white text-sm font-bold rounded-lg hover:bg-[#154d2f] flex items-center justify-center gap-2"
-        >
-          Save & Continue
-          <span>→</span>
-        </button>
       </div>
     </div>
   );
