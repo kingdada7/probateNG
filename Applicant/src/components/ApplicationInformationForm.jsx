@@ -64,7 +64,7 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                   <input
                     type="text"
                     value={applicantFullName}
-                    onChange={(e) => setFullName(e.target.value)}
+                    onChange={(e) => setApplicantFullName(e.target.value)}
                     placeholder="Surname First, Middle Name, Last Name"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
                   />
@@ -74,8 +74,8 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                     Relationship to Deceased
                   </label>
                   <select
-                    // value={relationship}
-                    // onChange={(e) => setRelationship(e.target.value)}
+                    value={relationshipToDeceased}
+                    onChange={(e) => setRelationshipToDeceased(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
                   >
                     <option value="">Select relationship</option>
@@ -94,8 +94,8 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                   </label>
                   <input
                     type="text"
-                    // value={occupation}
-                    // onChange={(e) => setOccupation(e.target.value)}
+                    value={applicantOccupation}
+                    onChange={(e) => setApplicatOccupation(e.target.value)}
                     placeholder="e.g. Civil Servant"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
                   />
@@ -105,8 +105,8 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                     Identification Type
                   </label>
                   <select
-                    // value={idType}
-                    // onChange={(e) => setIdType(e.target.value)}
+                    value={identificationType}
+                    onChange={(e) => setIdentificationType(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
                   >
                     <option value="National ID (NIN)">National ID (NIN)</option>
@@ -122,8 +122,8 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                 </label>
                 <input
                   type="text"
-                  //   value={idNumber}
-                  //   onChange={(e) => setIdNumber(e.target.value)}
+                    value={identificationNumber}
+                    onChange={(e) => setIdentificationNumber(e.target.value)}
                   placeholder="Enter identification number"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
                 />
@@ -142,8 +142,8 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                     Permanent Residential Address
                   </label>
                   <textarea
-                    // value={address}
-                    // onChange={(e) => setAddress(e.target.value)}
+                    value={applicantAddress}
+                    onChange={(e) => setApplicantAddress(e.target.value)}
                     placeholder="Street name, City, LGA, State"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400 resize-none"
                     rows={3}
@@ -164,8 +164,8 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                       />
                       <input
                         type="text"
-                        // value={phone}
-                        // onChange={(e) => setPhone(e.target.value)}
+                        value={applicantPhoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
                         placeholder="8012345678"
                         className="flex-1 px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
                       />
@@ -177,8 +177,8 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                     </label>
                     <input
                       type="email"
-                      //   value={email}
-                      //   onChange={(e) => setEmail(e.target.value)}
+                        value={applicantEmail}
+                        onChange={(e) => setApplicantEmail(e.target.value)}
                       placeholder="example@email.com"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
                     />
