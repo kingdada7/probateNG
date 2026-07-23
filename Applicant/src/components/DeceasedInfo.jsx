@@ -1,3 +1,4 @@
+import { FileText } from "lucide-react";
 import React from "react";
 
 const DeceasedInfo = () => {

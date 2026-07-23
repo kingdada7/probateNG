@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import DeceasedInfo from "./DeceasedInfo";
 
 const DeceasedInformationForm = () => {
   return (
     <div>
-      <h1>hello</h1>
+      <DeceasedInfo />
     </div>
-  )
-}
+  );
+};
 
-export default DeceasedInformationForm
+export default DeceasedInformationForm;
