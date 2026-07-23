@@ -26,7 +26,7 @@ const ApplicantInformation = () => {
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Sidebar */}
             <div className="w-full lg:w-[270px] shrink-0">
-              <StepSideBar />
+              <StepSideBar currentStep={1} />
             </div>
 
             {/* Form */}
