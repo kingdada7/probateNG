@@ -116,7 +116,12 @@ const DeceasedInformationForm = () => {
         lastAddress={lastAddress}
         setLastAddress={setLastAddress}
       />
-      <NextofKin />
+      <NextofKin
+        nextOfKin={nextOfKin}
+        setNextOfKin={setNextOfKin}
+        children={children}
+        setChildren={setChildren}
+      />
       <Assets />
     </>
   );
