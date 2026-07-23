@@ -1,7 +1,28 @@
 import { FileText } from "lucide-react";
 import React from "react";
 
-const DeceasedInfo = () => {
+const DeceasedInfo = ({
+  deceasedName,
+  setDeceasedName,
+  dateOfDeath,
+  setDateOfDeath,
+  placeOfDeath,
+  setPlaceOfDeath,
+  dateOfMarriage,
+  setDateOfMarriage,
+  spouseName,
+  setSpouseName,
+  occupationAndPlaceOfWork,
+  setOccupationAndPlaceOfWork,
+  formOfMarriage,
+  setFormOfMarriage,
+  identificationType,
+  setIdentificationType,
+  identificationNumber,
+  setIdentificationNumber,
+  lastAddress,
+  setLastAddress,
+}) => {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-6">
@@ -11,8 +32,8 @@ const DeceasedInfo = () => {
           </label>
           <input
             type="text"
-            // value={deceasedName}
-            // onChange={(e) => setDeceasedName(e.target.value)}
+            value={deceasedName}
+            onChange={(e) => setDeceasedName(e.target.value)}
             placeholder="Surname First, Middle Name, Last N"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -23,8 +44,8 @@ const DeceasedInfo = () => {
           </label>
           <input
             type="date"
-            // value={dateOfDeath}
-            // onChange={(e) => setDateOfDeath(e.target.value)}
+            value={dateOfDeath}
+            onChange={(e) => setDateOfDeath(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
         </div>
@@ -37,8 +58,8 @@ const DeceasedInfo = () => {
           </label>
           <input
             type="text"
-            // value={placeOfDeath}
-            // onChange={(e) => setPlaceOfDeath(e.target.value)}
+            value={placeOfDeath}
+            onChange={(e) => setPlaceOfDeath(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
         </div>
@@ -48,8 +69,8 @@ const DeceasedInfo = () => {
           </label>
           <input
             type="date"
-            // value={dateOfMarriage}
-            // onChange={(e) => setDateOfMarriage(e.target.value)}
+            value={dateOfMarriage}
+            onChange={(e) => setDateOfMarriage(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
         </div>
@@ -59,8 +80,8 @@ const DeceasedInfo = () => {
           </label>
           <input
             type="text"
-            // value={spouseName}
-            // onChange={(e) => setSpouseName(e.target.value)}
+            value={spouseName}
+            onChange={(e) => setSpouseName(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
         </div>
@@ -70,8 +91,8 @@ const DeceasedInfo = () => {
           </label>
           <input
             type="text"
-            // value={occupationAndPlaceOfWork}
-            // onChange={(e) => setOccupationAndPlaceOfWork(e.target.value)}
+            value={occupationAndPlaceOfWork}
+            onChange={(e) => setOccupationAndPlaceOfWork(e.target.value)}
             placeholder="e.g. Civil Servant, XYZ Company"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -83,8 +104,8 @@ const DeceasedInfo = () => {
             Form of Marriage
           </label>
           <select
-            // value={formOfMarriage}
-            // onChange={(e) => setFormOfMarriage(e.target.value)}
+            value={formOfMarriage}
+            onChange={(e) => setFormOfMarriage(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
           >
             <option value="Statutory Marriage">Statutory Marriage</option>
@@ -98,8 +119,8 @@ const DeceasedInfo = () => {
             Identification Type
           </label>
           <select
-            // value={identificationType}
-            // onChange={(e) => setIdentificationType(e.target.value)}
+            value={identificationType}
+            onChange={(e) => setIdentificationType(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
           >
             <option value="NIN">National ID (NIN)</option>
@@ -119,8 +140,8 @@ const DeceasedInfo = () => {
           </label>
           <input
             type="text"
-            // value={identificationNumber}
-            // onChange={(e) => setIdentificationNumber(e.target.value)}
+            value={identificationNumber}
+            onChange={(e) => setIdentificationNumber(e.target.value)}
             placeholder="Enter identification number"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
           />
@@ -140,8 +161,8 @@ const DeceasedInfo = () => {
             Last Known Residential Address of Deceased
           </label>
           <textarea
-            // value={lastAddress}
-            // onChange={(e) => setLastAddress(e.target.value)}
+            value={lastAddress}
+            onChange={(e) => setLastAddress(e.target.value)}
             placeholder="Street name, City, LGA, State"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400 resize-none"
             rows={3}

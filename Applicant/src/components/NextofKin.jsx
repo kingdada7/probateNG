@@ -222,7 +222,7 @@ const NextofKin = () => {
               <div className="col-span-2">
                 <button
                   type="button"
-                  //   onClick={() => removeChild(index)}
+                    onClick={() => removeChild(index)}
                   className="text-red-600 font-bold hover:underline"
                 >
                   Remove Child
