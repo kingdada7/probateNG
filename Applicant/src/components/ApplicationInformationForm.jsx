@@ -79,10 +79,10 @@ const ApplicationInformationForm = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
                   >
                     <option value="">Select relationship</option>
-                    <option value="spouse">Spouse</option>
-                    <option value="child">Child</option>
-                    <option value="parent">Parent</option>
-                    <option value="sibling">Sibling</option>
+                    <option value="Spouse">Spouse</option>
+                    <option value="Child">Child</option>
+                    <option value="Parent">Parent</option>
+                    <option value="Sibling">Sibling</option>
                   </select>
                 </div>
               </div>
@@ -95,7 +95,7 @@ const ApplicationInformationForm = () => {
                   <input
                     type="text"
                     value={applicantOccupation}
-                    onChange={(e) => setApplicatOccupation(e.target.value)}
+                    onChange={(e) => setApplicantOccupation(e.target.value)}
                     placeholder="e.g. Civil Servant"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
                   />
@@ -109,8 +109,12 @@ const ApplicationInformationForm = () => {
                     onChange={(e) => setIdentificationType(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
                   >
-                    <option value="National ID (NIN)">National ID (NIN)</option>
-                    <option value="Passport">Passport</option>
+                    <option value="">Select ID Type</option>
+                    <option value="NIN">National ID (NIN)</option>
+                    <option value="Voters Card">Voters Card</option>
+                    <option value="International Passport">
+                      International Passport
+                    </option>
                     <option value="Driver's License">Driver's License</option>
                   </select>
                 </div>
@@ -165,7 +169,9 @@ const ApplicationInformationForm = () => {
                       <input
                         type="text"
                         value={applicantPhoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        onChange={(e) =>
+                          setApplicantPhoneNumber(e.target.value)
+                        }
                         placeholder="8012345678"
                         className="flex-1 px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
                       />
