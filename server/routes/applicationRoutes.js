@@ -1,5 +1,5 @@
 import express from "express";
-import { applicantInformation } from "../controllers/applicationControllers.js";
+import { applicantInformation, getApplications } from "../controllers/applicationControllers.js";
 import auth from "../middleware/auth.js";
 
 const applicationRouter = express.Router();
