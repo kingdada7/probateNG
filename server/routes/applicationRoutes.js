@@ -6,4 +6,6 @@ const applicationRouter = express.Router();
 
 applicationRouter.post("/application-information", auth, applicantInformation);
 
+applicationRouter.get("/get-applications", auth, getApplications);
+
 export default applicationRouter;
