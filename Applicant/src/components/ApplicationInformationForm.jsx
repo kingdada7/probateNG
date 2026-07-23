@@ -6,13 +6,13 @@ import { useAppContext } from "../context/AppContext";
 const ApplicationInformationForm = () => {
   const { axios, navigate } = useAppContext();
   const [applicantFullName, setApplicantFullName] = useState("");
-const [applicantEmail, setApplicantEmail] = useState("");
-const [applicantPhoneNumber, setApplicantPhoneNumber] = useState("");
-const [applicantAddress, setApplicantAddress] = useState("");
-const [applicantOccupation, setApplicantOccupation] = useState("");
-const [relationshipToDeceased, setRelationshipToDeceased] = useState("");
-const [identificationType, setIdentificationType] = useState("");
-const [identificationNumber, setIdentificationNumber] = useState("");
+  const [applicantEmail, setApplicantEmail] = useState("");
+  const [applicantPhoneNumber, setApplicantPhoneNumber] = useState("");
+  const [applicantAddress, setApplicantAddress] = useState("");
+  const [applicantOccupation, setApplicantOccupation] = useState("");
+  const [relationshipToDeceased, setRelationshipToDeceased] = useState("");
+  const [identificationType, setIdentificationType] = useState("");
+  const [identificationNumber, setIdentificationNumber] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -122,8 +122,8 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                 </label>
                 <input
                   type="text"
-                    value={identificationNumber}
-                    onChange={(e) => setIdentificationNumber(e.target.value)}
+                  value={identificationNumber}
+                  onChange={(e) => setIdentificationNumber(e.target.value)}
                   placeholder="Enter identification number"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
                 />
@@ -177,8 +177,8 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                     </label>
                     <input
                       type="email"
-                        value={applicantEmail}
-                        onChange={(e) => setApplicantEmail(e.target.value)}
+                      value={applicantEmail}
+                      onChange={(e) => setApplicantEmail(e.target.value)}
                       placeholder="example@email.com"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
                     />
@@ -196,7 +196,10 @@ const [identificationNumber, setIdentificationNumber] = useState("");
                       Previous
                     </button> */}
 
-                <button className="px-6 py-3 bg-[#1a5c3a] text-white text-sm font-bold rounded-lg hover:bg-[#154d2f] flex items-center gap-2">
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-[#1a5c3a] text-white text-sm font-bold rounded-lg hover:bg-[#154d2f] flex items-center gap-2"
+                >
                   Save & Continue
                   <span>→</span>
                 </button>
