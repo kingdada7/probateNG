@@ -3,8 +3,10 @@ import DeceasedInfo from "./DeceasedInfo";
 import NextofKin from "./NextofKin";
 import Assets from "./Assets";
 import FamilyInfo from "./FamilyInfo";
+import { useAppContext } from "../context/AppContext";
 
 const DeceasedInformationForm = () => {
+  const { axios, navigate } = useAppContext();
   const [deceasedName, setDeceasedName] = useState("");
   const [dateOfDeath, setDateOfDeath] = useState("");
   const [placeOfDeath, setPlaceOfDeath] = useState("");
