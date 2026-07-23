@@ -18,33 +18,17 @@ const applicantSchema = new mongoose.Schema({
 });
 
 const deceasedSchema = new mongoose.Schema({
-  deceasedName: {
-    type: String,
-    trim: true,
-  },
+  deceasedName: String,
 
-  dateOfDeath: {
-    type: Date,
-  },
+  dateOfDeath: Date,
 
-  placeOfDeath: {
-    type: String,
-    trim: true,
-  },
+  placeOfDeath: String,
 
-  dateOfMarriage: {
-    type: Date,
-  },
+  dateOfMarriage: Date,
 
-  spouseName: {
-    type: String,
-    trim: true,
-  },
+  spouseName: String,
 
-  occupationAndPlaceOfWork: {
-    type: String,
-    trim: true,
-  },
+  occupationAndPlaceOfWork: String,
 
   formOfMarriage: {
     type: String,
@@ -64,31 +48,21 @@ const deceasedSchema = new mongoose.Schema({
     maxlength: [50, "Identification number cannot exceed 50 characters"],
   },
 
-  lastAddress: {
-    type: String,
-    trim: true,
-  },
+  lastAddress: String,
 
   nextOfKin: {
-    name: {
-      type: String,
-      trim: true,
-    },
+    name: String,
 
     relationship: {
       type: String,
       enum: ["Parent", "Sibling", "Child", "Spouse"],
     },
-
     phone: {
       type: String,
       trim: true,
     },
 
-    address: {
-      type: String,
-      trim: true,
-    },
+    address: String,
   },
 
   children: {
@@ -102,14 +76,9 @@ const deceasedSchema = new mongoose.Schema({
     ],
     default: [],
   },
-  nameAndAgeOfMinorChildren: {
-    type: String,
-    trim: true,
-  },
-  nameAndAddressOfGuardianOfMinorChildren: {
-    type: String,
-    trim: true,
-  },
+  nameAndAgeOfMinorChildren: String,
+
+  nameAndAddressOfGuardianOfMinorChildren: String,
 
   family: {
     father: {
