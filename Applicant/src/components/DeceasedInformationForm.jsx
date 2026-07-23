@@ -124,32 +124,34 @@ const DeceasedInformationForm = () => {
         setChildren={setChildren}
       />
 
-      <FamilyInfo/>
-      <Assets   bankAccounts={bankAccounts}
-  setBankAccounts={setBankAccounts}
-  personalChattel={personalChattel}
-  setPersonalChattel={setPersonalChattel}
-  insurancePolicy={insurancePolicy}
-  setInsurancePolicy={setInsurancePolicy}
-  companyShare={companyShare}
-  setCompanyShare={setCompanyShare}
-  pensionManager={pensionManager}
-  setPensionManager={setPensionManager}
-  pensionAccountNumber={pensionAccountNumber}
-  setPensionAccountNumber={setPensionAccountNumber}
-  landedProperty={landedProperty}
-  setLandedProperty={setLandedProperty}
-  addressOfProperty={addressOfProperty}
-  setAddressOfProperty={setAddressOfProperty}
-  rent={rent}
-  setRent={setRent}
-  nameOfTenant={nameOfTenant}
-  setNameOfTenant={setNameOfTenant}
-  suretyA={suretyA}
-  setSuretyA={setSuretyA}
-  suretyB={suretyB}
-  setSuretyB={setSuretyB}
- />
+      <FamilyInfo family={family} setFamily={setFamily} />
+
+      <Assets
+        bankAccounts={bankAccounts}
+        setBankAccounts={setBankAccounts}
+        personalChattel={personalChattel}
+        setPersonalChattel={setPersonalChattel}
+        insurancePolicy={insurancePolicy}
+        setInsurancePolicy={setInsurancePolicy}
+        companyShare={companyShare}
+        setCompanyShare={setCompanyShare}
+        pensionManager={pensionManager}
+        setPensionManager={setPensionManager}
+        pensionAccountNumber={pensionAccountNumber}
+        setPensionAccountNumber={setPensionAccountNumber}
+        landedProperty={landedProperty}
+        setLandedProperty={setLandedProperty}
+        addressOfProperty={addressOfProperty}
+        setAddressOfProperty={setAddressOfProperty}
+        rent={rent}
+        setRent={setRent}
+        nameOfTenant={nameOfTenant}
+        setNameOfTenant={setNameOfTenant}
+        suretyA={suretyA}
+        setSuretyA={setSuretyA}
+        suretyB={suretyB}
+        setSuretyB={setSuretyB}
+      />
     </>
   );
 };
