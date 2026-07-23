@@ -5,6 +5,7 @@ const DeceasedInformationForm = () => {
   return (
     <div>
       <DeceasedInfo />
+      
     </div>
   );
 };
