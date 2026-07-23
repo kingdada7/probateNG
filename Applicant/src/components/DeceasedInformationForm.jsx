@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DeceasedInfo from "./DeceasedInfo";
 import NextofKin from "./NextofKin";
 import Assets from "./Assets";
+import FamilyInfo from "./FamilyInfo";
 
 const DeceasedInformationForm = () => {
   const [deceasedName, setDeceasedName] = useState("");
@@ -122,7 +123,33 @@ const DeceasedInformationForm = () => {
         children={children}
         setChildren={setChildren}
       />
-      <Assets />
+
+      <FamilyInfo/>
+      <Assets   bankAccounts={bankAccounts}
+  setBankAccounts={setBankAccounts}
+  personalChattel={personalChattel}
+  setPersonalChattel={setPersonalChattel}
+  insurancePolicy={insurancePolicy}
+  setInsurancePolicy={setInsurancePolicy}
+  companyShare={companyShare}
+  setCompanyShare={setCompanyShare}
+  pensionManager={pensionManager}
+  setPensionManager={setPensionManager}
+  pensionAccountNumber={pensionAccountNumber}
+  setPensionAccountNumber={setPensionAccountNumber}
+  landedProperty={landedProperty}
+  setLandedProperty={setLandedProperty}
+  addressOfProperty={addressOfProperty}
+  setAddressOfProperty={setAddressOfProperty}
+  rent={rent}
+  setRent={setRent}
+  nameOfTenant={nameOfTenant}
+  setNameOfTenant={setNameOfTenant}
+  suretyA={suretyA}
+  setSuretyA={setSuretyA}
+  suretyB={suretyB}
+  setSuretyB={setSuretyB}
+ />
     </>
   );
 };
