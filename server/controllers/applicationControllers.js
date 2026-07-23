@@ -132,7 +132,7 @@ export const deceasedInformation = async (req, res) => { try {
       sureties,
     };
 
-  
+    application.currentStep = 2;
 
     await application.save();
 
