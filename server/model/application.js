@@ -18,14 +18,191 @@ const applicantSchema = new mongoose.Schema({
 });
 
 const deceasedSchema = new mongoose.Schema({
-  fullName: String,
-  gender: String,
-  dateOfBirth: Date,
-  dateOfDeath: Date,
-  placeOfDeath: String,
-  lastResidentialAddress: String,
-  maritalStatus: String,
-  occupation: String,
+  deceasedName: {
+    type: String,
+    trim: true,
+  },
+
+  dateOfDeath: {
+    type: Date,
+  },
+
+  placeOfDeath: {
+    type: String,
+    trim: true,
+  },
+
+  dateOfMarriage: {
+    type: Date,
+  },
+
+  spouseName: {
+    type: String,
+    trim: true,
+  },
+
+  occupationAndPlaceOfWork: {
+    type: String,
+    trim: true,
+  },
+
+  formOfMarriage: {
+    type: String,
+    enum: ["Statutory Marriage"],
+  },
+
+  identificationType: {
+    type: String,
+    trim: true,
+    enum: ["NIN", "Voters Card", "International Passport", "Driver's License"],
+  },
+
+  identificationNumber: {
+    type: String,
+    trim: true,
+    minlength: [5, "Identification number must be at least 5 characters"],
+    maxlength: [50, "Identification number cannot exceed 50 characters"],
+  },
+
+  lastAddress: {
+    type: String,
+    trim: true,
+  },
+
+  nextOfKin: {
+    name: {
+      type: String,
+      trim: true,
+    },
+
+    relationship: {
+      type: String,
+      enum: ["Parent", "Sibling", "Child", "Spouse"],
+    },
+
+    phone: {
+      type: String,
+      trim: true,
+    },
+
+    address: {
+      type: String,
+      trim: true,
+    },
+  },
+
+  children: {
+    type: [
+      {
+        name: String,
+        age: Number,
+        motherName: String,
+        motherPhone: String,
+      },
+    ],
+    default: [],
+  },
+  nameAndAgeOfMinorChildren: {
+    type: String,
+    trim: true,
+  },
+  nameAndAddressOfGuardianOfMinorChildren: {
+    type: String,
+    trim: true,
+  },
+
+  family: {
+    father: {
+      type: [{ name: String, address: String }],
+    },
+
+    mother: {
+      type: [{ name: String, address: String }],
+    },
+
+    brothers: {
+      type: [
+        {
+          name: String,
+          address: String,
+        },
+      ],
+      default: [],
+    },
+
+    sisters: {
+      type: [
+        {
+          name: String,
+          address: String,
+        },
+      ],
+      default: [],
+    },
+  },
+
+  bankAccounts: {
+    type: [
+      {
+        bankName: String,
+        accountNumber: String,
+      },
+    ],
+    default: [],
+  },
+  personalChattel: {
+    type: String,
+    trim: true,
+  },
+
+  insurancePolicy: {
+    type: String,
+    trim: true,
+  },
+  companyShare: {
+    type: String,
+    trim: true,
+  },
+
+  pensionManger: {
+    type: String,
+    trim: true,
+  },
+  pensionAccountNumber: {
+    type: String,
+    trim: true,
+  },
+  landedProperty: {
+    type: String,
+    trim: true,
+  },
+  addressOfProperty: {
+    type: String,
+    trim: true,
+  },
+  rent: {
+    type: String,
+    trim: true,
+  },
+  nameOfTenant: {
+    type: String,
+    trim: true,
+  },
+
+  sureties: {
+    type: [
+      {
+        name: String,
+        phone: String,
+        address: String,
+        occupation: String,
+        bankDetails: String,
+        propertyValue: String,
+        incomePerAnnum: String,
+      },
+    ],
+    default: [],
+  },
 });
 
 const applicationTypeSchema = new mongoose.Schema({
