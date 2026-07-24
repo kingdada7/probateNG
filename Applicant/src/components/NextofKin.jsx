@@ -66,6 +66,7 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
             }
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
           >
+             <option value="">Select relationship</option>
             <option value="Spouse">Spouse</option>
             <option value="Child">Child</option>
             <option value="Parent">Parent</option>

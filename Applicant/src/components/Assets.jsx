@@ -67,9 +67,9 @@ const Assets = ({
             <input
               type="text"
               value={account.bankName}
-              value={account.accountNumber}
+             
               onChange={(e) =>
-                handleBankChange(index, "accountNumber", e.target.value)
+                handleBankChange(index, "bankName", e.target.value)
               }
               placeholder="e.g. First Bank, GTBank, Zenith Bank"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
@@ -336,7 +336,7 @@ const Assets = ({
             type="text"
             value={suretyB.details}
             onChange={(e) =>
-              setSuretyA({
+              setSuretyB({
                 ...suretyB,
                 details: e.target.value,
               })
