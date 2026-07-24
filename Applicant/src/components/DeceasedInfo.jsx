@@ -123,7 +123,7 @@ const DeceasedInfo = ({
             onChange={(e) => setIdentificationType(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
           >
-             <option value="">Select Identification Type</option>
+            <option value="">Select Identification Type</option>
             <option value="NIN">National ID (NIN)</option>
 
             <option value="Voters Card">Voters Card</option>

@@ -4,6 +4,7 @@ import NextofKin from "./NextofKin";
 import Assets from "./Assets";
 import FamilyInfo from "./FamilyInfo";
 import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 const DeceasedInformationForm = () => {
   const { axios, navigate } = useAppContext();
@@ -118,6 +119,20 @@ const DeceasedInformationForm = () => {
         alert("Application not found. Please start a new application.");
         return;
       }
+      if (!deceasedName.trim()) {
+        toast.error("Please enter the deceased's name");
+        return;
+      }
+
+      if (!dateOfDeath) {
+        toast.error("Please select the date of death");
+        return;
+      }
+
+      if (!identificationType) {
+        toast.error("Please select an identification type");
+        return;
+      }
 
       const { data } = await axios.patch(
         `/api/application/${applicationId}/deceased-information`,
@@ -165,6 +180,7 @@ const DeceasedInformationForm = () => {
       }
     } catch (error) {
       console.log(error);
+      toast.error(error.response?.data?.message || "Something went wrong.");
     }
   };
 
