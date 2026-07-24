@@ -1,6 +1,7 @@
 import React from "react";
 import ApplicationNavbar from "../components/ApplicationNavbar";
 import StepSideBar from "../components/StepSideBar";
+import ApplicationTypeOptions from "../components/ApplicationTypeOptions";
 
 const ApplicationType = () => {
   const GREEN = "#1a5c2a";
@@ -27,6 +28,8 @@ const ApplicationType = () => {
               <StepSideBar currentStep={3} />
             </div>
           </div>
+
+          <ApplicationTypeOptions />
         </div>
       </div>
     </div>
