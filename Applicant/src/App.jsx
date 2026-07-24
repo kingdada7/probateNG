@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { useAppContext } from "./context/AppContext";
 import ApplicantInformation from "./pages/ApplicantInformation";
 import DeceasedInfromation from "./pages/DeceasedInfromation";
+import ApplicationType from "./pages/ApplicationType";
 
 const App = () => {
   const { token } = useAppContext();
@@ -32,6 +33,7 @@ const App = () => {
           />
 
           <Route path="deceasedinformation" element={<DeceasedInfromation />} />
+           <Route path="applicationtype" element={<ApplicationType />} />
         </Route>
 
         <Route path="/citizenregistration" element={<CitizenRegistration />} />
