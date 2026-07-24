@@ -1,6 +1,27 @@
-import React from "react";
+import { ChevronDown, Plus, TableProperties, Trash2 } from "lucide-react";
+import React, { useState } from "react";
 
 const AssestDetails = () => {
+  const GREEN = "#1a5c2a";
+  const CATEGORIES = [
+    "Real Estate",
+    "Bank Account",
+    "Vehicle",
+    "Stocks / Shares",
+    "Business Interest",
+    "Jewellery / Valuables",
+    "Other",
+  ];
+  const inputCls =
+    "border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 outline-none focus:border-[#1a5c2a] focus:ring-1 focus:ring-[#1a5c2a] transition bg-white w-full";
+  const [assets, setAssets] = useState([
+    {
+      id: 1,
+      category: "Bank Account",
+      description: "",
+      value: "",
+    },
+  ]);
   return (
     <div>
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">

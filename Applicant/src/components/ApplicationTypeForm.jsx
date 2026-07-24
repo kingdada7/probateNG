@@ -2,12 +2,14 @@ import React from "react";
 import ApplicationTypeOptions from "./ApplicationTypeOptions";
 import EstateSummary from "./EstateSummary";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import AssestDetails from "./AssestDetails";
 const ApplicationTypeForm = () => {
   const GREEN = "#1a5c2a";
   return (
     <div className="flex flex-col gap-4">
       <ApplicationTypeOptions />
       <EstateSummary />
+      <AssestDetails />
 
       {/* Action buttons */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 py-2">
