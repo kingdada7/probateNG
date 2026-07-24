@@ -2,12 +2,14 @@ import React from "react";
 import ApplicationNavbar from "../components/ApplicationNavbar";
 import StepSideBar from "../components/StepSideBar";
 import ApplicationTypeOptions from "../components/ApplicationTypeOptions";
+import EstateSummary from "../components/EstateSummary";
+import ApplicationTypeForm from "../components/ApplicationTypeForm";
 
 const ApplicationType = () => {
   const GREEN = "#1a5c2a";
   return (
-    <div>
-      <ApplicationNavbar />\
+    <>
+      <ApplicationNavbar />
       <div className="flex-1">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           {/* Page heading */}
@@ -27,12 +29,12 @@ const ApplicationType = () => {
             <div className="w-full lg:w-[270px] shrink-0">
               <StepSideBar currentStep={3} />
             </div>
-          </div>
 
-          <ApplicationTypeOptions />
+            <ApplicationTypeForm />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

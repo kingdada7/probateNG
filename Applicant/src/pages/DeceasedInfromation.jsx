@@ -33,9 +33,6 @@ const ApplicantInformation = () => {
             {/* Form */}
             <div className="flex-1 min-w-0">
               <DeceasedInformationForm />
-              <div className="flex gap-4 ml-90">
-               
-              </div>
             </div>
           </div>
         </div>
