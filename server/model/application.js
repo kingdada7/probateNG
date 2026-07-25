@@ -180,7 +180,10 @@ const applicationTypeSchema = new mongoose.Schema({
     enum: ["Letters of Administration", "Grant of Probate"],
   },
 
-  estate: Number,
+   estate: {
+    type: Number,
+    default: 0,
+  },
 
   assestDetails: [
     {
