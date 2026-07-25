@@ -177,10 +177,39 @@ const deceasedSchema = new mongoose.Schema({
 const applicationTypeSchema = new mongoose.Schema({
   applicationType: {
     type: String,
-    enum: ["Letters of Administration", "Probate", "Will Annexed"],
+    enum: ["Letters of Administration", "Grant of Probate"],
   },
-  hasWill: Boolean,
-  executorName: String,
+
+  estate: Number,
+
+  assestDetails: [
+    {
+      category: {
+        type: String,
+        enum: [
+          "Real Estate",
+          "Bank Account",
+          "Vehicle",
+          "Shares",
+          "Insurance",
+          "Personal Property",
+          "Other",
+        ],
+        required: false,
+      },
+      description: {
+        type: String,
+        required: false,
+        trim: true,
+        maxlength: 300,
+      },
+      value: {
+        type: Number,
+        required: false,
+        min: 0,
+      },
+    },
+  ],
 });
 
 const documentSchema = new mongoose.Schema({

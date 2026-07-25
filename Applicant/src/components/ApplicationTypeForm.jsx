@@ -3,6 +3,7 @@ import ApplicationTypeOptions from "./ApplicationTypeOptions";
 import EstateSummary from "./EstateSummary";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import AssestDetails from "./AssestDetails";
+import SubTotal from "./SubTotal";
 const ApplicationTypeForm = () => {
   const GREEN = "#1a5c2a";
   return (
@@ -10,6 +11,7 @@ const ApplicationTypeForm = () => {
       <ApplicationTypeOptions />
       <EstateSummary />
       <AssestDetails />
+      <SubTotal />
 
       {/* Action buttons */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 py-2">
