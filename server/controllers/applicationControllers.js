@@ -150,6 +150,21 @@ export const deceasedInformation = async (req, res) => { try {
     });
   }};
 
+
+export const applicationType = async (req, res)=>{
+  try {
+      const { applicationId } = req.params;
+      const {applicationType,estate, assestDetails} = req.body
+  } catch (error) {
+    
+  }
+}
+
+
+
+
+
+
 export const getApplications = async (req, res) => {
   try {
     const applications = await Application.find({

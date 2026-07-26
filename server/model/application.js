@@ -180,12 +180,12 @@ const applicationTypeSchema = new mongoose.Schema({
     enum: ["Letters of Administration", "Grant of Probate"],
   },
 
-   estate: {
+  estate: {
     type: Number,
     default: 0,
   },
 
-  assestDetails: [
+  assetDetails: [
     {
       category: {
         type: String,
@@ -213,7 +213,18 @@ const applicationTypeSchema = new mongoose.Schema({
       },
     },
   ],
+
+  subTotal: {
+    type: Number,
+    default: 0,
+  },
 });
+const subTotal = applicationType.assetDetails.reduce(
+  (total, asset) => total + (asset.value || 0),
+  0,
+);
+
+applicationType.subTotal = subTotal;
 
 const documentSchema = new mongoose.Schema({
   deathCertificate: String,
