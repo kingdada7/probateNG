@@ -13,10 +13,8 @@ const ApplicationTypeForm = () => {
       <ApplicationTypeOptions
         applicationType={applicationType}
         setApplicationType={setApplicationType}
-        estate={estate}
-        setEstate={setEstate}
       />
-      <EstateSummary />
+      <EstateSummary estate={estate} setEstate={setEstate} />
       <AssestDetails />
       <SubTotal />
 
