@@ -155,7 +155,7 @@ export const deceasedInformation = async (req, res) => {
 export const applicationType = async (req, res) => {
   try {
     const { applicationId } = req.params;
-    const { applicationType, estate, assestDetails } = req.body;
+    const { applicationType, estate, assetDetails } = req.body;
 
     const application = await Application.findOne({
       _id: applicationId,
@@ -169,7 +169,7 @@ export const applicationType = async (req, res) => {
       });
     }
 
-    const subTotal = assestDetails.reduce(
+    const subTotal = assetDetails.reduce(
       (total, asset) => total + (asset.value || 0),
       0,
     );
@@ -177,7 +177,7 @@ export const applicationType = async (req, res) => {
     application.applicationType = {
       applicationType,
       estate,
-      assestDetails,
+      assetDetails,
       subTotal,
     };
 

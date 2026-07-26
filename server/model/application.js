@@ -219,13 +219,8 @@ const applicationTypeSchema = new mongoose.Schema({
     default: 0,
   },
 });
-const subTotal = applicationType.assetDetails.reduce(
-  (total, asset) => total + (asset.value || 0),
-  0,
-);
 
-applicationType.subTotal = subTotal;
-
+re
 const documentSchema = new mongoose.Schema({
   deathCertificate: String,
   passportPhotograph: String,
