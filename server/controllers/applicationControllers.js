@@ -59,7 +59,8 @@ export const applicantInformation = async (req, res) => {
   }
 };
 
-export const deceasedInformation = async (req, res) => { try {
+export const deceasedInformation = async (req, res) => {
+  try {
     const { applicationId } = req.params;
 
     const {
@@ -148,22 +149,56 @@ export const deceasedInformation = async (req, res) => { try {
       success: false,
       message: "Internal Server Error",
     });
-  }};
-
-
-export const applicationType = async (req, res)=>{
-  try {
-      const { applicationId } = req.params;
-      const {applicationType,estate, assestDetails} = req.body
-  } catch (error) {
-    
   }
-}
+};
 
+export const applicationType = async (req, res) => {
+  try {
+    const { applicationId } = req.params;
+    const { applicationType, estate, assestDetails } = req.body;
 
+    const application = await Application.findOne({
+      _id: applicationId,
+      user: req.user.id,
+    });
 
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
 
+    const subTotal = assestDetails.reduce(
+      (total, asset) => total + (asset.value || 0),
+      0,
+    );
 
+    application.applicationType = {
+      applicationType,
+      estate,
+      assestDetails,
+      subTotal,
+    };
+
+    application.currentStep = 3;
+
+    await application.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Application Type saved successfully",
+      application,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
 
 export const getApplications = async (req, res) => {
   try {
