@@ -14,7 +14,7 @@ import {
 // import { API_ENDPOINT } from "../../../utils/apiPaths.js";
 // import axiosInstance from "../../../utils/axiosInstance";
 // import { UserContext } from "../../../context/userContext.jsx";
-
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
 
