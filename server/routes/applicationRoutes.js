@@ -1,6 +1,7 @@
 import express from "express";
 import {
   applicantInformation,
+  applicationType,
   deceasedInformation,
   getApplications,
 } from "../controllers/applicationControllers.js";
@@ -13,6 +14,11 @@ applicationRouter.patch(
   "/:applicationId/deceased-information",
   auth,
   deceasedInformation,
+);
+applicationRouter.patch(
+  "/:applicationId/application-type",
+  auth,
+  applicationType,
 );
 
 applicationRouter.get("/get-applications", auth, getApplications);
