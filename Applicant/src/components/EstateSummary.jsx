@@ -1,8 +1,7 @@
 import React from "react";
 
-
-const EstateSummary = () => {
-      const GREEN = "#1a5c2a";
+const EstateSummary = ({ estate, setEstate }) => {
+  const GREEN = "#1a5c2a";
   return (
     <div>
       {/* Section 2 — Estate Summary */}
@@ -32,8 +31,8 @@ const EstateSummary = () => {
             </span>
             <input
               type="text"
-            //   value={estateValue}
-            //   onChange={(e) => setEstateValue(e.target.value)}
+              value={estate}
+              onChange={(e) => setEstate(e.target.value)}
               className="flex-1 bg-transparent text-sm text-gray-800 outline-none min-w-0 font-medium"
             />
           </div>

@@ -6,12 +6,15 @@ import AssestDetails from "./AssestDetails";
 import SubTotal from "./SubTotal";
 const ApplicationTypeForm = () => {
   const [applicationType, setApplicationType] = useState("");
+  const [estate, setEstate] = useState("");
   const GREEN = "#1a5c2a";
   return (
     <div className="flex flex-col gap-4">
       <ApplicationTypeOptions
         applicationType={applicationType}
         setApplicationType={setApplicationType}
+        estate={estate}
+        setEstate={setEstate}
       />
       <EstateSummary />
       <AssestDetails />
