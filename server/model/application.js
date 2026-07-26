@@ -220,7 +220,6 @@ const applicationTypeSchema = new mongoose.Schema({
   },
 });
 
-re
 const documentSchema = new mongoose.Schema({
   deathCertificate: String,
   passportPhotograph: String,
