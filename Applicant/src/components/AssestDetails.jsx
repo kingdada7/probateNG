@@ -15,19 +15,17 @@ const AssestDetails = ({ assetDetails, setAssetDetails }) => {
     ]);
   };
 
- const removeAsset = (id) => {
-  setAssetDetails((prev) =>
-    prev.filter((asset) => asset.id !== id)
-  );
-};
+  const removeAsset = (id) => {
+    setAssetDetails((prev) => prev.filter((asset) => asset.id !== id));
+  };
 
-const handleAssetsChange = (id, field, value) => {
-  setAssetDetails((prev) =>
-    prev.map((asset) =>
-      asset.id === id ? { ...asset, [field]: value } : asset
-    )
-  );
-};
+  const handleAssetsChange = (id, field, value) => {
+    setAssetDetails((prev) =>
+      prev.map((asset) =>
+        asset.id === id ? { ...asset, [field]: value } : asset,
+      ),
+    );
+  };
   const inputCls =
     "border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 outline-none focus:border-[#1a5c2a] focus:ring-1 focus:ring-[#1a5c2a] transition bg-white w-full";
 
@@ -71,6 +69,9 @@ const handleAssetsChange = (id, field, value) => {
             {/* Category select */}
             <div className="relative px-2">
               <select className="appearance-none w-full border border-gray-200 rounded-lg pl-3 pr-8 py-2 text-sm text-gray-800 bg-white outline-none focus:border-[#1a5c2a] focus:ring-1 focus:ring-[#1a5c2a] transition">
+                <option value="" disabled>
+                  Select Category
+                </option>
                 <option>Real Estate</option>
                 <option>Bank Account</option>
                 <option>Vehicle</option>
