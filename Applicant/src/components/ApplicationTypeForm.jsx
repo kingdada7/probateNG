@@ -11,7 +11,11 @@ const ApplicationTypeForm = () => {
   const [applicationType, setApplicationType] = useState("");
   const [estate, setEstate] = useState("");
   const [assetDetails, setAssetDetails] = useState([]);
-  const [subTotal, setSubTotal] = useState(0);
+  const subTotal = assetDetails.reduce(
+    (total, asset) =>
+      total + (Number(String(asset.value).replace(/,/g, "")) || 0),
+    0,
+  );
   const GREEN = "#1a5c2a";
 
   const submitHandler = async (e) => {

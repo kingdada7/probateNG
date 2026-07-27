@@ -41,6 +41,7 @@ const AssestDetails = ({ assetDetails, setAssetDetails }) => {
             </h2>
           </div>
           <button
+            type="button"
             onClick={addAsset}
             className="inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-lg border-2 transition-colors hover:opacity-80 shrink-0"
             style={{ borderColor: GREEN, color: GREEN }}
