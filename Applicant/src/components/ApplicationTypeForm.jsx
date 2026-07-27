@@ -9,8 +9,47 @@ const ApplicationTypeForm = () => {
   const [estate, setEstate] = useState("");
   const [assetDetails, setAssetDetails] = useState([]);
   const GREEN = "#1a5c2a";
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      const applicationId = localStorage.getItem("applicationId");
+
+      if (!applicationId) {
+        alert("Application not found. Please start a new application.");
+        return;
+      }
+      if (!applicationType) {
+        toast.error("Please select an application type");
+        return;
+      }
+
+      if (!estate) {
+        toast.error("Please fill the the estate field");
+        return;
+      }
+
+      const { data } = await axios.patch(
+        `/api/application/${applicationId}/application-type`,
+        {
+          applicationType,
+          estate,
+          assetDetails,
+        },
+      );
+
+      if (data.success) {
+        navigate("/citizenportal/documents-upload"); // or your next page
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Something went wrong.");
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-4">
+    <form onSubmit={submitHandler} className="flex flex-col gap-4">
       <ApplicationTypeOptions
         applicationType={applicationType}
         setApplicationType={setApplicationType}
@@ -24,19 +63,19 @@ const ApplicationTypeForm = () => {
 
       {/* Action buttons */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 py-2">
-        <button
+        {/* <button
           // onClick={onBack}
           className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-gray-300 text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 transition-colors"
         >
           <ArrowLeft size={15} />
           Back to Deceased Info
-        </button>
+        </button> */}
         <div className="flex flex-col sm:flex-row gap-3">
-          <button className="px-7 py-3 rounded-xl border border-gray-200 bg-white text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors shadow-sm">
+          {/* <button className="px-7 py-3 rounded-xl border border-gray-200 bg-white text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors shadow-sm">
             Save Draft
-          </button>
+          </button> */}
           <button
-            // onClick={onContinue}
+            type="submit"
             className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl text-sm font-bold text-white hover:opacity-90 transition-opacity"
             style={{ backgroundColor: GREEN }}
           >
@@ -45,7 +84,7 @@ const ApplicationTypeForm = () => {
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
