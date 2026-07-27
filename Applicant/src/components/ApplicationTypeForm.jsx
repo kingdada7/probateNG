@@ -7,6 +7,7 @@ import SubTotal from "./SubTotal";
 const ApplicationTypeForm = () => {
   const [applicationType, setApplicationType] = useState("");
   const [estate, setEstate] = useState("");
+  const [assetDetails, setAssetDetails] = useState([]);
   const GREEN = "#1a5c2a";
   return (
     <div className="flex flex-col gap-4">
@@ -15,7 +16,10 @@ const ApplicationTypeForm = () => {
         setApplicationType={setApplicationType}
       />
       <EstateSummary estate={estate} setEstate={setEstate} />
-      <AssestDetails />
+      <AssestDetails
+        assetDetails={assetDetails}
+        setAssetDetails={setAssetDetails}
+      />
       <SubTotal />
 
       {/* Action buttons */}
