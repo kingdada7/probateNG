@@ -8,6 +8,7 @@ const AssestDetails = ({ assetDetails, setAssetDetails }) => {
     setAssetDetails((prev) => [
       ...prev,
       {
+        id: crypto.randomUUID(),
         category: "",
         description: "",
         value: "",
@@ -65,52 +66,71 @@ const AssestDetails = ({ assetDetails, setAssetDetails }) => {
 
         {/* Desktop rows */}
         <div className="hidden sm:block divide-y divide-gray-100">
-          <div className="grid grid-cols-[minmax(160px,1fr)_minmax(180px,2fr)_140px_40px] gap-0 items-center py-3">
-            {/* Category select */}
-            <div className="relative px-2">
-              <select className="appearance-none w-full border border-gray-200 rounded-lg pl-3 pr-8 py-2 text-sm text-gray-800 bg-white outline-none focus:border-[#1a5c2a] focus:ring-1 focus:ring-[#1a5c2a] transition">
-                <option value="" disabled>
-                  Select Category
-                </option>
-                <option>Real Estate</option>
-                <option>Bank Account</option>
-                <option>Vehicle</option>
-                <option>Shares</option>
-                <option>Insurance</option>
-                <option>Personal Property</option>
-                <option>Other</option>
-              </select>
-              <ChevronDown
-                size={13}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-              />
+          {assetDetails.map((asset) => (
+            <div
+              key={asset.id}
+              className="grid grid-cols-[minmax(160px,1fr)_minmax(180px,2fr)_140px_40px] gap-0 items-center py-3"
+            >
+              {/* Category select */}
+              <div className="relative px-2">
+                <select
+                  value={asset.category}
+                  onChange={(e) =>
+                    handleAssetsChange(asset.id, "category", e.target.value)
+                  }
+                  className="appearance-none w-full border border-gray-200 rounded-lg pl-3 pr-8 py-2 text-sm text-gray-800 bg-white outline-none focus:border-[#1a5c2a] focus:ring-1 focus:ring-[#1a5c2a] transition"
+                >
+                  <option value="" disabled>
+                    Select Category
+                  </option>
+                  <option>Real Estate</option>
+                  <option>Bank Account</option>
+                  <option>Vehicle</option>
+                  <option>Shares</option>
+                  <option>Insurance</option>
+                  <option>Personal Property</option>
+                  <option>Other</option>
+                </select>
+                <ChevronDown
+                  size={13}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                />
+              </div>
+              {/* Description */}
+              <div className="px-2">
+                <input
+                  value={asset.description}
+                  onChange={(e) =>
+                    handleAssetsChange(asset.id, "description", e.target.value)
+                  }
+                  type="text"
+                  placeholder="e.g. Plot 442, Maitama District"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 placeholder-gray-400 outline-none focus:border-[#1a5c2a] focus:ring-1 focus:ring-[#1a5c2a] transition bg-white"
+                />
+              </div>
+              {/* Value */}
+              <div className="px-2">
+                <input
+                  type="text"
+                  value={asset.value}
+                  onChange={(e) =>
+                    handleAssetsChange(asset.id, "value", e.target.value)
+                  }
+                  placeholder="0"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 placeholder-gray-400 outline-none focus:border-[#1a5c2a] focus:ring-1 focus:ring-[#1a5c2a] transition bg-white text-right"
+                />
+              </div>
+              {/* Delete */}
+              <div className="flex justify-center">
+                <button
+                  onClick={() => removeAsset(asset.id)}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+                >
+                  <Trash2 size={15} />
+                </button>
+              </div>
             </div>
-            {/* Description */}
-            <div className="px-2">
-              <input
-                type="text"
-                placeholder="e.g. Plot 442, Maitama District"
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 placeholder-gray-400 outline-none focus:border-[#1a5c2a] focus:ring-1 focus:ring-[#1a5c2a] transition bg-white"
-              />
-            </div>
-            {/* Value */}
-            <div className="px-2">
-              <input
-                type="text"
-                placeholder="0"
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-800 placeholder-gray-400 outline-none focus:border-[#1a5c2a] focus:ring-1 focus:ring-[#1a5c2a] transition bg-white text-right"
-              />
-            </div>
-            {/* Delete */}
-            <div className="flex justify-center">
-              <button
-                onClick={() => removeAsset(asset.id)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
-              >
-                <Trash2 size={15} />
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
