@@ -10,6 +10,7 @@ import { useAppContext } from "./context/AppContext";
 import ApplicantInformation from "./pages/ApplicantInformation";
 import DeceasedInfromation from "./pages/DeceasedInfromation";
 import ApplicationType from "./pages/ApplicationType";
+import DocumentsUpload from "./pages/DocumentsUpload";
 
 const App = () => {
   const { token } = useAppContext();
@@ -33,7 +34,8 @@ const App = () => {
           />
 
           <Route path="deceasedinformation" element={<DeceasedInfromation />} />
-           <Route path="applicationtype" element={<ApplicationType />} />
+          <Route path="applicationtype" element={<ApplicationType />} />
+          <Route path="documentsupload" element={<DocumentsUpload />} />
         </Route>
 
         <Route path="/citizenregistration" element={<CitizenRegistration />} />
