@@ -5,11 +5,13 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import AssestDetails from "./AssestDetails";
 import SubTotal from "./SubTotal";
 import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 const ApplicationTypeForm = () => {
   const { axios, navigate } = useAppContext();
   const [applicationType, setApplicationType] = useState("");
   const [estate, setEstate] = useState("");
   const [assetDetails, setAssetDetails] = useState([]);
+  const [subTotal, setSubTotal] = useState(0);
   const GREEN = "#1a5c2a";
 
   const submitHandler = async (e) => {
@@ -61,7 +63,7 @@ const ApplicationTypeForm = () => {
         assetDetails={assetDetails}
         setAssetDetails={setAssetDetails}
       />
-      <SubTotal />
+      <SubTotal subTotal={subTotal} />
 
       {/* Action buttons */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 py-2">

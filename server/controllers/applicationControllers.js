@@ -170,7 +170,7 @@ export const applicationType = async (req, res) => {
     }
 
     const subTotal = assetDetails.reduce(
-      (total, asset) => total + (asset.value || 0),
+      (total, asset) => total + (Number(asset.value) || 0),
       0,
     );
 
