@@ -4,7 +4,9 @@ import EstateSummary from "./EstateSummary";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import AssestDetails from "./AssestDetails";
 import SubTotal from "./SubTotal";
+import { useAppContext } from "../context/AppContext";
 const ApplicationTypeForm = () => {
+  const { axios, navigate } = useAppContext();
   const [applicationType, setApplicationType] = useState("");
   const [estate, setEstate] = useState("");
   const [assetDetails, setAssetDetails] = useState([]);
