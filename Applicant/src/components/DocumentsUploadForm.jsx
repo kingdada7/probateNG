@@ -6,14 +6,6 @@ function DocumentsUploadForm() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 lg:p-10">
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-gray-900 leading-tight">
-                Step 4:Upload Supporting Documents
-              </h1>
-            </div>
-          </div>
-
           <div className="mb-8 p-4 bg-green-50 border border-blue-200 rounded-lg">
             <div className="flex gap-3">
               <Lock className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -153,7 +145,7 @@ function DocumentsUploadForm() {
                   type="checkbox"
                   // checked={documentDeclaration}
                   // onChange={(e) => setDocumentDeclaration(e.target.checked)}
-                  className="w-5 h-5 accent-blue-600 mt-0.5"
+                  className="w-5 h-5 accent-[#16a34a] mt-0.5"
                 />
                 <div>
                   <p className="font-bold text-gray-900">
