@@ -169,16 +169,22 @@ export const applicationType = async (req, res) => {
       });
     }
 
-    const subTotal = assetDetails.reduce(
-      (total, asset) =>
-        total + (Number(String(asset.value).replace(/,/g, "")) || 0),
+    const cleanedEstate = Number(String(estate).replace(/,/g, ""));
+
+    const cleanedAssetDetails = assetDetails.map((asset) => ({
+      ...asset,
+      value: Number(String(asset.value).replace(/,/g, "")),
+    }));
+
+    const subTotal = cleanedAssetDetails.reduce(
+      (total, asset) => total + (asset.value || 0),
       0,
     );
 
     application.applicationType = {
       applicationType,
-      estate,
-      assetDetails,
+      estate: cleanedEstate,
+      assetDetails: cleanedAssetDetails,
       subTotal,
     };
 
@@ -200,7 +206,6 @@ export const applicationType = async (req, res) => {
     });
   }
 };
-
 export const getApplications = async (req, res) => {
   try {
     const applications = await Application.find({
