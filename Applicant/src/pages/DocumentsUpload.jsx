@@ -2,15 +2,13 @@ import { Lock, FileText, Upload, BarChart3, CheckSquare } from "lucide-react";
 import { useState } from "react";
 
 function DocumentsUpload() {
- 
-
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <main className="flex-1 max-w-2xl mx-auto w-full py-12 px-8">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-10">
+      <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 lg:p-10">
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h1 className="text-3xl font-black text-gray-900">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-gray-900 leading-tight">
                 Step 4:Upload Supporting Documents
               </h1>
             </div>
@@ -31,7 +29,7 @@ function DocumentsUpload() {
           </div>
 
           <div className="space-y-8">
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-bold text-gray-900">Death Certificate</h3>
@@ -89,7 +87,7 @@ function DocumentsUpload() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-bold text-gray-900">
