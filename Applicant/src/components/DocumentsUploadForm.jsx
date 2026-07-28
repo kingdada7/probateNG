@@ -67,7 +67,7 @@ function DocumentsUploadForm() {
                   </span>
                 </div>
                 <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition cursor-pointer bg-gray-50">
-                  <Upload className="w-12 h-12 text-green-500 mx-auto mb-3" />
+                  <FileTextma className="w-12 h-12 text-green-500 mx-auto mb-3" />
                   <p className="font-bold text-gray-900 mb-1">
                     Click or drag and drop
                   </p>
