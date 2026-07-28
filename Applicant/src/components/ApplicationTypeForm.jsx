@@ -48,7 +48,7 @@ const ApplicationTypeForm = () => {
       );
 
       if (data.success) {
-        navigate("/citizenportal/documents-upload"); // or your next page
+        navigate("/citizenportal/documentsupload"); // or your next page
       }
     } catch (error) {
       console.log(error);
