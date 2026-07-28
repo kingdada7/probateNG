@@ -1,7 +1,15 @@
-import { Lock, FileText, Upload, BarChart3, CheckSquare } from "lucide-react";
+import {
+  Lock,
+  FileText,
+  Upload,
+  BarChart3,
+  CheckSquare,
+  ArrowRight,
+} from "lucide-react";
 import { useState } from "react";
 
 function DocumentsUploadForm() {
+  const GREEN = "#1a5c2a";
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
@@ -160,6 +168,16 @@ function DocumentsUploadForm() {
                 </div>
               </label>
             </div>
+          </div>
+          <div className="flex justify-end mt-6">
+            <button
+              type="submit"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 mt-6 px-7 py-3 rounded-xl text-sm font-bold text-white hover:opacity-90 transition-opacity"
+              style={{ backgroundColor: GREEN }}
+            >
+              Submit
+              <ArrowRight size={15} />
+            </button>
           </div>
         </div>
       </main>
