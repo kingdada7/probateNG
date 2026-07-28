@@ -1,7 +1,7 @@
 import { Lock, FileText, Upload, BarChart3, CheckSquare } from "lucide-react";
 import { useState } from "react";
 
-function DocumentsUpload() {
+function DocumentsUploadForm() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
@@ -175,4 +175,4 @@ function DocumentsUpload() {
   );
 }
 
-export default DocumentsUpload;
+export default DocumentsUploadForm;
