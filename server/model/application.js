@@ -221,11 +221,10 @@ const applicationTypeSchema = new mongoose.Schema({
 });
 
 const documentSchema = new mongoose.Schema({
-  deathCertificate: String,
-  passportPhotograph: String,
-  validId: String,
-  willDocument: String,
-  affidavit: String,
+  deathCertificate: { type: String, default: "" },
+  otherSupporting: { type: String, default: "" },
+  willDocument: { type: String, default: "" },
+  affidavit: { type: String, default: "" },
 });
 
 const applicationSchema = new mongoose.Schema(

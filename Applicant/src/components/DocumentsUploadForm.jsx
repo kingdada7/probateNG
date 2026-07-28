@@ -67,7 +67,7 @@ function DocumentsUploadForm() {
                   </span>
                 </div>
                 <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition cursor-pointer bg-gray-50">
-                  <FileTextma className="w-12 h-12 text-green-500 mx-auto mb-3" />
+                  <FileText className="w-12 h-12 text-green-500 mx-auto mb-3" />
                   <p className="font-bold text-gray-900 mb-1">
                     Click or drag and drop
                   </p>
@@ -90,9 +90,7 @@ function DocumentsUploadForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-bold text-gray-900">
-                    Other supporting Document
-                  </h3>
+                  <h3 className="font-bold text-gray-900">Will Documents</h3>
                   <span className="text-xs font-bold text-gray-500 bg-gray-200 px-2 py-1 rounded">
                     OPTIONAL
                   </span>
