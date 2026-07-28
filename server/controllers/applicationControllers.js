@@ -212,7 +212,10 @@ export const uploadDocuments = async (req, res) => {
   try {
     const { applicationId } = req.params;
 
-    const application = await Application.findById(applicationId);
+    const application = await Application.findOne({
+      _id: applicationId,
+      user: req.user.id,
+    });
 
     if (!application) {
       return res.status(404).json({
@@ -221,41 +224,26 @@ export const uploadDocuments = async (req, res) => {
       });
     }
 
+    const folders = {
+      deathCertificate: "/probate/death-certificates",
+      otherDocuments: "/probate/other-documents",
+      willDocument: "/probate/wills",
+      affidavit: "/probate/affidavits",
+    };
+
     const documents = {};
 
-    if (req.files?.deathCertificate?.[0]) {
-      documents.deathCertificate = await uploadToImageKit(
-        req.files.deathCertificate[0],
-        "/probate/death-certificates",
-      );
+    for (const [field, folder] of Object.entries(folders)) {
+      if (req.files?.[field]?.[0]) {
+        documents[field] = await uploadToImageKit(req.files[field][0], folder);
+      }
     }
 
-    if (req.files?.passportPhotograph?.[0]) {
-      documents.passportPhotograph = await uploadToImageKit(
-        req.files.passportPhotograph[0],
-        "/probate/passports",
-      );
-    }
-
-    if (req.files?.validId?.[0]) {
-      documents.validId = await uploadToImageKit(
-        req.files.validId[0],
-        "/probate/valid-ids",
-      );
-    }
-
-    if (req.files?.willDocument?.[0]) {
-      documents.willDocument = await uploadToImageKit(
-        req.files.willDocument[0],
-        "/probate/wills",
-      );
-    }
-
-    if (req.files?.affidavit?.[0]) {
-      documents.affidavit = await uploadToImageKit(
-        req.files.affidavit[0],
-        "/probate/affidavits",
-      );
+    if (Object.keys(documents).length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No documents uploaded.",
+      });
     }
 
     application.documents = {
@@ -263,9 +251,11 @@ export const uploadDocuments = async (req, res) => {
       ...documents,
     };
 
+    application.currentStep = 4;
+
     await application.save();
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Documents uploaded successfully",
       documents: application.documents,
@@ -273,7 +263,7 @@ export const uploadDocuments = async (req, res) => {
   } catch (error) {
     console.error(error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: error.message,
     });
