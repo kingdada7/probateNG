@@ -206,6 +206,11 @@ export const applicationType = async (req, res) => {
     });
   }
 };
+
+
+
+
+
 export const getApplications = async (req, res) => {
   try {
     const applications = await Application.find({
