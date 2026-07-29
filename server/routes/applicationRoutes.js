@@ -25,26 +25,15 @@ applicationRouter.patch(
 
 applicationRouter.patch(
   "/:applicationId/documents-upload",
+
+  upload.fields([
+    { name: "deathCertificate", maxCount: 1 },
+    { name: "otherSupporting", maxCount: 1 },
+    { name: "willDocument", maxCount: 1 },
+    { name: "affidavit", maxCount: 1 },
+  ]),
   auth,
-  (req, res, next) => {
-    upload.fields([
-      { name: "deathCertificate", maxCount: 1 },
-      { name: "otherSupporting", maxCount: 1 },
-      { name: "willDocument", maxCount: 1 },
-      { name: "affidavit", maxCount: 1 },
-    ])(req, res, (err) => {
-      if (err) {
-        console.log("Multer error:", err.message);
-        console.log("Rejected field:", err.field);
-        return res.status(400).json({
-          message: err.message,
-          field: err.field,
-        });
-      }
-      next();
-    });
-  },
-  uploadDocuments
+  uploadDocuments,
 );
 
 applicationRouter.get("/get-applications", auth, getApplications);

@@ -1,6 +1,8 @@
 import fs from "fs";
 import { toFile } from "@imagekit/nodejs";
 import Application from "../model/application.js";
+import { uploadFile } from "../utils/uploadFIle.js";
+
 
 export const applicantInformation = async (req, res) => {
   try {
