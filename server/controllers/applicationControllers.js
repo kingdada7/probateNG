@@ -3,7 +3,6 @@ import { toFile } from "@imagekit/nodejs";
 import Application from "../model/application.js";
 import { uploadFile } from "../utils/uploadFIle.js";
 
-
 export const applicantInformation = async (req, res) => {
   try {
     const {
@@ -220,6 +219,14 @@ export const uploadDocuments = async (req, res) => {
       _id: applicationId,
       user: req.user.id,
     });
+    if (!application.documentUpload) {
+      application.documentUpload = {
+        deathCertificate: "",
+        otherSupporting: "",
+        willDocument: "",
+        affidavit: "",
+      };
+    }
 
     if (!application) {
       return res.status(404).json({
@@ -229,25 +236,27 @@ export const uploadDocuments = async (req, res) => {
     }
 
     if (files?.deathCertificate) {
-      application.documents.deathCertificate = await uploadFile(
+      application.documentUpload.deathCertificate = await uploadFile(
         files.deathCertificate[0],
       );
     }
 
     if (files?.otherSupporting) {
-      application.documents.otherSupporting = await uploadFile(
+      application.documentUpload.otherSupporting = await uploadFile(
         files.otherSupporting[0],
       );
     }
 
     if (files?.willDocument) {
-      application.documents.willDocument = await uploadFile(
+      application.documentUpload.willDocument = await uploadFile(
         files.willDocument[0],
       );
     }
 
     if (files?.affidavit) {
-      application.documents.affidavit = await uploadFile(files.affidavit[0]);
+      application.documentUpload.affidavit = await uploadFile(
+        files.affidavit[0],
+      );
     }
     application.currentStep = 3;
     await application.save();
@@ -255,7 +264,7 @@ export const uploadDocuments = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Documents uploaded successfully",
-      documents: application.documents,
+      documents: application.documentUpload,
     });
   } catch (error) {
     console.error(error);

@@ -1,11 +1,13 @@
 import fs from "fs";
 import { toFile } from "@imagekit/nodejs";
-// import your imagekit instance
+import imageKit from "../config/imageKit.js";
+
+
 
 export const uploadFile = async (file) => {
   const buffer = fs.readFileSync(file.path);
 
-  const response = await imagekit.files.upload({
+  const response = await imageKit.files.upload({
     file: await toFile(buffer, file.originalname),
     fileName: file.originalname,
     folder: "/uploads",
@@ -14,7 +16,7 @@ export const uploadFile = async (file) => {
   // Delete the temporary file
   fs.unlinkSync(file.path);
 
-  return imagekit.helper.buildSrc({
+  return imageKit.helper.buildSrc({
     urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
     src: response.filePath,
     transformation: [

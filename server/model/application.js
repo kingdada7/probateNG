@@ -220,7 +220,7 @@ const applicationTypeSchema = new mongoose.Schema({
   },
 });
 
-const documentSchema = new mongoose.Schema(
+const documentUploadSchema = new mongoose.Schema(
   {
     deathCertificate: { type: String, default: "" },
     otherSupporting: { type: String, default: "" },
@@ -237,7 +237,7 @@ const applicationSchema = new mongoose.Schema(
 
     applicationType: applicationTypeSchema,
 
-    documents: documentSchema,
+    documentUpload: documentUploadSchema,
 
     status: {
       type: String,
