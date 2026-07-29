@@ -220,13 +220,15 @@ const applicationTypeSchema = new mongoose.Schema({
   },
 });
 
-const documentSchema = new mongoose.Schema({
-  deathCertificate: { type: String, default: "" },
-  otherSupporting: { type: String, default: "" },
-  willDocument: { type: String, default: "" },
-  affidavit: { type: String, default: "" },
-});
-
+const documentSchema = new mongoose.Schema(
+  {
+    deathCertificate: { type: String, default: "" },
+    otherSupporting: { type: String, default: "" },
+    willDocument: { type: String, default: "" },
+    affidavit: { type: String, default: "" },
+  },
+  { _id: false },
+);
 const applicationSchema = new mongoose.Schema(
   {
     applicant: applicantSchema,

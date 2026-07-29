@@ -1,6 +1,7 @@
+import fs from "fs";
+import { toFile } from "@imagekit/nodejs";
 import Application from "../model/application.js";
 
-import { uploadToImageKit } from "../utils/uploadToImageKit.js";
 export const applicantInformation = async (req, res) => {
   try {
     const {
@@ -211,6 +212,7 @@ export const applicationType = async (req, res) => {
 export const uploadDocuments = async (req, res) => {
   try {
     const { applicationId } = req.params;
+    const files = req.files;
 
     const application = await Application.findOne({
       _id: applicationId,
@@ -224,35 +226,28 @@ export const uploadDocuments = async (req, res) => {
       });
     }
 
-    const folders = {
-      deathCertificate: "/probate/death-certificates",
-      otherDocuments: "/probate/other-documents",
-      willDocument: "/probate/wills",
-      affidavit: "/probate/affidavits",
-    };
-
-    const documents = {};
-
-    for (const [field, folder] of Object.entries(folders)) {
-      if (req.files?.[field]?.[0]) {
-        documents[field] = await uploadToImageKit(req.files[field][0], folder);
-      }
+    if (files?.deathCertificate) {
+      application.documents.deathCertificate = await uploadFile(
+        files.deathCertificate[0],
+      );
     }
 
-    if (Object.keys(documents).length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "No documents uploaded.",
-      });
+    if (files?.otherSupporting) {
+      application.documents.otherSupporting = await uploadFile(
+        files.otherSupporting[0],
+      );
     }
 
-    application.documents = {
-      ...application.documents,
-      ...documents,
-    };
+    if (files?.willDocument) {
+      application.documents.willDocument = await uploadFile(
+        files.willDocument[0],
+      );
+    }
 
-    application.currentStep = 4;
-
+    if (files?.affidavit) {
+      application.documents.affidavit = await uploadFile(files.affidavit[0]);
+    }
+    application.currentStep = 3;
     await application.save();
 
     return res.status(200).json({
@@ -265,7 +260,7 @@ export const uploadDocuments = async (req, res) => {
 
     return res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Internal Server Error",
     });
   }
 };
