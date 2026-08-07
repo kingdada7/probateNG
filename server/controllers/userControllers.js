@@ -1,6 +1,7 @@
 import User from "../model/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import Application from "../model/application.js";
 
 export const userRegister = async (req, res) => {
   try {
@@ -77,7 +78,9 @@ export const userLogin = async (req, res) => {
 
     const normalizedEmail = email.toLowerCase().trim();
 
-    const user = await User.findOne({ email: normalizedEmail });
+    const user = await User.findOne({
+      email: normalizedEmail,
+    });
 
     if (!user) {
       return res.status(404).json({
@@ -99,23 +102,32 @@ export const userLogin = async (req, res) => {
       expiresIn: "1d",
     });
 
-    // Find the user's application
+    // Find user's application
     const application = await Application.findOne({
       user: user._id,
-    });
+    }).sort({ createdAt: -1 });
 
     return res.status(200).json({
       success: true,
       message: "Login successful",
       token,
+
       user: {
         id: user._id,
         fullName: user.fullName,
         email: user.email,
       },
+
+      application: application
+        ? {
+            id: application._id,
+            currentStep: application.currentStep,
+            status: application.status,
+          }
+        : null,
     });
   } catch (error) {
-    console.error(error);
+    console.error("LOGIN ERROR:", error);
 
     return res.status(500).json({
       success: false,
