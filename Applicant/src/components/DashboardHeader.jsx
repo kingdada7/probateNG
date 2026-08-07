@@ -79,7 +79,11 @@ const DashboardHeader = () => {
         />
         <DashboardStatCard
           label="Pending"
-          value={5}
+          value={
+            applications.filter(
+              (application) => application.status === "Pending Review",
+            ).length
+          }
           iconBg="bg-amber-50"
           icon={<ClipboardList size={20} className="text-amber-500" />}
           trend={
