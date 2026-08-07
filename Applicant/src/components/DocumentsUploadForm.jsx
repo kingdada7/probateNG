@@ -132,12 +132,10 @@ function DocumentsUploadForm() {
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg"
-                    // onChange={(e) =>
-                    //   setDocuments((prev) => ({
-                    //     ...prev,
-                    //     willDocument: e.target.files?.[0] || null,
-                    //   }))
-                    // }
+                    value={otherSupporting}
+                    onChange={(e) =>
+                      setOtherSupporting(e.target.files?.[0] || null)
+                    }
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />
                 </div>
