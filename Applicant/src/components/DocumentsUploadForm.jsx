@@ -53,12 +53,10 @@ function DocumentsUploadForm() {
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg"
-                    // onChange={(e) =>
-                    //   setDocuments((prev) => ({
-                    //     ...prev,
-                    //     deathCertificate: e.target.files?.[0] || null,
-                    //   }))
-                    // }
+                    value={deathCertificate}
+                    onChange={(e) =>
+                      setDeathCertificate(e.target.files?.[0] || null)
+                    }
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />
                 </div>
