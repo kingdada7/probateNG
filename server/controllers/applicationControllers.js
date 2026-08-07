@@ -258,7 +258,7 @@ export const uploadDocuments = async (req, res) => {
         files.affidavit[0],
       );
     }
-    application.currentStep = 3;
+    application.currentStep = 4;
     await application.save();
 
     return res.status(200).json({
