@@ -220,6 +220,16 @@ export const uploadDocuments = async (req, res) => {
       _id: applicationId,
       user: req.user.id,
     });
+
+    // Check first
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    // Initialize documentUpload if necessary
     if (!application.documentUpload) {
       application.documentUpload = {
         deathCertificate: "",
@@ -229,43 +239,42 @@ export const uploadDocuments = async (req, res) => {
       };
     }
 
-    if (!application) {
-      return res.status(404).json({
-        success: false,
-        message: "Application not found",
-      });
-    }
-
     if (files?.deathCertificate) {
       application.documentUpload.deathCertificate = await uploadFile(
-        files.deathCertificate[0],
+        files.deathCertificate[0]
       );
     }
 
     if (files?.otherSupporting) {
       application.documentUpload.otherSupporting = await uploadFile(
-        files.otherSupporting[0],
+        files.otherSupporting[0]
       );
     }
 
     if (files?.willDocument) {
       application.documentUpload.willDocument = await uploadFile(
-        files.willDocument[0],
+        files.willDocument[0]
       );
     }
 
     if (files?.affidavit) {
       application.documentUpload.affidavit = await uploadFile(
-        files.affidavit[0],
+        files.affidavit[0]
       );
     }
+
+    // Application is now submitted
     application.currentStep = 5;
+    application.status = "Pending Review";
+
     await application.save();
 
     return res.status(200).json({
       success: true,
-      message: "Documents uploaded successfully",
+      message: "Application submitted successfully",
       documents: application.documentUpload,
+      status: application.status,
+      currentStep: application.currentStep,
     });
   } catch (error) {
     console.error(error);
@@ -276,7 +285,6 @@ export const uploadDocuments = async (req, res) => {
     });
   }
 };
-
 export const getApplications = async (req, res) => {
   try {
     const applications = await Application.find({
