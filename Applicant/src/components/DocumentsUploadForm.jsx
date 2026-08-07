@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
+import DocumentsUploader from "./DocumentsUploader";
 
 function DocumentsUploadForm() {
   const [deathCertificate, setDeathCertificate] = useState(null);
@@ -87,21 +88,10 @@ function DocumentsUploadForm() {
                     REQUIRED
                   </span>
                 </div>
-                <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition cursor-pointer bg-gray-50">
-                  <FileText className="w-12 h-12 text-green-500 mx-auto mb-3" />
-                  <p className="font-bold text-gray-900 mb-1">
-                    Click or drag and drop
-                  </p>
-                  <p className="text-sm text-gray-600">PDF, JPG up to 5MB</p>
-                  <input
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg"
-                    onChange={(e) =>
-                      setDeathCertificate(e.target.files?.[0] || null)
-                    }
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  />
-                </div>
+                <DocumentsUploader
+                  file={deathCertificate}
+                  setFile={setDeathCertificate}
+                />
               </div>
 
               <div>
@@ -113,19 +103,7 @@ function DocumentsUploadForm() {
                     REQUIRED
                   </span>
                 </div>
-                <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition cursor-pointer bg-gray-50">
-                  <FileText className="w-12 h-12 text-green-500 mx-auto mb-3" />
-                  <p className="font-bold text-gray-900 mb-1">
-                    Click or drag and drop
-                  </p>
-                  <p className="text-sm text-gray-600">PDF, JPG up to 5MB</p>
-                  <input
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg"
-                    onChange={(e) => setAffidavit(e.target.files?.[0] || null)}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  />
-                </div>
+                <DocumentsUploader file={affidavit} setFile={setAffidavit} />
               </div>
             </div>
 
@@ -137,21 +115,10 @@ function DocumentsUploadForm() {
                     OPTIONAL
                   </span>
                 </div>
-                <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition cursor-pointer bg-gray-50">
-                  <FileText className="w-12 h-12 text-green-500 mx-auto mb-3" />
-                  <p className="font-bold text-gray-900 mb-1">
-                    Click or drag and drop
-                  </p>
-                  <p className="text-sm text-gray-600">PDF, JPG up to 5MB</p>
-                  <input
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg"
-                    onChange={(e) =>
-                      setWillDocument(e.target.files?.[0] || null)
-                    }
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  />
-                </div>
+                <DocumentsUploader
+                  file={willDocument}
+                  setFile={setWillDocument}
+                />
               </div>
 
               <div>
@@ -163,21 +130,10 @@ function DocumentsUploadForm() {
                     OPTIONAL
                   </span>
                 </div>
-                <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition cursor-pointer bg-gray-50">
-                  <FileText className="w-12 h-12 text-green-500 mx-auto mb-3" />
-                  <p className="font-bold text-gray-900 mb-1">
-                    Click or drag and drop
-                  </p>
-                  <p className="text-sm text-gray-600">PDF, JPG up to 5MB</p>
-                  <input
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg"
-                    onChange={(e) =>
-                      setOtherSupporting(e.target.files?.[0] || null)
-                    }
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  />
-                </div>
+                <DocumentsUploader
+                  file={otherSupporting}
+                  setFile={setOtherSupporting}
+                />
               </div>
             </div>
 
