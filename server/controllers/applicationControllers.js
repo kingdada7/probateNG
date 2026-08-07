@@ -46,6 +46,7 @@ export const applicantInformation = async (req, res) => {
       },
 
       user: req.user.id,
+      currentStep: 2,
     });
     return res.status(201).json({
       success: true,
@@ -136,7 +137,7 @@ export const deceasedInformation = async (req, res) => {
       sureties,
     };
 
-    application.currentStep = 2;
+    application.currentStep = 3;
 
     await application.save();
 
@@ -191,7 +192,7 @@ export const applicationType = async (req, res) => {
       subTotal,
     };
 
-    application.currentStep = 3;
+    application.currentStep = 4;
 
     await application.save();
 
@@ -258,7 +259,7 @@ export const uploadDocuments = async (req, res) => {
         files.affidavit[0],
       );
     }
-    application.currentStep = 4;
+    application.currentStep = 5;
     await application.save();
 
     return res.status(200).json({

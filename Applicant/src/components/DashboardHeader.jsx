@@ -10,13 +10,31 @@ import {
   TrendingUp,
   XCircle,
 } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import DashboardStatCard from "./DashboardStatCard";
 import { Link } from "react-router";
 
 const DashboardHeader = () => {
-  const { user } = useAppContext();
+  const { user, axios } = useAppContext();
+
+  const [applications, setApplications] = useState([]);
+
+  useEffect(() => {
+    const getApplications = async () => {
+      try {
+        const { data } = await axios.get("/api/application/get-applications");
+
+        if (data.success) {
+          setApplications(data.applications);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getApplications();
+  }, []);
   return (
     <>
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-5 mt-6">
@@ -46,7 +64,7 @@ const DashboardHeader = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6">
         <DashboardStatCard
           label="Total Applications"
-          value={12}
+          value={applications.length}
           iconBg="bg-green-50"
           icon={<FolderOpen size={20} className="text-[#1a5c2a]" />}
           trend={

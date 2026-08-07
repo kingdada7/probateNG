@@ -9,11 +9,7 @@ import {
   EyeOff,
   Landmark,
 } from "lucide-react";
-// import { InfinitySpin } from "react-loader-spinner";
-// import { validateEmail } from "../../../utils/helper.js";
-// import { API_ENDPOINT } from "../../../utils/apiPaths.js";
-// import axiosInstance from "../../../utils/axiosInstance";
-// import { UserContext } from "../../../context/userContext.jsx";
+
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
@@ -24,79 +20,72 @@ function CitizenLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const { axios, setToken, navigate } = useAppContext();
+  const { axios, setToken, navigate, setApplicationId } = useAppContext();
 
   const handleLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const { data } = await axios.post("/api/citizen/citizenlogin", {
-      email,
-      password,
-    });
+    try {
+      const { data } = await axios.post("/api/citizen/citizenlogin", {
+        email,
+        password,
+      });
 
-    if (!data.success) {
-      toast.error(data.message);
-      return;
-    }
+      if (!data.success) {
+        toast.error(data.message);
+        return;
+      }
 
-    setToken(data.token);
+      setToken(data.token);
 
-    localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token);
 
-    axios.defaults.headers.common["Authorization"] = data.token;
+      if (data.application?.id) {
+        setApplicationId(data.application.id);
+      }
 
-    // No application yet
-    if (!data.application) {
-      navigate("/citizenportal/applicationinformation");
-      return;
-    }
-
-    // Save application ID
-    localStorage.setItem(
-      "applicationId",
-      data.application.id
-    );
-
-    console.log(
-      "Current application step:",
-      data.application.currentStep
-    );
-
-    // Resume application
-    switch (data.application.currentStep) {
-      case 1:
+      // No application yet
+      if (!data.application) {
         navigate("/citizenportal/applicationinformation");
-        break;
+        return;
+      }
 
-      case 2:
-        navigate("/citizenportal/deceasedinformation");
-        break;
+      // Save application ID
+      localStorage.setItem("applicationId", data.application.id);
 
-      case 3:
-        navigate("/citizenportal/applicationtype");
-        break;
+      console.log("Current application step:", data.application.currentStep);
 
-      case 4:
-        navigate("/citizenportal/documentsupload");
-        break;
+      // Resume application
+      switch (data.application.currentStep) {
+        case 1:
+          navigate("/citizenportal/applicationinformation");
+          break;
 
-      case 5:
-        navigate("/citizenportal");
-        break;
+        case 2:
+          navigate("/citizenportal/deceasedinformation");
+          break;
 
-      default:
-        navigate("/citizenportal/applicationinformation");
+        case 3:
+          navigate("/citizenportal/applicationtype");
+          break;
+
+        case 4:
+          navigate("/citizenportal/documentsupload");
+          break;
+
+        case 5:
+          navigate("/citizenportal");
+          break;
+
+        default:
+          navigate("/citizenportal/applicationinformation");
+      }
+    } catch (error) {
+      console.log(error);
+
+      toast.error(error.response?.data?.message || "Something went wrong.");
     }
-  } catch (error) {
-    console.log(error);
-
-    toast.error(
-      error.response?.data?.message ||
-        "Something went wrong."
-    );
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-[#f6f8f7] flex flex-col ">

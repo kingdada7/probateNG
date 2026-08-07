@@ -11,7 +11,13 @@ export const AppProvider = ({ children }) => {
 
   // Restore token from localStorage
   const [token, setToken] = useState(() => {
-    return localStorage.getItem("token");
+    const savedToken = localStorage.getItem("token");
+
+    if (savedToken) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${savedToken}`;
+    }
+
+    return savedToken;
   });
 
   const [input, setInput] = useState("");
