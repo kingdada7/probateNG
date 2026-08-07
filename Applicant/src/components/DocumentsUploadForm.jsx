@@ -18,25 +18,44 @@ function DocumentsUploadForm() {
   const { axios, navigate } = useAppContext();
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
       const applicationId = localStorage.getItem("applicationId");
-      const { data } = await axdios.patch(
+
+      const formData = new FormData();
+
+      if (deathCertificate) {
+        formData.append("deathCertificate", deathCertificate);
+      }
+
+      if (affidavit) {
+        formData.append("affidavit", affidavit);
+      }
+
+      if (willDocument) {
+        formData.append("willDocument", willDocument);
+      }
+
+      if (otherSupporting) {
+        formData.append("otherSupporting", otherSupporting);
+      }
+
+      const { data } = await axios.patch(
         `/api/application/${applicationId}/documents-upload`,
-        {
-          deathCertificate,
-          affidavit,
-          willDocument,
-          otherSupporting,
-        },
+        formData,
       );
+
       if (data.success) {
         navigate("/CitizenDashboard");
+
         toast.success(
           "Documents uploaded successfully and application submitted",
         );
       }
     } catch (error) {
       console.log(error);
+
       toast.error(error.response?.data?.message || "Something went wrong.");
     }
   };
