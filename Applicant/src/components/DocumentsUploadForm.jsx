@@ -9,6 +9,11 @@ import {
 import { useState } from "react";
 
 function DocumentsUploadForm() {
+  const [deathCertificate, setDeathCertificate] = useState(null);
+  const [affidavit, setAffidavit] = useState(null);
+  const [willDocument, setWillDocument] = useState(null);
+  const [otherSupporting, setOtherSupporting] = useState(null);
+
   const GREEN = "#1a5c2a";
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -145,7 +150,7 @@ function DocumentsUploadForm() {
               </div>
             </div>
 
-            <div className="border-t border-gray-200 pt-6">
+            {/* <div className="border-t border-gray-200 pt-6">
               <label className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="checkbox"
@@ -165,7 +170,7 @@ function DocumentsUploadForm() {
                   </p>
                 </div>
               </label>
-            </div>
+            </div> */}
           </div>
           <div className="flex justify-end mt-6">
             <button
