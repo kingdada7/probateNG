@@ -1,36 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAppContext } from "../context/AppContext";
 
 const DashboardTable = () => {
-  const applications = [
-    {
-      refId: "#FCT-PR-2023-0089",
-      estateName: "Estate of Late Samuel Okoro",
-      submissionDate: "Oct 24, 2023",
-      status: "Pending Review",
-      action: "View Details",
-    },
-    {
-      refId: "#FCT-PR-2023-0054",
-      estateName: "Estate of Late Amina Bello",
-      submissionDate: "Sep 12, 2023",
-      status: "Approved",
-      action: "Download Grant",
-    },
-    {
-      refId: "#FCT-PR-2023-0042",
-      estateName: "Estate of Late Chinedu Azikiwe",
-      submissionDate: "Aug 30, 2023",
-      status: "Rejected",
-      action: "View Reasons",
-    },
-  ];
+  const { axios } = useAppContext();
+
+  const [applications, setApplications] = useState([]);
+
+  useEffect(() => {
+    const getApplications = async () => {
+      try {
+        const { data } = await axios.get(
+          "/api/application/get-applications"
+        );
+
+        if (data.success) {
+          setApplications(data.applications);
+        }
+      } catch (error) {
+        console.error("Error fetching applications:", error);
+      }
+    };
+
+    getApplications();
+  }, []);
 
   function statusBadge(status) {
     switch (status) {
       case "Draft":
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-300">
-            <span className="w-1.5 h-1.5 rounded-full bg-gray-500 shrink-0"></span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gray-50 text-gray-600 border border-gray-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0"></span>
             Draft
           </span>
         );
@@ -58,18 +57,20 @@ const DashboardTable = () => {
             Rejected
           </span>
         );
+
+      default:
+        return null;
     }
   }
+
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-      <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+    <div>
+      <div className="flex items-center justify-between px-6 py-5">
         <h2 className="text-lg font-bold text-gray-900">
           Recent Application Activity
         </h2>
-        <button
-          //   style={{ color: GREEN }}
-          className="text-sm font-semibold hover:underline"
-        >
+
+        <button className="text-sm font-semibold hover:underline">
           View All
         </button>
       </div>
@@ -82,39 +83,52 @@ const DashboardTable = () => {
               <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
                 Reference ID
               </th>
+
               <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
-                Estate Name
+                Application Name
               </th>
+
               <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
                 Submission Date
               </th>
+
               <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
                 Status
               </th>
+
               <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
                 Action
               </th>
             </tr>
           </thead>
+
           <tbody className="divide-y divide-gray-50">
-            {applications.map((app, i) => (
-              <tr key={i} className="hover:bg-gray-50 transition-colors">
+            {applications.map((app) => (
+              <tr
+                key={app._id}
+                className="hover:bg-gray-50 transition-colors"
+              >
                 <td className="px-6 py-4 font-mono text-xs text-gray-500 whitespace-nowrap">
-                  {app.refId}
+                  {app._id}
                 </td>
+
                 <td className="px-6 py-4 text-sm font-semibold text-gray-800 whitespace-nowrap">
-                  {app.estateName}
+                  {app.deceased?.deceasedName
+                    ? `Estate of Late ${app.deceased.deceasedName}`
+                    : "Probate Application"}
                 </td>
+
                 <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
-                  {app.submissionDate}
+                  {new Date(app.createdAt).toLocaleDateString()}
                 </td>
-                <td className="px-6 py-4">{statusBadge(app.status)}</td>
+
                 <td className="px-6 py-4">
-                  <button
-                    // style={{ color: GREEN }}
-                    className="text-sm font-bold hover:underline whitespace-nowrap"
-                  >
-                    {app.action}
+                  {statusBadge(app.status)}
+                </td>
+
+                <td className="px-6 py-4">
+                  <button className="text-sm font-bold hover:underline whitespace-nowrap">
+                    View Details
                   </button>
                 </td>
               </tr>
@@ -125,33 +139,45 @@ const DashboardTable = () => {
 
       {/* Mobile Cards */}
       <div className="sm:hidden divide-y divide-gray-100">
-        {applications.map((app, i) => (
-          <div key={i} className="px-5 py-4 space-y-2.5">
+        {applications.map((app) => (
+          <div
+            key={app._id}
+            className="px-5 py-4 space-y-2.5"
+          >
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className="text-sm font-bold text-gray-800">
-                  {app.estateName}
+                  {app.deceased?.deceasedName
+                    ? `Estate of Late ${app.deceased.deceasedName}`
+                    : "Probate Application"}
                 </div>
+
                 <div className="font-mono text-[11px] text-gray-400 mt-0.5">
-                  {app.refId}
+                  {app._id}
                 </div>
               </div>
+
               {statusBadge(app.status)}
             </div>
+
             <div className="flex items-center justify-between">
               <span className="text-xs text-gray-500">
-                {app.submissionDate}
+                {new Date(app.createdAt).toLocaleDateString()}
               </span>
-              <button
-                // style={{ color: GREEN }}
-                className="text-sm font-bold hover:underline"
-              >
-                {app.action}
+
+              <button className="text-sm font-bold hover:underline">
+                View Details
               </button>
             </div>
           </div>
         ))}
       </div>
+
+      {applications.length === 0 && (
+        <div className="px-6 py-10 text-center text-gray-500">
+          No applications found.
+        </div>
+      )}
     </div>
   );
 };
