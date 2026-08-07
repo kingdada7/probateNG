@@ -39,6 +39,33 @@ function CitizenLogin() {
         setToken(data.token);
         localStorage.setItem("token", data.token);
         axios.defaults.headers.common["Authorization"] = data.token;
+
+        // Save application ID if one exists
+        if (data.application?._id) {
+          localStorage.setItem("applicationId", data.application._id);
+        }
+
+        // Resume application
+        switch (data.application?.currentStep) {
+          case 1:
+            navigate("/application/applicant");
+            break;
+
+          case 2:
+            navigate("/application/deceased");
+            break;
+
+          case 3:
+            navigate("/application/application-type");
+            break;
+
+          case 4:
+            navigate("/application/documents-upload");
+            break;
+
+          default:
+            navigate("/CitizenDashboard");
+        }
       } else {
         toast.error(data.message);
       }

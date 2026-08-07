@@ -78,7 +78,7 @@ function DocumentsUploadForm() {
             </div>
           </div>
 
-          <form className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <div className="flex items-center justify-between mb-4">
