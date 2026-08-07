@@ -99,6 +99,11 @@ export const userLogin = async (req, res) => {
       expiresIn: "1d",
     });
 
+    // Find the user's application
+    const application = await Application.findOne({
+      user: user._id,
+    });
+
     return res.status(200).json({
       success: true,
       message: "Login successful",
