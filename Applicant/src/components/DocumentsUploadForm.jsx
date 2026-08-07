@@ -7,12 +7,14 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useState } from "react";
+import { useAppContext } from "../context/AppContext";
 
 function DocumentsUploadForm() {
   const [deathCertificate, setDeathCertificate] = useState(null);
   const [affidavit, setAffidavit] = useState(null);
   const [willDocument, setWillDocument] = useState(null);
   const [otherSupporting, setOtherSupporting] = useState(null);
+  const { axios, navigate } = useAppContext();
 
   const GREEN = "#1a5c2a";
   return (
