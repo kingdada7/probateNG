@@ -27,52 +27,76 @@ function CitizenLogin() {
   const { axios, setToken, navigate } = useAppContext();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const { data } = await axios.post("/api/citizen/citizenlogin", {
-        email,
-        password,
-      });
+  try {
+    const { data } = await axios.post("/api/citizen/citizenlogin", {
+      email,
+      password,
+    });
 
-      if (data.success) {
-        setToken(data.token);
-        localStorage.setItem("token", data.token);
-        axios.defaults.headers.common["Authorization"] = data.token;
-
-        // Save application ID if one exists
-        if (data.application?._id) {
-          localStorage.setItem("applicationId", data.application._id);
-        }
-
-        // Resume application
-        switch (data.application?.currentStep) {
-          case 1:
-            navigate("/application/applicant");
-            break;
-
-          case 2:
-            navigate("/application/deceased");
-            break;
-
-          case 3:
-            navigate("/application/application-type");
-            break;
-
-          case 4:
-            navigate("/application/documents-upload");
-            break;
-
-          default:
-            navigate("/CitizenDashboard");
-        }
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+    if (!data.success) {
+      toast.error(data.message);
+      return;
     }
-  };
+
+    setToken(data.token);
+
+    localStorage.setItem("token", data.token);
+
+    axios.defaults.headers.common["Authorization"] = data.token;
+
+    // No application yet
+    if (!data.application) {
+      navigate("/citizenportal/applicationinformation");
+      return;
+    }
+
+    // Save application ID
+    localStorage.setItem(
+      "applicationId",
+      data.application.id
+    );
+
+    console.log(
+      "Current application step:",
+      data.application.currentStep
+    );
+
+    // Resume application
+    switch (data.application.currentStep) {
+      case 1:
+        navigate("/citizenportal/applicationinformation");
+        break;
+
+      case 2:
+        navigate("/citizenportal/deceasedinformation");
+        break;
+
+      case 3:
+        navigate("/citizenportal/applicationtype");
+        break;
+
+      case 4:
+        navigate("/citizenportal/documentsupload");
+        break;
+
+      case 5:
+        navigate("/citizenportal");
+        break;
+
+      default:
+        navigate("/citizenportal/applicationinformation");
+    }
+  } catch (error) {
+    console.log(error);
+
+    toast.error(
+      error.response?.data?.message ||
+        "Something went wrong."
+    );
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#f6f8f7] flex flex-col ">

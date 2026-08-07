@@ -39,7 +39,7 @@ const ApplicationTypeForm = () => {
       }
 
       const { data } = await axios.patch(
-        `/api/application/${applicationId}/application-type`,
+        `/api/application/${applicationId}/applicationtype`,
         {
           applicationType,
           estate,

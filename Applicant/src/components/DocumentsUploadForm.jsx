@@ -47,7 +47,7 @@ function DocumentsUploadForm() {
       );
 
       if (data.success) {
-        navigate("/CitizenDashboard");
+        navigate("/citizenportal");
 
         toast.success(
           "Documents uploaded successfully and application submitted",
