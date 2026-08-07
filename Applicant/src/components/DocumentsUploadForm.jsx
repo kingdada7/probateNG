@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 function DocumentsUploadForm() {
   const [deathCertificate, setDeathCertificate] = useState(null);
@@ -16,6 +17,29 @@ function DocumentsUploadForm() {
   const [otherSupporting, setOtherSupporting] = useState(null);
   const { axios, navigate } = useAppContext();
 
+  const handleSubmit = async (e) => {
+    try {
+      const applicationId = localStorage.getItem("applicationId");
+      const { data } = await axdios.patch(
+        `/api/application/${applicationId}/documents-upload`,
+        {
+          deathCertificate,
+          affidavit,
+          willDocument,
+          otherSupporting,
+        },
+      );
+      if (data.success) {
+        navigate("/CitizenDashboard");
+        toast.success(
+          "Documents uploaded successfully and application submitted",
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Something went wrong.");
+    }
+  };
   const GREEN = "#1a5c2a";
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
