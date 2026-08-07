@@ -78,7 +78,7 @@ function DocumentsUploadForm() {
             </div>
           </div>
 
-          <div className="space-y-8">
+          <form className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -96,7 +96,6 @@ function DocumentsUploadForm() {
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg"
-                    value={deathCertificate}
                     onChange={(e) =>
                       setDeathCertificate(e.target.files?.[0] || null)
                     }
@@ -123,7 +122,6 @@ function DocumentsUploadForm() {
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg"
-                    value={affidavit}
                     onChange={(e) => setAffidavit(e.target.files?.[0] || null)}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />
@@ -148,7 +146,6 @@ function DocumentsUploadForm() {
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg"
-                    value={willDocument}
                     onChange={(e) =>
                       setWillDocument(e.target.files?.[0] || null)
                     }
@@ -175,7 +172,6 @@ function DocumentsUploadForm() {
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg"
-                    value={otherSupporting}
                     onChange={(e) =>
                       setOtherSupporting(e.target.files?.[0] || null)
                     }
@@ -185,38 +181,17 @@ function DocumentsUploadForm() {
               </div>
             </div>
 
-            {/* <div className="border-t border-gray-200 pt-6">
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  // checked={documentDeclaration}
-                  // onChange={(e) => setDocumentDeclaration(e.target.checked)}
-                  className="w-5 h-5 accent-[#16a34a] mt-0.5"
-                />
-                <div>
-                  <p className="font-bold text-gray-900">
-                    Legal Declaration & Verification
-                  </p>
-                  <p className="text-sm text-gray-600 mt-1">
-                    I hereby declare that all uploaded documents are true and
-                    correct representations of the originals and agree to
-                    present the physical copies to the Registrar of the FCT
-                    Customary Court upon request.
-                  </p>
-                </div>
-              </label>
-            </div> */}
-          </div>
-          <div className="flex justify-end mt-6">
-            <button
-              type="submit"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 mt-6 px-7 py-3 rounded-xl text-sm font-bold text-white hover:opacity-90 transition-opacity"
-              style={{ backgroundColor: GREEN }}
-            >
-              Submit
-              <ArrowRight size={15} />
-            </button>
-          </div>
+            <div className="flex justify-end mt-6">
+              <button
+                type="submit"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 mt-6 px-7 py-3 rounded-xl text-sm font-bold text-white hover:opacity-90 transition-opacity"
+                style={{ backgroundColor: GREEN }}
+              >
+                Submit
+                <ArrowRight size={15} />
+              </button>
+            </div>
+          </form>
         </div>
       </main>
     </div>
