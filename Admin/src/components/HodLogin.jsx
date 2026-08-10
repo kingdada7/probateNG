@@ -1,8 +1,8 @@
 import { MdAlternateEmail } from "react-icons/md";
-
 import { CiLock } from "react-icons/ci";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const HodLogin = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -145,12 +145,12 @@ const HodLogin = () => {
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-700">
           Don't have an account?{" "}
-          <a
-            href="/superadminregister"
+          <Link
+            to="/hodregister"
             className="text-[#C7A008] font-semibold hover:underline"
           >
             Register here
-          </a>
+          </Link>
         </p>
       </div>
     </div>

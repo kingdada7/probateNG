@@ -8,7 +8,6 @@ import { FaIdCard } from "react-icons/fa";
 import { Eye, EyeOff, Key } from "lucide-react";
 import { PiUserCheck } from "react-icons/pi";
 import { MdAlternateEmail } from "react-icons/md";
-import { InfinitySpin } from "react-loader-spinner";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 
@@ -22,7 +21,7 @@ const HodRegister = () => {
   const [superAdminCode, setSuperAdminCode] = useState("");
 
   const [error, setError] = useState("");
-  const { updateUser } = React.useContext(UserContext);
+
   const navigate = useNavigate();
 
   //   const handleSubmit = async (e) => {
