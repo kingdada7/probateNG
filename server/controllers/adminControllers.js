@@ -94,7 +94,7 @@ export const hodRegister = async (req, res) => {
 
 export const hodLogin = async (req, res) => {
   try {
-    const { email, password };
+    const { email, password } = req.body;
 
     if (!email?.trim() || !password) {
       return res.status(400).json({
@@ -109,9 +109,33 @@ export const hodLogin = async (req, res) => {
     const hod = await Admin.findOne({ email: normalizedEmail });
     if (!hod) {
       return res.status(401).json({
+        success: false,
         message: "Account not found ",
       });
     }
+
+    const isPasswordValid = await bcrypt.compare(password, hod.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    const token = jwt.sign({ id: hod._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    return res.status(200).json({
+      message: "Login successful",
+      token,
+      hod: {
+        id: hod._id,
+        fullName: hod.fullName,
+        email: hod.email,
+      },
+    });
   } catch (error) {
     console.error("Error during HOD login:", error);
     return res.status(500).json({
