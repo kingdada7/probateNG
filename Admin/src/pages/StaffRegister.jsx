@@ -1,7 +1,7 @@
 import React from "react";
 import { User, Info, Eye, EyeOff } from "lucide-react";
 import { IoShieldCheckmark } from "react-icons/io5";
-import { InfinitySpin } from "react-loader-spinner";
+
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 
