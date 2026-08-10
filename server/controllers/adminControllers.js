@@ -1,6 +1,7 @@
 import Admin from "../model/admin.js";
 import bcrypt from "bcrypt";
 import "dotenv/config";
+import jwt from "jsonwebtoken";
 
 export const hodRegister = async (req, res) => {
   try {
