@@ -29,3 +29,5 @@ Applicant/node_modules
 Applicant/.env
 server/node_modules
 server/.env
+Admin/node_modules
+Admin/.env
