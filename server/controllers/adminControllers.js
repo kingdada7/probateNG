@@ -110,7 +110,7 @@ export const hodLogin = async (req, res) => {
     if (!hod) {
       return res.status(401).json({
         success: false,
-        message: "Account not found ",
+        message: "invalid email or password",
       });
     }
 
