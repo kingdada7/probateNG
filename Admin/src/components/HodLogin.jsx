@@ -1,15 +1,16 @@
 import { MdAlternateEmail } from "react-icons/md";
-import react, { useState } from react;
+
 import { CiLock } from "react-icons/ci";
 import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 
 const HodLogin = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-//   const { updateUser } = React.useContext(UserContext);
-//   const navigate = useNavigate();
+  //   const { updateUser } = React.useContext(UserContext);
+  //   const navigate = useNavigate();
 
   // const [loading, setLoading] = useState(true);
   // useEffect(() => {
@@ -26,51 +27,51 @@ const HodLogin = () => {
   //   );
   // }
 
-//   const handleLogin = async (e) => {
-//     e.preventDefault();
+  //   const handleLogin = async (e) => {
+  //     e.preventDefault();
 
-//     if (!email.trim()) {
-//       setError("Please enter your email address");
-//       return;
-//     }
+  //     if (!email.trim()) {
+  //       setError("Please enter your email address");
+  //       return;
+  //     }
 
-//     if (!validateEmail(email)) {
-//       setError("Please enter a valid email address");
-//       return;
-//     }
+  //     if (!validateEmail(email)) {
+  //       setError("Please enter a valid email address");
+  //       return;
+  //     }
 
-//     if (!password) {
-//       setError("Please enter a password");
-//       return;
-//     }
+  //     if (!password) {
+  //       setError("Please enter a password");
+  //       return;
+  //     }
 
-//     try {
-//       // setLoading(true);
-//       // setError("");
+  //     try {
+  //       // setLoading(true);
+  //       // setError("");
 
-//       const response = await axiosInstance.post(API_ENDPOINT.AUTH.LOGIN, {
-//         email,
-//         password,
-//       });
+  //       const response = await axiosInstance.post(API_ENDPOINT.AUTH.LOGIN, {
+  //         email,
+  //         password,
+  //       });
 
-//       const { role } = response.data;
+  //       const { role } = response.data;
 
-//       updateUser(response.data);
-//       updateUser(response.data);
+  //       updateUser(response.data);
+  //       updateUser(response.data);
 
-//       if (role === "super-admin") {
-//         navigate("/superadmin/dashboard");
-//       }
-//     } catch (error) {
-//       if (error.response?.data?.message) {
-//         setError(error.response.data.message);
-//       } else {
-//         setError("An error occurred during login.");
-//       }
-//     } finally {
-//       // setLoading(false);
-//     }
-//   };
+  //       if (role === "super-admin") {
+  //         navigate("/superadmin/dashboard");
+  //       }
+  //     } catch (error) {
+  //       if (error.response?.data?.message) {
+  //         setError(error.response.data.message);
+  //       } else {
+  //         setError("An error occurred during login.");
+  //       }
+  //     } finally {
+  //       // setLoading(false);
+  //     }
+  //   };
 
   return (
     <div className="p-8 bg-linear-to-l from-yellow-50 to-yellow-25 ">
@@ -78,7 +79,7 @@ const HodLogin = () => {
         H.O.D Probate{" "}
       </h2>
 
-      <form onSubmit={handleLogin} className="space-y-4 ">
+      <form className="space-y-4 ">
         <div>
           <label className="block text-sm font-bold text-gray-900 mb-2">
             Official Email Address
@@ -88,8 +89,8 @@ const HodLogin = () => {
 
             <input
               type="email"
-            //   value={email}
-            //   onChange={(e) => setEmail(e.target.value)}
+              //   value={email}
+              //   onChange={(e) => setEmail(e.target.value)}
               placeholder="e.g. name.surname@judiciary.gov.ng"
               className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C7A008] focus:border-transparent text-sm placeholder-gray-400"
             />
@@ -106,8 +107,8 @@ const HodLogin = () => {
           </div>
           <div className="relative">
             <input
-            //   value={password}
-            //   onChange={(e) => setPassword(e.target.value)}
+              //   value={password}
+              //   onChange={(e) => setPassword(e.target.value)}
               type={hidePassword ? "password" : "text"}
               placeholder="Enter your password "
               className="w-full px-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#C7A008] focus:border-transparent text-sm"

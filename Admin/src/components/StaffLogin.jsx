@@ -1,5 +1,6 @@
 import { Eye, EyeOff } from "lucide-react";
 import React, { useState } from "react";
+import { CiLock } from "react-icons/ci";
 import { MdAlternateEmail } from "react-icons/md";
 
 const StaffLogin = () => {
@@ -62,7 +63,7 @@ const StaffLogin = () => {
         Admin Login{" "}
       </h2>
 
-      <form onSubmit={handleLogin} className="space-y-4 ">
+      <form  className="space-y-4 ">
         <div>
           <label className="block text-sm font-bold text-gray-900 mb-2">
             Official Email Address

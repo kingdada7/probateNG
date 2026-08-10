@@ -10,6 +10,8 @@ import { Link, useNavigate } from "react-router";
 import { MdAlternateEmail } from "react-icons/md";
 
 import { useEffect, useState } from "react";
+import HodLogin from "../components/HodLogin";
+import StaffLogin from "../components/StaffLogin";
 
 const AdminLogin = ({ tier }) => {
   const [adminTier, setAdminTier] = useState(tier || "standard");
@@ -52,20 +54,20 @@ const AdminLogin = ({ tier }) => {
                 onClick={() => setAdminTier("standard")}
                 className={`flex-1 py-2.5 px-4 rounded-md font-bold text-sm transition-all flex items-center justify-center gap-2 ${adminTier === "standard" ? "bg-white text-green-600 shadow-sm" : "text-gray-600 hover:text-green-600"}`}
               >
-                <IoShieldCheckmark /> Admin
+                <IoShieldCheckmark /> Staff
               </button>
               <button
                 onClick={() => setAdminTier("super")}
                 className={`flex-1 py-2.5 px-4 rounded-md font-bold text-sm transition-all flex items-center justify-center gap-2 ${adminTier === "super" ? "bg-white text-[#C7A008] shadow-sm" : "text-gray-600 hover:text-[#C7A008]"}`}
               >
                 <MdAdminPanelSettings />
-                Super Admin
+                Hod
               </button>
             </div>
-            {/* <div className="">
-              {adminTier === "standard" && <StandardAdminUI />}
-              {adminTier === "super" && <SuperAdminUI />}
-            </div> */}
+            <div className="">
+              {adminTier === "standard" && <StaffLogin />}
+              {adminTier === "super" && <HodLogin />}
+            </div>
           </div>
         </div>
       </main>
