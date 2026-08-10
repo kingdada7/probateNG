@@ -4,14 +4,8 @@ import "dotenv/config";
 
 export const hodRegister = async (req, res) => {
   try {
-    const {
-      fullName,
-      email,
-      password,
-      confirmPassword,
-      staffId,
-      inviteCode,
-    } = req.body;
+    const { fullName, email, password, confirmPassword, staffId, inviteCode } =
+      req.body;
 
     if (
       !fullName?.trim() ||
@@ -92,6 +86,34 @@ export const hodRegister = async (req, res) => {
   } catch (error) {
     console.error("Error during HOD registration:", error);
 
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
+export const hodLogin = async (req, res) => {
+  try {
+    const { email, password };
+
+    if (!email?.trim() || !password) {
+      return res.status(400).json({
+        message: "Email and password are required",
+      });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // Find HOD by email
+
+    const hod = await Admin.findOne({ email: normalizedEmail });
+    if (!hod) {
+      return res.status(401).json({
+        message: "Account not found ",
+      });
+    }
+  } catch (error) {
+    console.error("Error during HOD login:", error);
     return res.status(500).json({
       message: "Internal server error",
     });
