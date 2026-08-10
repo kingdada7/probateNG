@@ -6,3 +6,5 @@ const adminRouter = express.Router();
 adminRouter.post("/hodlogin", hodLogin);
 
 adminRouter.post("/hodregister", hodRegister);
+
+export default adminRouter;
