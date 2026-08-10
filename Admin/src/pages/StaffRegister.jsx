@@ -253,7 +253,7 @@ const StaffRegister = () => {
                   <p className="text-sm text-gray-700">
                     Have an account?{" "}
                     <Link
-                      to="/adminlogin"
+                      to="/"
                       className="text-[#1a5c3a] font-semibold hover:underline"
                     >
                       Login here
