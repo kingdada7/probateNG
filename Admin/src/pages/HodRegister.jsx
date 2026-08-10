@@ -273,12 +273,12 @@ const HodRegister = () => {
                 <div className="mt-6 text-center">
                   <p className="text-sm text-gray-700">
                     Have an account?{" "}
-                    <a
-                      href="/superadminlogin"
+                    <Link
+                      to="/"
                       className="text-[#1a5c3a] font-semibold hover:underline"
                     >
                       Login here
-                    </a>
+                    </Link>
                   </p>
                 </div>
                 {error && <p className="text-sm text-red-600">{error}</p>}
