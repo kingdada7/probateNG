@@ -10,4 +10,5 @@ adminRouter.post("/hodregister", hodRegister);
 
 adminRouter.get("/gethod", hodAuth, getHOD);
 
+
 export default adminRouter;
