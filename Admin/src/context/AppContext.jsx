@@ -9,9 +9,9 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const navigate = useNavigate();
 
-  // Restore token from localStorage
+  // Restore admin token from localStorage
   const [token, setToken] = useState(() => {
-    const savedToken = localStorage.getItem("token");
+    const savedToken = localStorage.getItem("adminToken");
 
     if (savedToken) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${savedToken}`;
@@ -20,68 +20,58 @@ export const AppProvider = ({ children }) => {
     return savedToken;
   });
 
-  const [input, setInput] = useState("");
-  const [user, setUser] = useState(null);
-  const [applicationId, setApplicationId] = useState(() => {
-    return localStorage.getItem("applicationId");
-  });
+  const [admin, setAdmin] = useState(null);
 
-  const [application, setApplication] = useState(null);
   // Set Authorization header whenever token changes
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+      localStorage.setItem("adminToken", token);
     } else {
       delete axios.defaults.headers.common["Authorization"];
+      localStorage.removeItem("adminToken");
     }
   }, [token]);
 
-  useEffect(() => {
-    if (applicationId) {
-      localStorage.setItem("applicationId", applicationId);
-    } else {
-      localStorage.removeItem("applicationId");
-    }
-  }, [applicationId]);
-
-  // Fetch logged-in user
-  const fetchUser = async () => {
+  // Fetch logged-in HOD
+  const fetchAdmin = async () => {
     try {
-      const { data } = await axios.get("/api/citizen/get-user");
+      const { data } = await axios.get("/api/admin/me");
 
       if (data.success) {
-        setUser(data.user);
+        setAdmin(data.admin);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching admin:", error);
 
-      setUser(null);
+      setAdmin(null);
       setToken(null);
-      localStorage.removeItem("token");
     }
   };
 
-  // Fetch user whenever a token exists
+  // Fetch admin whenever token exists
   useEffect(() => {
     if (token) {
-      fetchUser();
+      fetchAdmin();
     }
   }, [token]);
+
+  const logout = () => {
+    setToken(null);
+    setAdmin(null);
+    navigate("/login");
+  };
 
   const value = {
     axios,
     navigate,
     token,
     setToken,
-    input,
-    setInput,
-    user,
-    setUser,
-    applicationId,
-    setApplicationId,
-
-    application,
-    setApplication,
+    admin,
+    setAdmin,
+    fetchAdmin,
+    logout,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
