@@ -23,7 +23,7 @@ const hodAuth = async (req, res, next) => {
       });
     }
 
-    req.user = hod;
+    req.admin = hod;
 
     next();
   } catch (error) {

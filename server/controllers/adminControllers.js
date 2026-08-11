@@ -144,3 +144,10 @@ export const hodLogin = async (req, res) => {
     });
   }
 };
+
+export const getHOD = async (req, res) => {
+  return res.status(200).json({
+    success: true,
+    admin: req.admin,
+  });
+};
