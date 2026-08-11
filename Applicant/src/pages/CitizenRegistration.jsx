@@ -28,6 +28,7 @@ function CitizenRegistration() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
+
   const handleRegister = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {

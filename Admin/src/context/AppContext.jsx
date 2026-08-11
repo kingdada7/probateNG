@@ -37,7 +37,7 @@ export const AppProvider = ({ children }) => {
   // Fetch logged-in HOD
   const fetchAdmin = async () => {
     try {
-      const { data } = await axios.get("/api/admin/me");
+      const { data } = await axios.get("/api/admin/gethod");
 
       if (data.success) {
         setAdmin(data.admin);
@@ -60,7 +60,7 @@ export const AppProvider = ({ children }) => {
   const logout = () => {
     setToken(null);
     setAdmin(null);
-    navigate("/login");
+    navigate("/");
   };
 
   const value = {

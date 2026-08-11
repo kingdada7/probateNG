@@ -10,83 +10,43 @@ import { PiUserCheck } from "react-icons/pi";
 import { MdAlternateEmail } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 const HodRegister = () => {
+  const { axios, navigate } = useAppContext();
   const [hidePassword, setHidePassword] = useState(true);
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [superAdminCode, setSuperAdminCode] = useState("");
-
+  const [inviteCode, setInviteCode] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate();
+  const handleRegister = async (e) => {
+    e.preventDefault();
 
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     // Handle form submission logic here
+    if (password !== confirmPassword) {
+      return toast.error("Passwords do not match");
+    }
 
-  //     if (!fullname.trim()) {
-  //       setError("Please enter your full name");
-  //       return;
-  //     }
+    try {
+      const { data } = await axios.post("/api/hodadmin/hodregister", {
+        fullName,
+        email,
+        password,
+        confirmPassword,
+        staffId,
+        division,
+        inviteCode,
+      });
 
-  //     if (!email.trim()) {
-  //       setError("Please enter your email address");
-  //       return;
-  //     }
-
-  //     if (!validateEmail(email)) {
-  //       setError("Please enter a valid email address");
-  //       return;
-  //     }
-
-  //     if (!password) {
-  //       setError("Please enter a password");
-  //       return;
-  //     }
-
-  //     if (password !== confirmPassword) {
-  //       setError("Passwords do not match");
-  //       return;
-  //     }
-
-  //     if (!superAdminCode) {
-  //       setError("Please enter the authorized invite code");
-  //       return;
-  //     }
-  //     try {
-  //       setLoading(true);
-  //       setError("");
-
-  //       const response = await axiosInstance.post(API_ENDPOINT.AUTH.REGISTER, {
-  //         email,
-  //         password,
-  //         name: fullname,
-  //         adminCode: superAdminCode,
-  //       });
-
-  //       const { token, role } = response.data;
-
-  //       if (token) {
-  //         updateUser(response.data);
-
-  //         if (role === "super-admin") {
-  //           navigate("/superadmin/dashboard");
-  //         }
-  //       }
-  //     } catch (error) {
-  //       if (error.response?.data?.message) {
-  //         setError(error.response.data.message);
-  //       } else {
-  //         setError("An error occurred during registration.");
-  //       }
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Registration failed");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -131,7 +91,7 @@ const HodRegister = () => {
                 ministry-issued authorization code to establish your
                 administrative profile
               </p>
-              <form className="space-y-6">
+              <form onSubmit={handleRegister} className="space-y-6">
                 <div>
                   <label className="block text-xs font-bold text-gray-900 tracking-wider mb-3">
                     FULL LEGAL NAME
@@ -139,8 +99,8 @@ const HodRegister = () => {
                   <div className="relative">
                     <FaUser className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                     <input
-                      //   value={fullname}
-                      //   onChange={(e) => setFullname(e.target.value)}
+                      value={fullname}
+                      onChange={(e) => setFullname(e.target.value)}
                       type="text"
                       placeholder="Enter as it appears on official ID"
                       className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:bg-white text-sm text-gray-700 placeholder-gray-500"
@@ -156,8 +116,8 @@ const HodRegister = () => {
                     <div className="relative">
                       <MdAlternateEmail className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                       <input
-                        // value={email}
-                        // onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         type="email"
                         placeholder="username@fct.gov.ng"
                         className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:bg-white text-sm text-gray-700 placeholder-gray-500"
@@ -175,6 +135,8 @@ const HodRegister = () => {
                       <FaIdCard className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                       <input
                         type="text"
+                        value={staffId}
+                        onChange={(e) => setStaffId(e.target.value)}
                         placeholder="FCT/CRT/XXXX"
                         className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:bg-white text-sm text-gray-700 placeholder-gray-500"
                       />
@@ -190,8 +152,8 @@ const HodRegister = () => {
                     <CiLock className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                     <div className="relative">
                       <input
-                        // value={password}
-                        // onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         type={hidePassword ? "password" : "text"}
                         placeholder="Enter your password "
                         className="w-full px-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm"
@@ -219,8 +181,8 @@ const HodRegister = () => {
                     <CiLock className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                     <div className="relative">
                       <input
-                        // value={hideConfirmPassword}
-                        // onChange={(e) => setConfirmPassword(e.target.value)}
+                        value={hideConfirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                         type={hideConfirmPassword ? "password" : "text"}
                         placeholder="Enter your password "
                         className="w-full px-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm"
@@ -255,8 +217,8 @@ const HodRegister = () => {
                   </div>
                   <input
                     type="text"
-                    // value={superAdminCode}
-                    // onChange={(e) => setSuperAdminCode(e.target.value)}
+                    value={inviteCode}
+                    onChange={(e) => setInviteCode(e.target.value)}
                     placeholder="Enter Secure Invite Code"
                     className="w-full px-4 py-4 border-2 border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-[#1a5c3a] text-sm text-gray-700 placeholder-gray-500 text-center tracking-wider"
                   />
