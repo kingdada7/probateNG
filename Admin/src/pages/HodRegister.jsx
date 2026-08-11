@@ -19,6 +19,7 @@ const HodRegister = () => {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [staffId, setStaffId] = useState("");
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [inviteCode, setInviteCode] = useState("");
@@ -181,7 +182,7 @@ const HodRegister = () => {
                     <CiLock className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
                     <div className="relative">
                       <input
-                        value={hideConfirmPassword}
+                        value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         type={hideConfirmPassword ? "password" : "text"}
                         placeholder="Enter your password "
@@ -189,7 +190,7 @@ const HodRegister = () => {
                       />
                       {hideConfirmPassword ? (
                         <EyeOff
-                          onClick={() => setHidePassword(false)}
+                          onClick={() => setHideConfirmPassword(false)}
                           className="absolute right-4 top-3.5 w-5 h-5 text-gray-500 cursor-pointer"
                         />
                       ) : (
