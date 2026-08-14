@@ -1,6 +1,5 @@
 import React from "react";
-import { Outlet, useNavigate } from "react-router";
-import HodDashboard from "./HodDashboard";
+import { Outlet } from "react-router";
 
 const AdminLayout = () => {
   return (

@@ -1,35 +1,33 @@
 import React from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes, Navigate } from "react-router";
 
 import AdminLogin from "./pages/AdminLogin";
 import StaffRegister from "./pages/StaffRegister";
 import HodRegister from "./pages/HodRegister";
 import HodDashboard from "./pages/HodDashboard";
-import AdminLayout from "./pages/adminLayout";
+import AdminLayout from "./pages/AdminLayout";
 
 const App = () => {
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   return (
     <Routes>
-      {/* Login */}
+      {/* Public */}
       <Route path="/admin" element={<AdminLogin />} />
-
-      {/* Registration */}
       <Route path="/admin/staffregister" element={<StaffRegister />} />
-
       <Route path="/admin/hodregister" element={<HodRegister />} />
 
-      {/* Protected Admin Area */}
-      <Route path="/admin" element={token ? <AdminLayout /> : <AdminLogin />}>
-        {/* <Route
-          path="staff/dashboard"
-          element={<StaffDashboard />}
-        /> */}
-
+      {/* Protected */}
+      <Route
+        path="/admin/dashboard"
+        element={token ? <AdminLayout /> : <Navigate to="/admin" replace />}
+      >
         <Route
-          path="hod/dashboard"
-          element={role === "hod" ? <HodDashboard /> : <AdminLogin />}
+          path="hod"
+          element={
+            role === "hod" ? <HodDashboard /> : <Navigate to="/admin" replace />
+          }
         />
       </Route>
     </Routes>
