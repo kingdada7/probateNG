@@ -12,29 +12,26 @@ const HodLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
- 
-   const handleLogin = async (e) => {
-      e.preventDefault();
-  
-      
-     
-  
-      try {
-        const { data } = await axios.post("/api/hodadmin/hodregister", {
-        
-          email,
-          password,
-          
-  
-        
-        });
-  
-        toast.success(data.message);
-        navigate("/admin/dashboard");
-      } catch (error) {
-        toast.error(error.response?.data?.message || "Registration failed");
-      }
-    };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await axios.post("/api/hodadmin/hodlogin", {
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", "hod");
+
+      // toast.success(data.message);
+      toast.success("Login successful");
+      navigate("/admin/dashboard/hod");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Registration failed");
+    }
+  };
 
   return (
     <div className="p-8 bg-linear-to-l from-yellow-50 to-yellow-25 ">
@@ -42,7 +39,7 @@ const HodLogin = () => {
         H.O.D Probate{" "}
       </h2>
 
-      <form className="space-y-4 ">
+      <form onSubmit={handleLogin} className="space-y-4 ">
         <div>
           <label className="block text-sm font-bold text-gray-900 mb-2">
             Official Email Address
@@ -52,8 +49,8 @@ const HodLogin = () => {
 
             <input
               type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="e.g. name.surname@judiciary.gov.ng"
               className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C7A008] focus:border-transparent text-sm placeholder-gray-400"
             />
@@ -70,8 +67,8 @@ const HodLogin = () => {
           </div>
           <div className="relative">
             <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type={hidePassword ? "password" : "text"}
               placeholder="Enter your password "
               className="w-full px-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#C7A008] focus:border-transparent text-sm"

@@ -9,40 +9,44 @@ import HodDashboard from "./pages/HodDashboard";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./pages/AdminLayout";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
-    <Routes>
-      {/* ================= PUBLIC ROUTES ================= */}
+    <div>
+      <Toaster />
 
-      <Route path="/admin" element={<AdminLogin />} />
+      <Routes>
+        {/* ================= PUBLIC ROUTES ================= */}
 
-      <Route path="/admin/staffregister" element={<StaffRegister />} />
+        <Route path="/admin" element={<AdminLogin />} />
 
-      <Route path="/admin/hodregister" element={<HodRegister />} />
+        <Route path="/admin/staffregister" element={<StaffRegister />} />
 
-      {/* ================= PROTECTED ADMIN ROUTES ================= */}
+        <Route path="/admin/hodregister" element={<HodRegister />} />
 
-      <Route
-        path="/admin/dashboard"
-        element={
-          <ProtectedRoute>
-            <AdminLayout />
-          </ProtectedRoute>
-        }
-      >
-        {/* HOD */}
+        {/* ================= PROTECTED ADMIN ROUTES ================= */}
+
         <Route
-          path="hod"
+          path="/admin/dashboard"
           element={
-            <ProtectedRoute allowedRole="hod">
-              <HodDashboard />
+            <ProtectedRoute>
+              <AdminLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          {/* HOD */}
+          <Route
+            path="hod"
+            element={
+              <ProtectedRoute allowedRole="hod">
+                <HodDashboard />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* STAFF */}
-        {/* <Route
+          {/* STAFF */}
+          {/* <Route
           path="staff"
           element={
             <ProtectedRoute allowedRole="staff">
@@ -50,11 +54,12 @@ const App = () => {
             </ProtectedRoute>
           }
         /> */}
-      </Route>
+        </Route>
 
-      {/* Unknown route */}
-      <Route path="*" element={<Navigate to="/admin" replace />} />
-    </Routes>
+        {/* Unknown route */}
+        <Route path="*" element={<Navigate to="/admin" replace />} />
+      </Routes>
+    </div>
   );
 };
 
