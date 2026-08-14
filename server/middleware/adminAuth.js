@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import Admin from "../model/admin.js";
 
-const hodAuth = async (req, res, next) => {
+const adminAuth = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
 
@@ -14,16 +14,16 @@ const hodAuth = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const hod = await Admin.findById(decoded.id).select("-password");
+    const admin = await Admin.findById(decoded.id).select("-password");
 
-    if (!hod) {
+    if (!admin) {
       return res.status(401).json({
         success: false,
-        message: "HOD not found",
+        message: "Admin not found",
       });
     }
 
-    req.admin = hod;
+    req.admin = admin;
 
     next();
   } catch (error) {
@@ -34,4 +34,4 @@ const hodAuth = async (req, res, next) => {
   }
 };
 
-export default hodAuth;
+export default adminAuth;

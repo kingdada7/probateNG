@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -13,9 +13,7 @@ export const AppProvider = ({ children }) => {
     const savedToken = localStorage.getItem("adminToken");
 
     if (savedToken) {
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${savedToken}`;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${savedToken}`;
     }
 
     return savedToken;
@@ -25,9 +23,7 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${token}`;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       localStorage.setItem("adminToken", token);
     } else {
@@ -74,11 +70,7 @@ export const AppProvider = ({ children }) => {
     logout,
   };
 
-  return (
-    <AppContext.Provider value={value}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 export const useAppContext = () => {

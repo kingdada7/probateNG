@@ -1,6 +1,6 @@
 import express from "express";
 import { getHOD, hodLogin, hodRegister } from "../controllers/adminControllers.js";
-import hodAuth from "../middleware/hodAuth.js";
+import hodAuth from "../middleware/adminAuth.js";
 
 const adminRouter = express.Router();
 
@@ -8,7 +8,7 @@ adminRouter.post("/hodlogin", hodLogin);
 
 adminRouter.post("/hodregister", hodRegister);
 
-adminRouter.get("/gethod", hodAuth, getHOD);
+adminRouter.get("/me", );
 
 
 export default adminRouter;
