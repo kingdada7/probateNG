@@ -9,7 +9,7 @@ import { Eye, EyeOff, Key } from "lucide-react";
 import { PiUserCheck } from "react-icons/pi";
 import { MdAlternateEmail } from "react-icons/md";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, } from "react-router";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 
@@ -28,22 +28,25 @@ const HodRegister = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    
     if (password !== confirmPassword) {
       return toast.error("Passwords do not match");
     }
 
+
     try {
       const { data } = await axios.post("/api/hodadmin/hodregister", {
-        fullName,
+        fullName: fullname,
         email,
         password,
         confirmPassword,
         staffId,
-        division,
+
         inviteCode,
       });
 
       toast.success(data.message);
+      navigate("/admin");
     } catch (error) {
       toast.error(error.response?.data?.message || "Registration failed");
     }

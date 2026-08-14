@@ -1,35 +1,59 @@
 import React from "react";
-import { Route, Routes, Navigate } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 
 import AdminLogin from "./pages/AdminLogin";
 import StaffRegister from "./pages/StaffRegister";
 import HodRegister from "./pages/HodRegister";
 import HodDashboard from "./pages/HodDashboard";
+// import StaffDashboard from "./pages/StaffDashboard";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./pages/AdminLayout";
 
 const App = () => {
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
-
   return (
     <Routes>
-      {/* Public */}
+      {/* ================= PUBLIC ROUTES ================= */}
+
       <Route path="/admin" element={<AdminLogin />} />
+
       <Route path="/admin/staffregister" element={<StaffRegister />} />
+
       <Route path="/admin/hodregister" element={<HodRegister />} />
 
-      {/* Protected */}
+      {/* ================= PROTECTED ADMIN ROUTES ================= */}
+
       <Route
         path="/admin/dashboard"
-        element={token ? <AdminLayout /> : <Navigate to="/admin" replace />}
+        element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
       >
+        {/* HOD */}
         <Route
           path="hod"
           element={
-            role === "hod" ? <HodDashboard /> : <Navigate to="/admin" replace />
+            <ProtectedRoute allowedRole="hod">
+              <HodDashboard />
+            </ProtectedRoute>
           }
         />
+
+        {/* STAFF */}
+        {/* <Route
+          path="staff"
+          element={
+            <ProtectedRoute allowedRole="staff">
+              <StaffDashboard />
+            </ProtectedRoute>
+          }
+        /> */}
       </Route>
+
+      {/* Unknown route */}
+      <Route path="*" element={<Navigate to="/admin" replace />} />
     </Routes>
   );
 };
