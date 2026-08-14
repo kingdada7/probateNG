@@ -73,6 +73,7 @@ export const hodRegister = async (req, res) => {
       email: normalizedEmail,
       password: hashedPassword,
       staffId: staffId.trim(),
+      role: "hod",
     });
 
     return res.status(201).json({
@@ -124,9 +125,13 @@ export const hodLogin = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ id: hod._id }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
-    });
+    const token = jwt.sign(
+      { id: hod._id, role: hod.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      },
+    );
 
     return res.status(200).json({
       message: "Login successful",
@@ -135,6 +140,7 @@ export const hodLogin = async (req, res) => {
         id: hod._id,
         fullName: hod.fullName,
         email: hod.email,
+        role: hod.role,
       },
     });
   } catch (error) {
