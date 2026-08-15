@@ -1,51 +1,60 @@
-import { House, ShieldUserIcon, User } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  ShieldUser,
+  Landmark,
+} from "lucide-react";
 import React from "react";
 import { NavLink } from "react-router";
 
 const SideBar = () => {
+  const links = [
+    {
+      name: "Dashboard",
+      icon: LayoutDashboard,
+      to: "/admin/dashboard/hod",
+      end: true,
+    },
+    {
+      name: "User Management",
+      icon: Users,
+      to: "/hoddashboard/users",
+    },
+    {
+      name: "Admin Management",
+      icon: ShieldUser,
+      to: "/hoddashboard/admins",
+    },
+    {
+      name: "Bank Approvals",
+      icon: Landmark,
+      to: "/hoddashboard/bank-approvals",
+    },
+  ];
+
   return (
-    <div className="flex flex-col border-r border-gray-800 min-h-full pt-6">
-      <NavLink
-        end={true}
-        to=""
-        className={({ isActive }) =>
-          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-green-600 border-r-4 border-yellow-600"}`
-        }
-      >
-        <House className="text-white" />
-        <p className="hidden md:inline-block text-white">Dashboard</p>
-      </NavLink>
-
-      <NavLink
-        to=""
-        className={({ isActive }) =>
-          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-green-600 border-r-4 border-yellow-600"}`
-        }
-      >
-        <User className="text-white" />
-        <p className="hidden md:inline-block text-white">User Management</p>
-      </NavLink>
-
-      <NavLink
-        to=""
-        className={({ isActive }) =>
-          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-green-600 border-r-4 border-yellow-600"}`
-        }
-      >
-        <ShieldUserIcon className="text-white" />
-        <p className="hidden md:inline-block text-white">Admin Management</p>
-      </NavLink>
-
-      <NavLink
-        to=""
-        className={({ isActive }) =>
-          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-green-600 border-r-4 border-yellow-600"}`
-        }
-      >
-        <House className="text-white" />
-        <p className="hidden md:inline-block text-white">Bank Approvals</p>
-      </NavLink>
-    </div>
+    <aside className="w-64 min-h-screen bg-[#086b2f] py-6">
+      <nav className="flex flex-col gap-1 px-2">
+        {links.map(({ name, icon: Icon, to, end }) => (
+          <NavLink
+            key={name}
+            to={to}
+            end={end}
+            className={({ isActive }) =>
+              `relative flex items-center gap-4 h-12 px-4 rounded-md text-sm font-medium transition-all duration-200
+              ${
+                isActive
+                  ? "bg-[#237d47] text-white before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:bg-yellow-400 before:rounded-l-md"
+                  : "text-white/90 hover:bg-white/10"
+              }`
+            }
+          >
+            <Icon size={19} strokeWidth={2} />
+            <span>{name}</span>
+          </NavLink>
+        ))}
+      </nav>
+    </aside>
   );
 };
 
