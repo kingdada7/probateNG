@@ -18,7 +18,7 @@ const SideBar = () => {
     {
       name: "Admin Management",
       icon: ShieldUser,
-      to: "/hoddashboard/admins",
+      to: "/admin/dashboard/admins",
     },
     {
       name: "Bank Approvals",
