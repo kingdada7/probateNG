@@ -10,6 +10,7 @@ import HodDashboard from "./pages/HodDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./pages/AdminLayout";
 import { Toaster } from "react-hot-toast";
+import UserMangement from "./pages/UserMangement";
 
 const App = () => {
   return (
@@ -44,7 +45,14 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-
+          <Route
+            path="users"
+            element={
+              <ProtectedRoute allowedRole="hod">
+                <UserMangement />
+              </ProtectedRoute>
+            }
+          />
           {/* STAFF */}
           {/* <Route
           path="staff"

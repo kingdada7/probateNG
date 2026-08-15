@@ -1,9 +1,4 @@
-import {
-  LayoutDashboard,
-  Users,
-  ShieldUser,
-  Landmark,
-} from "lucide-react";
+import { LayoutDashboard, Users, ShieldUser, Landmark } from "lucide-react";
 import React from "react";
 import { NavLink } from "react-router";
 
@@ -18,7 +13,7 @@ const SideBar = () => {
     {
       name: "User Management",
       icon: Users,
-      to: "/hoddashboard/users",
+      to: "/admin/dashboard/users",
     },
     {
       name: "Admin Management",
