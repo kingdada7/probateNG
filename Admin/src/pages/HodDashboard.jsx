@@ -15,8 +15,6 @@ import {
 } from "lucide-react";
 import StatCard from "../components/StatCard";
 
-
-
 const HodDashboard = () => {
   return (
     <div className="min-h-screen bg-[#f4f7f6]">
@@ -49,9 +47,7 @@ const HodDashboard = () => {
                 Hon. Justice A. Bello
               </p>
 
-              <p className="text-[10px] font-bold text-[#d2a900]">
-                SUPERADMIN
-              </p>
+              <p className="text-[10px] font-bold text-[#d2a900]">SUPERADMIN</p>
             </div>
 
             <div className="flex h-[42px] w-[42px] items-center justify-center rounded-full border-2 border-[#b8d3c2] bg-[#edf5ef]">
@@ -102,99 +98,11 @@ const HodDashboard = () => {
             value="12"
           />
         </section>
-
-        {/* PERSONNEL */}
-       
-
-        {/* BOTTOM */}
-        <section className="mt-8 grid grid-cols-1 gap-8 xl:grid-cols-[1fr_330px]">
-          {/* Authorization Logs */}
-          <div className="rounded-xl bg-white p-7 shadow-[0_2px_5px_rgba(0,0,0,0.03)]">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <History size={22} className="text-[#08743a]" />
-
-                <h2 className="text-[18px] font-bold text-[#253047]">
-                  Recent Authorization Logs
-                </h2>
-              </div>
-
-              <button className="text-[12px] font-bold text-[#08713a]">
-                View All Logs
-              </button>
-            </div>
-
-            <div className="mt-8 space-y-7">
-              <LogItem
-                icon={ShieldCheck}
-                text={
-                  <>
-                    <strong>Olawale Adeyemi</strong> updated access permissions
-                    for Bank Portal 4
-                  </>
-                }
-                time="TODAY, 11:24 AM • IP: 192.168.1.45"
-              />
-
-              <LogItem
-                icon={KeyRound}
-                danger
-                text={
-                  <>
-                    Failed login attempt on account{" "}
-                    <strong>m.musa@fct.gov.ng</strong>
-                  </>
-                }
-                time="TODAY, 10:05 AM • IP: 41.203.1.18"
-              />
-            </div>
-          </div>
-
-          {/* Advisory */}
-          <div className="rounded-xl bg-[#086b2f] p-7 text-white">
-            <p className="text-[11px] font-bold tracking-[2px] text-[#e6bd00]">
-              ADMINISTRATIVE ADVISORY
-            </p>
-
-            <h2 className="mt-2 text-[22px] font-bold leading-tight">
-              Bi-Annual Access Review Protocol
-            </h2>
-
-            <p className="mt-5 text-[14px] leading-6 text-white/75">
-              According to Section 4.2 of the Judicial Admin Policy, all
-              Administrative access levels must be verified every 180 days.
-            </p>
-          </div>
-        </section>
       </div>
     </div>
   );
 };
 
-<StatCard/>
-
-
-const LogItem = ({ icon: Icon, text, time, danger }) => {
-  return (
-    <div className="flex gap-4">
-      <div
-        className={`flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full ${
-          danger ? "bg-[#ffe2e2]" : "bg-[#e0edff]"
-        }`}
-      >
-        <Icon
-          size={16}
-          className={danger ? "text-[#ef4141]" : "text-[#3778dd]"}
-        />
-      </div>
-
-      <div>
-        <p className="text-[14px] text-[#253047]">{text}</p>
-
-        <p className="mt-1 text-[10px] text-[#9aacc2]">{time}</p>
-      </div>
-    </div>
-  );
-};
+<StatCard />;
 
 export default HodDashboard;
