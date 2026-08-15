@@ -13,6 +13,7 @@ import {
   UserPlus,
   Download,
 } from "lucide-react";
+import StatCard from "../components/StatCard";
 
 
 
@@ -170,58 +171,8 @@ const HodDashboard = () => {
   );
 };
 
-const StatCard = ({
-  icon: Icon,
-  iconBg,
-  iconColor,
-  title,
-  value,
-  valueColor = "text-[#202d42]",
-  badge,
-  badgeColor,
-}) => {
-  return (
-    <div className="relative min-h-[185px] rounded-xl border border-[#e6ebe8] bg-white p-6 shadow-[0_2px_5px_rgba(0,0,0,0.03)]">
-      <div className="flex items-start justify-between">
-        <div
-          className={`flex h-[55px] w-[55px] items-center justify-center rounded-lg ${iconBg}`}
-        >
-          <Icon size={25} className={iconColor} />
-        </div>
+<StatCard/>
 
-        {badge && (
-          <span
-            className={`rounded-md px-3 py-2 text-[11px] font-bold ${badgeColor}`}
-          >
-            {badge}
-          </span>
-        )}
-      </div>
-
-      <div className="mt-5">
-        <p className="text-[14px] font-medium text-[#637694]">{title}</p>
-
-        <p className={`mt-1 text-[32px] font-bold ${valueColor}`}>
-          {value}
-        </p>
-      </div>
-    </div>
-  );
-};
-
-const PaginationButton = ({ children, active }) => {
-  return (
-    <button
-      className={`flex h-[32px] min-w-[34px] items-center justify-center rounded-md border px-3 text-[12px] font-semibold ${
-        active
-          ? "border-[#086b2f] bg-[#086b2f] text-white"
-          : "border-[#dce4e1] bg-white text-[#4e6079] hover:bg-gray-50"
-      }`}
-    >
-      {children}
-    </button>
-  );
-};
 
 const LogItem = ({ icon: Icon, text, time, danger }) => {
   return (
