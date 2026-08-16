@@ -1,128 +1,162 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
 const ApplicationDashboardTable = () => {
+  function statusBadge(status) {
+    switch (status) {
+      case "Draft":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gray-50 text-gray-600 border border-gray-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0"></span>
+            Draft
+          </span>
+        );
+
+      case "Pending Review":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
+            Pending Review
+          </span>
+        );
+
+      case "Approved":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0"></span>
+            Approved
+          </span>
+        );
+
+      case "Rejected":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
+            Rejected
+          </span>
+        );
+
+      default:
+        return null;
+    }
+  }
+
   return (
     <div>
-          <div className="overflow-x-auto">
-        <table className="w-full min-w-[950px]">
+      <div className="flex items-center justify-between px-6 py-5">
+        <h2 className="text-lg font-bold text-gray-900">
+          Recent Application Activity
+        </h2>
+
+        <button className="text-sm font-semibold hover:underline">
+          View All
+        </button>
+      </div>
+
+      {/* Desktop Table */}
+      <div className="hidden sm:block overflow-x-auto">
+        <table className="w-full">
           <thead>
-            <tr className="bg-[#edf2f0] text-left">
-              <th className="px-6 py-4 text-[11px] font-bold tracking-wide text-[#627690]">
-                NAME & EMAIL
+            <tr className="border-b border-gray-100">
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+                Reference ID
               </th>
 
-              <th className="px-5 py-4 text-[11px] font-bold tracking-wide text-[#627690]">
-                CURRENT ROLE
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+                Application Name
               </th>
 
-              <th className="px-5 py-4 text-[11px] font-bold tracking-wide text-[#627690]">
-                DEPARTMENT
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+                Submission Date
               </th>
 
-              <th className="px-5 py-4 text-[11px] font-bold tracking-wide text-[#627690]">
-                LAST ACTIVITY
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+                Application Type
               </th>
 
-              <th className="px-5 py-4 text-[11px] font-bold tracking-wide text-[#627690]">
-                STATUS
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+                Status
               </th>
 
-              <th className="px-5 py-4 text-[11px] font-bold tracking-wide text-[#627690]">
-                ACTIONS
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+                Action
               </th>
             </tr>
           </thead>
 
-          <tbody>
-            {admins.map((admin) => (
-              <tr
-                key={admin.email}
-                className={`border-b border-[#edf0ef] ${
-                  admin.highlighted ? "bg-[#fffdf4]" : "bg-white"
-                }`}
-              >
-                {/* Name */}
-                <td className="px-6 py-5">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-lg bg-[#eef3f7] text-[12px] font-bold text-[#11703c]">
-                      {admin.initials}
-                    </div>
+          <tbody className="divide-y divide-gray-50">
+            <tr
+              // key={app._id}
+              className="hover:bg-gray-50 transition-colors"
+            >
+              <td className="px-6 py-4 font-mono text-xs text-gray-500 whitespace-nowrap">
+                {/* {app._id} */}
+              </td>
 
-                    <div>
-                      <p className="text-[14px] font-bold text-[#253047]">
-                        {admin.name}
-                      </p>
+              <td className="px-6 py-4 text-sm font-semibold text-gray-800 whitespace-nowrap">
+                {/* {app.deceased?.deceasedName
+                    ? `Estate of Late ${app.deceased.deceasedName}`
+                    : "Probate Application"} */}
+              </td>
 
-                      <p className="mt-1 text-[12px] text-[#657995]">
-                        {admin.email}
-                      </p>
-                    </div>
-                  </div>
-                </td>
+              <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
+                {/* {new Date(app.createdAt).toLocaleDateString()} */}
+              </td>
 
-                {/* Role */}
-                <td className="px-5">
-                  <span
-                    className={`rounded-full px-3 py-1 text-[10px] font-bold ${
-                      admin.role === "SUPER ADMIN"
-                        ? "bg-[#d4a900] text-white"
-                        : "bg-[#e4f0e9] text-[#087139]"
-                    }`}
-                  >
-                    {admin.role}
-                  </span>
-                </td>
+              <td className="px-6 py-4">{/* {statusBadge(app.status)} */}</td>
 
-                {/* Department */}
-                <td className="px-5 text-[14px] text-[#52657f]">
-                  {admin.department}
-                </td>
-
-                {/* Activity */}
-                <td className="px-5 text-[14px] text-[#52657f]">
-                  {admin.activity}
-                </td>
-
-                {/* Status */}
-                <td className="px-5">
-                  <div
-                    className={`flex items-center gap-2 text-[12px] font-bold ${
-                      admin.status === "ACTIVE"
-                        ? "text-[#0aa04c]"
-                        : "text-[#9babc0]"
-                    }`}
-                  >
-                    <span
-                      className={`h-[6px] w-[6px] rounded-full ${
-                        admin.status === "ACTIVE"
-                          ? "bg-[#0aa04c]"
-                          : "bg-[#9babc0]"
-                      }`}
-                    />
-
-                    {admin.status}
-                  </div>
-                </td>
-
-                {/* Actions */}
-                <td className="px-5">
-                  <div className="flex items-center gap-5 text-[#9badc1]">
-                    <button>
-                      <ArrowLeftRight size={18} />
-                    </button>
-
-                    <button>
-                      <Ban size={18} />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+              <td className="px-6 py-4">
+                <button className="text-sm font-bold hover:underline whitespace-nowrap">
+                  View Details
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
-    </div>
-  )
-}
 
-export default ApplicationDashboardTable
+      {/* Mobile Cards */}
+      {/* <div className="sm:hidden divide-y divide-gray-100">
+        {applications.map((app) => (
+          <div
+            key={app._id}
+            className="px-5 py-4 space-y-2.5"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="text-sm font-bold text-gray-800">
+                  {app.deceased?.deceasedName
+                    ? `Estate of Late ${app.deceased.deceasedName}`
+                    : "Probate Application"}
+                </div>
+
+                <div className="font-mono text-[11px] text-gray-400 mt-0.5">
+                  {app._id}
+                </div>
+              </div>
+
+              {statusBadge(app.status)}
+            </div>
+
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-gray-500">
+                {new Date(app.createdAt).toLocaleDateString()}
+              </span>
+
+              <button className="text-sm font-bold hover:underline">
+                View Details
+              </button>
+            </div>
+          </div>
+        ))}
+      </div> */}
+
+      {/* {applications.length === 0 && (
+        <div className="px-6 py-10 text-center text-gray-500">
+          No applications found.
+        </div>
+      )} */}
+    </div>
+  );
+};
+
+export default ApplicationDashboardTable;

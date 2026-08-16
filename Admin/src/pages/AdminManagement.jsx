@@ -3,6 +3,7 @@ import React from "react";
 import PaginationButton from "../components/PaginationButton";
 import AdminManagementTable from "../components/AdminManagementTable";
 
+
 const AdminManagement = () => {
   return (
     <div>
@@ -33,6 +34,8 @@ const AdminManagement = () => {
         </div>
 
         <AdminManagementTable />
+
+      
 
         {/* Pagination */}
         <div className="flex flex-col gap-4 bg-[#f8fafb] px-6 py-5 sm:flex-row sm:items-center sm:justify-between">

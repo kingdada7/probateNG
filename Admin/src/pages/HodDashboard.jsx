@@ -5,21 +5,18 @@ import {
   ClipboardClock,
   Radio,
   Terminal,
-  ArrowLeftRight,
-  Ban,
-  ShieldCheck,
-  KeyRound,
-  History,
-  UserPlus,
-  Download,
 } from "lucide-react";
+
 import StatCard from "../components/StatCard";
+import ApplicationDashboardTable from "../components/ApplicationDashboardTable";
 
 const HodDashboard = () => {
   return (
     <div className="min-h-screen bg-[#f4f7f6]">
+
       {/* ================= HEADER ================= */}
       <header className="hidden h-[55px] border-b border-[#e2e8e5] bg-white px-8 lg:flex lg:items-center lg:justify-between">
+        
         <div>
           <h1 className="text-[21px] font-bold leading-none text-[#09652e]">
             HOD Management Oversight
@@ -31,6 +28,7 @@ const HodDashboard = () => {
         </div>
 
         <div className="flex items-center gap-5">
+
           {/* Notification */}
           <div className="relative border-r border-gray-200 pr-6">
             <Bell size={21} className="text-[#8fa0b5]" />
@@ -47,20 +45,25 @@ const HodDashboard = () => {
                 Hon. Justice A. Bello
               </p>
 
-              <p className="text-[10px] font-bold text-[#d2a900]">SUPERADMIN</p>
+              <p className="text-[10px] font-bold text-[#d2a900]">
+                SUPERADMIN
+              </p>
             </div>
 
             <div className="flex h-[42px] w-[42px] items-center justify-center rounded-full border-2 border-[#b8d3c2] bg-[#edf5ef]">
               <Users size={21} className="text-[#83a88e]" />
             </div>
           </div>
+
         </div>
       </header>
 
       {/* ================= CONTENT ================= */}
-      <div className="px-4 pb-10 pt-[76px] sm:px-6 lg:px-8 lg:pt-8">
-        {/* STAT CARDS */}
+      <main className="px-4 pb-10 pt-[76px] sm:px-6 lg:px-8 lg:pt-8">
+
+        {/* ================= STAT CARDS ================= */}
         <section className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+
           <StatCard
             icon={Users}
             iconBg="bg-[#e8f3ed]"
@@ -97,12 +100,18 @@ const HodDashboard = () => {
             title="System Alerts"
             value="12"
           />
+
         </section>
-      </div>
+
+        {/* ================= APPLICATIONS ================= */}
+        <section className="mt-6">
+          <ApplicationDashboardTable />
+        </section>
+
+      </main>
+
     </div>
   );
 };
-
-<StatCard />;
 
 export default HodDashboard;
