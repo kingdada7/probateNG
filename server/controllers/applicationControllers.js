@@ -304,3 +304,22 @@ export const getApplications = async (req, res) => {
     });
   }
 };
+
+export const getAllApplicationsForAdmin = async (req, res) => {
+  try {
+    const applications = await Application.find()
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      applications,
+    });
+  } catch (error) {
+    console.error("Get admin applications error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch applications",
+    });
+  }
+};

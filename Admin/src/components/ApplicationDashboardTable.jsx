@@ -77,9 +77,7 @@ const ApplicationDashboardTable = () => {
                 Status
               </th>
 
-              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
-                Action
-              </th>
+            
             </tr>
           </thead>
 
@@ -104,11 +102,7 @@ const ApplicationDashboardTable = () => {
 
               <td className="px-6 py-4">{/* {statusBadge(app.status)} */}</td>
 
-              <td className="px-6 py-4">
-                <button className="text-sm font-bold hover:underline whitespace-nowrap">
-                  View Details
-                </button>
-              </td>
+             
             </tr>
           </tbody>
         </table>
