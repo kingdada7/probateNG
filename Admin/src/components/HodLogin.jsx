@@ -21,11 +21,14 @@ const HodLogin = () => {
         email,
         password,
       });
+       setToken(data.token);
 
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("adminToken", data.token);
+
+     
       localStorage.setItem("role", "hod");
 
-      // toast.success(data.message);
+      toast.success(data.message);
       toast.success("Login successful");
       navigate("/admin/dashboard/hod");
     } catch (error) {
