@@ -3,11 +3,13 @@ import {
   applicantInformation,
   applicationType,
   deceasedInformation,
+  getAllApplicationsForAdmin,
   getApplications,
   uploadDocuments,
 } from "../controllers/applicationControllers.js";
 import auth from "../middleware/auth.js";
 import upload from "../middleware/multer.js";
+import adminAuth from "../middleware/adminAuth.js";
 
 const applicationRouter = express.Router();
 
@@ -37,5 +39,11 @@ applicationRouter.patch(
 );
 
 applicationRouter.get("/get-applications", auth, getApplications);
+
+applicationRouter.get(
+  "get-admin-applications",
+  adminAuth,
+  getAllApplicationsForAdmin,
+);
 
 export default applicationRouter;
