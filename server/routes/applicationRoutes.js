@@ -41,7 +41,7 @@ applicationRouter.patch(
 applicationRouter.get("/get-applications", auth, getApplications);
 
 applicationRouter.get(
-  "get-admin-applications",
+  "/get-admin-applications",
   adminAuth,
   getAllApplicationsForAdmin,
 );
