@@ -22,7 +22,7 @@ const HodDashboard = () => {
       <header className="hidden h-[55px] border-b border-[#e2e8e5] bg-white px-8 lg:flex lg:items-center lg:justify-between">
         <div>
           <h1 className="text-[21px] font-bold leading-none text-[#09652e]">
-            Admin Management Oversight
+            HOD Management Oversight
           </h1>
 
           <p className="mt-1 text-[13px] text-[#61738f]">
