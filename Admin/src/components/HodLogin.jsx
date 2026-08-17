@@ -7,7 +7,7 @@ import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 
 const HodLogin = () => {
-  const { axios, navigate } = useAppContext();
+  const { axios, navigate ,setToken} = useAppContext();
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +32,7 @@ const HodLogin = () => {
       toast.success("Login successful");
       navigate("/admin/dashboard/hod");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Registration failed");
+      toast.error(error.response?.data?.message || "Login failed");
     }
   };
 
