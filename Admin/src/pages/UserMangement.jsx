@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import ApplicationTable from "../components/ApplicationTable";
 
 const applications = [
   {
@@ -248,7 +249,7 @@ const UserMangement = () => {
             </div>
           </div>
 
-      
+          <ApplicationTable />
 
           {/* ================= PAGINATION ================= */}
 
