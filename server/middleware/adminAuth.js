@@ -3,7 +3,16 @@ import Admin from "../model/admin.js";
 
 const adminAuth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+      return res.status(401).json({
+        success: false,
+        message: "Authorization header missing",
+      });
+    }
+
+    const token = authHeader.split(" ")[1];
 
     if (!token) {
       return res.status(401).json({
@@ -27,6 +36,8 @@ const adminAuth = async (req, res, next) => {
 
     next();
   } catch (error) {
+    console.error("Admin auth error:", error.message);
+
     return res.status(401).json({
       success: false,
       message: "Invalid or expired token",

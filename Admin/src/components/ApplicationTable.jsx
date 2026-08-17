@@ -1,279 +1,194 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 
-const ApplicationManagement = () => {
+const ApplicationTable = () => {
   const { axios } = useAppContext();
 
   const [applications, setApplications] = useState([]);
-  const [selected, setSelected] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-const fetchApplications = async () => {
-  try {
-    setLoading(true);
-    setError("");
 
-    const { data } = await axios.get(
-      "/api/applications/admin/applications"
-    );
+useEffect(() => {
+  const getApplications = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
 
-    console.log("APPLICATIONS:", data.applications);
+      console.log("ADMIN TOKEN:", token);
 
-    if (data.success) {
-      const formattedApplications = data.applications.map(
-        (application) => ({
-          id: application._id,
+      if (!token) {
+        console.error("No admin token found");
+        return;
+      }
 
-          applicant:
-            application.applicant?.applicantFullName || "N/A",
-
-          relationship:
-            application.applicant?.relationshipToDeceased || "N/A",
-
-          deceased:
-            application.deceased?.deceasedName || "N/A",
-
-          type:
-            application.applicationType?.applicationType || "N/A",
-
-          // Your current schema doesn't have assignedTo yet
-          assigned: "Unassigned",
-
-          initials: "",
-
-          date: application.createdAt
-            ? new Date(application.createdAt).toLocaleDateString(
-                "en-GB",
-                {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                }
-              )
-            : "N/A",
-
-          status: application.status,
-
-          statusClass: getStatusClass(application.status),
-        })
+      const { data } = await axios.get(
+        "/api/application/get-admin-applications",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
-      setApplications(formattedApplications);
+      console.log("APPLICATION API DATA:", data);
 
-      setSelected(
-        new Array(formattedApplications.length).fill(false)
+      if (data.success) {
+        setApplications(data.applications || []);
+      }
+    } catch (error) {
+      console.error(
+        "Error fetching applications:",
+        error.response?.data || error
       );
     }
-  } catch (error) {
-    console.error("Failed to fetch applications:", error);
+  };
 
-    setError(
-      error.response?.data?.message ||
-        "Failed to load applications"
-    );
-  } finally {
-    setLoading(false);
+  getApplications();
+}, [axios]);
+
+  function statusBadge(status) {
+    switch (status) {
+      case "Draft":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gray-50 text-gray-600 border border-gray-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0"></span>
+            Draft
+          </span>
+        );
+
+      case "Pending Review":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
+            Pending Review
+          </span>
+        );
+
+      case "Approved":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0"></span>
+            Approved
+          </span>
+        );
+
+      case "Rejected":
+        return (
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
+            Rejected
+          </span>
+        );
+
+      default:
+        return null;
+    }
   }
-};
 
-  useEffect(() => {
-    fetchApplications();
-  }, []);
-};
-
-const ApplicationTable = () => {
   return (
     <div>
-      {/* ================= TABLE ================= */}
+      <div className="flex items-center justify-between px-6 py-5">
+        <h2 className="text-lg font-bold text-gray-900">
+          Recent Application Activity
+        </h2>
 
-      <div className="w-full overflow-x-auto">
-        <table className="w-full min-w-[850px] table-fixed border-collapse">
+        <button className="text-sm font-semibold hover:underline">
+          View All
+        </button>
+      </div>
+
+      {/* Desktop Table */}
+      <div className="hidden sm:block overflow-x-auto">
+        <table className="w-full">
           <thead>
-            <tr className="bg-[#faf9fa]">
-              <th className="w-[38px] border-b border-[#d0cfd2] px-[10px] py-0 text-center">
-                <input
-                  type="checkbox"
-                  checked={selected.every(Boolean)}
-                  onChange={toggleAll}
-                  className="
-                        h-[14px] w-[14px] cursor-pointer
-                        appearance-none rounded-[2px]
-                        border border-[#d3d4d7]
-                        checked:border-[#273345]
-                        checked:bg-[#273345]
-                      "
-                />
+            <tr className="border-b border-gray-100">
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+                Reference ID
               </th>
 
-              <th className="w-[94px] border-b border-[#d0cfd2] px-[10px] text-left text-[11.5px] font-semibold text-[#45464c]">
-                App ID
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+                Application Name
               </th>
 
-              <th className="w-[108px] border-b border-[#d0cfd2] px-[10px] text-left text-[11.5px] font-semibold text-[#45464c]">
-                Applicant
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+                Submission Date
               </th>
 
-              <th className="w-[108px] border-b border-[#d0cfd2] px-[10px] text-left text-[11.5px] font-semibold text-[#45464c]">
-                Deceased
-              </th>
-
-              <th className="w-[113px] border-b border-[#d0cfd2] px-[10px] text-left text-[11.5px] font-semibold text-[#45464c]">
-                Type
-              </th>
-
-              <th className="w-[105px] border-b border-[#d0cfd2] px-[10px] text-left text-[11.5px] font-semibold text-[#45464c]">
-                Assigned To
-              </th>
-
-              <th className="w-[76px] border-b border-[#d0cfd2] px-[10px] text-left text-[11.5px] font-semibold text-[#45464c]">
-                Date
-              </th>
-
-              <th className="w-[103px] border-b border-[#d0cfd2] px-[10px] text-left text-[11.5px] font-semibold text-[#45464c]">
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
                 Status
+              </th>
+
+              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+                Action
               </th>
             </tr>
           </thead>
 
-          <tbody>
-            {applications.map((application, index) => (
-              <tr
-                key={application.id}
-                className="
-                      h-[66px] border-b border-[#dedde0]
-                      odd:bg-white even:bg-[#f3f6f8]
-                      hover:bg-[#eef2f5]
-                    "
-              >
-                {/* Checkbox */}
-                <td className="px-[10px] text-center">
-                  <input
-                    type="checkbox"
-                    checked={selected[index]}
-                    onChange={() => toggleRow(index)}
-                    className="
-                          h-[14px] w-[14px] cursor-pointer
-                          appearance-none rounded-[2px]
-                          border border-[#d3d4d7]
-                          checked:border-[#273345]
-                          checked:bg-[#273345]
-                        "
-                  />
+          <tbody className="divide-y divide-gray-50">
+            {applications.map((app) => (
+              <tr key={app._id} className="hover:bg-gray-50 transition-colors">
+                <td className="px-6 py-4 font-mono text-xs text-gray-500 whitespace-nowrap">
+                  {app._id}
                 </td>
 
-                {/* App ID */}
-                <td
-                  className="
-                        px-[10px] text-[11px] font-bold
-                        leading-[1.05] tracking-[0.1px]
-                        text-[#30333a]
-                      "
-                >
-                  <span className="block">PRB-2024-</span>
-                  <span>{application.id.split("-").pop()}</span>
+                <td className="px-6 py-4 text-sm font-semibold text-gray-800 whitespace-nowrap">
+                  {app.deceased?.deceasedName
+                    ? `Estate of Late ${app.deceased.deceasedName}`
+                    : "Probate Application"}
                 </td>
 
-                {/* Applicant */}
-                <td className="px-[10px]">
-                  <div className="flex flex-col gap-[3px]">
-                    <strong
-                      className="
-                            text-[11.5px] font-bold
-                            leading-[1.08] text-[#35363b]
-                          "
-                    >
-                      {application.applicant}
-                    </strong>
-
-                    <small className="text-[9.5px] text-[#686970]">
-                      {application.relationship}
-                    </small>
-                  </div>
+                <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
+                  {new Date(app.createdAt).toLocaleDateString()}
                 </td>
 
-                {/* Deceased */}
-                <td
-                  className="
-                        px-[10px] text-[11.5px]
-                        leading-[1.15] text-[#35363b]
-                      "
-                >
-                  {application.deceased}
-                </td>
+                <td className="px-6 py-4">{statusBadge(app.status)}</td>
 
-                {/* Type */}
-                <td
-                  className="
-                        px-[10px] text-[11.5px]
-                        leading-[1.15] text-[#35363b]
-                      "
-                >
-                  {application.type}
-                </td>
-
-                {/* Assigned */}
-                <td className="px-[10px]">
-                  {application.assigned === "Unassigned" ? (
-                    <span
-                      className="
-                            text-[10px] italic
-                            text-[#b9b9bd]
-                          "
-                    >
-                      Unassigned
-                    </span>
-                  ) : (
-                    <div className="flex items-center gap-[7px]">
-                      <span
-                        className="
-                              flex h-[21px] w-[21px]
-                              shrink-0 items-center
-                              justify-center rounded-full
-                              bg-[#e7eaeb] text-[7.5px]
-                              font-semibold text-[#707278]
-                            "
-                      >
-                        {application.initials}
-                      </span>
-
-                      <span className="text-[11px] text-[#35363b]">
-                        {application.assigned}
-                      </span>
-                    </div>
-                  )}
-                </td>
-
-                {/* Date */}
-                <td
-                  className="
-                        whitespace-pre-line px-[10px]
-                        text-[11px] leading-[1.15]
-                        text-[#57585e]
-                      "
-                >
-                  {application.date}
-                </td>
-
-                {/* Status */}
-                <td className="px-[10px]">
-                  <span
-                    className={`
-                          inline-flex min-h-[22px]
-                          items-center rounded-[9px]
-                          px-[9px] py-[3px]
-                          text-[9.5px] font-medium
-                          leading-[1.05] whitespace-nowrap
-                          ${application.statusClass}
-                        `}
-                  >
-                    {application.status}
-                  </span>
+                <td className="px-6 py-4">
+                  <button className="text-sm font-bold hover:underline whitespace-nowrap">
+                    View Details
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {/* Mobile Cards */}
+      <div className="sm:hidden divide-y divide-gray-100">
+        {applications.map((app) => (
+          <div key={app._id} className="px-5 py-4 space-y-2.5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="text-sm font-bold text-gray-800">
+                  {app.deceased?.deceasedName
+                    ? `Estate of Late ${app.deceased.deceasedName}`
+                    : "Probate Application"}
+                </div>
+
+                <div className="font-mono text-[11px] text-gray-400 mt-0.5">
+                  {app._id}
+                </div>
+              </div>
+
+              {statusBadge(app.status)}
+            </div>
+
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-gray-500">
+                {new Date(app.createdAt).toLocaleDateString()}
+              </span>
+
+              <button className="text-sm font-bold hover:underline">
+                View Details
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {applications.length === 0 && (
+        <div className="px-6 py-10 text-center text-gray-500">
+          No applications found.
+        </div>
+      )}
     </div>
   );
 };

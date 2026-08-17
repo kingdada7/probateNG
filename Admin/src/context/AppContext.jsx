@@ -31,22 +31,26 @@ export const AppProvider = ({ children }) => {
       localStorage.removeItem("adminToken");
     }
   }, [token]);
+const fetchAdmin = async () => {
+  try {
+    const { data } = await axios.get("/api/hodadmin/me");
 
-  const fetchAdmin = async () => {
-    try {
-      const { data } = await axios.get("/api/admin/me");
+    if (data.success) {
+      setAdmin(data.admin);
+    }
+  } catch (error) {
+    console.error(
+      "Error fetching admin:",
+      error.response?.data || error.message
+    );
 
-      if (data.success) {
-        setAdmin(data.admin);
-      }
-    } catch (error) {
-      console.error("Error fetching admin:", error);
+    setAdmin(null);
 
-      setAdmin(null);
+    if (error.response?.status === 401) {
       setToken(null);
     }
-  };
-
+  }
+};
   useEffect(() => {
     if (token) {
       fetchAdmin();
