@@ -8,74 +8,73 @@ const ApplicationManagement = () => {
   const [selected, setSelected] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+const fetchApplications = async () => {
+  try {
+    setLoading(true);
+    setError("");
 
-  const fetchApplications = async () => {
-    try {
-      setLoading(true);
-      setError("");
+    const { data } = await axios.get(
+      "/api/applications/admin/applications"
+    );
 
-      const { data } = await axios.get("/api/applications/all");
+    console.log("APPLICATIONS:", data.applications);
 
-      console.log("APPLICATION API:", data);
-
-      if (data.success) {
-        const formattedApplications = data.applications.map((application) => ({
+    if (data.success) {
+      const formattedApplications = data.applications.map(
+        (application) => ({
           id: application._id,
 
           applicant:
-            application.applicant?.fullName ||
-            application.user?.fullName ||
-            "N/A",
+            application.applicant?.applicantFullName || "N/A",
 
           relationship:
-            application.applicant?.relationship ||
-            application.relationship ||
-            "N/A",
+            application.applicant?.relationshipToDeceased || "N/A",
 
           deceased:
-            application.deceased?.fullName ||
-            application.deceased?.name ||
-            "N/A",
+            application.deceased?.deceasedName || "N/A",
 
           type:
-            application.applicationType?.name ||
-            application.applicationType ||
-            "N/A",
+            application.applicationType?.applicationType || "N/A",
 
-          assigned: application.assignedTo?.fullName || "Unassigned",
+          // Your current schema doesn't have assignedTo yet
+          assigned: "Unassigned",
 
-          initials:
-            application.assignedTo?.fullName
-              ?.split(" ")
-              .map((name) => name[0])
-              .join("")
-              .slice(0, 2)
-              .toUpperCase() || "",
+          initials: "",
 
           date: application.createdAt
-            ? new Date(application.createdAt).toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })
+            ? new Date(application.createdAt).toLocaleDateString(
+                "en-GB",
+                {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                }
+              )
             : "N/A",
 
-          status: application.status || "Pending",
+          status: application.status,
 
           statusClass: getStatusClass(application.status),
-        }));
+        })
+      );
 
-        setApplications(formattedApplications);
-        setSelected(new Array(formattedApplications.length).fill(false));
-      }
-    } catch (error) {
-      console.error("Failed to fetch applications:", error);
+      setApplications(formattedApplications);
 
-      setError(error.response?.data?.message || "Failed to load applications");
-    } finally {
-      setLoading(false);
+      setSelected(
+        new Array(formattedApplications.length).fill(false)
+      );
     }
-  };
+  } catch (error) {
+    console.error("Failed to fetch applications:", error);
+
+    setError(
+      error.response?.data?.message ||
+        "Failed to load applications"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchApplications();
