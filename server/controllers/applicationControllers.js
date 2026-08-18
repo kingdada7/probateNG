@@ -323,3 +323,32 @@ export const getAllApplicationsForAdmin = async (req, res) => {
     });
   }
 };
+
+
+
+export const getApplicationById = async (req, res) => {
+  try {
+    const { applicationId } = req.params;
+
+    const application = await Application.findById(applicationId);
+
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      application,
+    });
+  } catch (error) {
+    console.error("Get application by ID error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch application",
+    });
+  }
+};
