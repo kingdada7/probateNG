@@ -12,6 +12,7 @@ import AdminLayout from "./pages/AdminLayout";
 import { Toaster } from "react-hot-toast";
 import UserMangement from "./pages/UserMangement";
 import AdminManagement from "./pages/AdminManagement";
+import ApplicationDetails from "./components/ApplicationDetails";
 
 const App = () => {
   return (
@@ -62,6 +63,11 @@ const App = () => {
                 <AdminManagement />
               </ProtectedRoute>
             }
+          />
+
+          <Route
+            path="applications/:applicationId"
+            element={<ApplicationDetails />}
           />
 
           {/* STAFF */}
