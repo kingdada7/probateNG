@@ -2,46 +2,50 @@ import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 
 const ApplicationTable = () => {
-  const { axios } = useAppContext();
+  const { axios, navigate } = useAppContext();
 
   const [applications, setApplications] = useState([]);
 
-useEffect(() => {
-  const getApplications = async () => {
-    try {
-      const token = localStorage.getItem("adminToken");
-
-      console.log("ADMIN TOKEN:", token);
-
-      if (!token) {
-        console.error("No admin token found");
-        return;
-      }
-
-      const { data } = await axios.get(
-        "/api/application/get-admin-applications",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log("APPLICATION API DATA:", data);
-
-      if (data.success) {
-        setApplications(data.applications || []);
-      }
-    } catch (error) {
-      console.error(
-        "Error fetching applications:",
-        error.response?.data || error
-      );
-    }
+  const handleViewApplication = (applicationId) => {
+    navigate(`/admin/dashboard/applications/${applicationId}`);
   };
 
-  getApplications();
-}, [axios]);
+  useEffect(() => {
+    const getApplications = async () => {
+      try {
+        const token = localStorage.getItem("adminToken");
+
+        console.log("ADMIN TOKEN:", token);
+
+        if (!token) {
+          console.error("No admin token found");
+          return;
+        }
+
+        const { data } = await axios.get(
+          "/api/application/get-admin-applications",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        console.log("APPLICATION API DATA:", data);
+
+        if (data.success) {
+          setApplications(data.applications || []);
+        }
+      } catch (error) {
+        console.error(
+          "Error fetching applications:",
+          error.response?.data || error,
+        );
+      }
+    };
+
+    getApplications();
+  }, [axios]);
 
   function statusBadge(status) {
     switch (status) {
@@ -98,7 +102,7 @@ useEffect(() => {
       <div className="hidden sm:block overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-gray-100">
+            <tr className="border-b border-gray-100 cursor-pointer hover:bg-gray-50">
               <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
                 Reference ID
               </th>
@@ -123,7 +127,11 @@ useEffect(() => {
 
           <tbody className="divide-y divide-gray-50">
             {applications.map((app) => (
-              <tr key={app._id} className="hover:bg-gray-50 transition-colors">
+              <tr
+                key={app._id}
+                onClick={() => handleViewApplication(app._id)}
+                className="transition-colors cursor-pointer  hover:bg-gray-50"
+              >
                 <td className="px-6 py-4 font-mono text-xs text-gray-500 whitespace-nowrap">
                   {app._id}
                 </td>
