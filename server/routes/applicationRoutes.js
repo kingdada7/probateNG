@@ -4,6 +4,7 @@ import {
   applicationType,
   deceasedInformation,
   getAllApplicationsForAdmin,
+  getApplicationById,
   getApplications,
   uploadDocuments,
 } from "../controllers/applicationControllers.js";
@@ -45,5 +46,7 @@ applicationRouter.get(
   adminAuth,
   getAllApplicationsForAdmin,
 );
+
+applicationRouter.get("/:applicationId", adminAuth, getApplicationById);
 
 export default applicationRouter;
