@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from "react-router";
 
 const ProtectedRoute = ({ children, allowedRole }) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("adminToken");
   const role = localStorage.getItem("role");
 
   // Not logged in
