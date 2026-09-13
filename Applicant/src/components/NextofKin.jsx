@@ -6,7 +6,7 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
     setChildren((prev) => [
       ...prev,
       {
-        childName: "",
+        name: "",
         age: "",
         motherName: "",
         motherPhone: "",
@@ -161,9 +161,9 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
 
               <input
                 type="text"
-                value={child.childName}
+                value={child.name}
                 onChange={(e) =>
-                  handleChildChange(index, "childName", e.target.value)
+                  handleChildChange(index, "name", e.target.value)
                 }
                 placeholder="Surname First, Middle Name, Last N"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
