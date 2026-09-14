@@ -157,3 +157,56 @@ export const getAdmin = async (req, res) => {
     admin: req.admin,
   });
 };
+
+const reviewApplication = async (req, res) => {
+  try {
+    const { applicationId } = req.params;
+    const { status, rejectionReason } = req.body;
+
+    if (!["Approved", "Rejected"].includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid review status",
+      });
+    }
+
+    if (status === "Rejected" && !rejectionReason?.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Rejection reason is required",
+      });
+    }
+
+    const application = await Application.findById(applicationId);
+
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    application.status = status;
+
+    application.rejectionReason =
+      status === "Rejected" ? rejectionReason.trim() : "";
+
+    await application.save();
+
+    res.json({
+      success: true,
+      message:
+        status === "Approved"
+          ? "Application approved successfully"
+          : "Application rejected successfully",
+      application,
+    });
+  } catch (error) {
+    console.error("Review application error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to review application",
+    });
+  }
+};
