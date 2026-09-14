@@ -245,6 +245,12 @@ const applicationSchema = new mongoose.Schema(
       default: "Draft",
     },
 
+    rejectionReason: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
     currentStep: {
       type: Number,
       default: 1,
