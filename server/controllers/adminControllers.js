@@ -158,7 +158,7 @@ export const getAdmin = async (req, res) => {
   });
 };
 
-const reviewApplication = async (req, res) => {
+ export const reviewApplication = async (req, res) => {
   try {
     const { applicationId } = req.params;
     const { status, rejectionReason } = req.body;

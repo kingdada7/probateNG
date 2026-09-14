@@ -3,6 +3,7 @@ import {
   getAdmin,
   hodLogin,
   hodRegister,
+  reviewApplication,
 } from "../controllers/adminControllers.js";
 
 import adminAuth from "../middleware/adminAuth.js";
@@ -14,5 +15,11 @@ adminRouter.post("/hodlogin", hodLogin);
 adminRouter.post("/hodregister", hodRegister);
 
 adminRouter.get("/me", adminAuth, getAdmin);
+
+adminRouter.patch(
+  "/applications/:applicationId/review",
+  adminAuth,
+  reviewApplication,
+);
 
 export default adminRouter;
