@@ -666,7 +666,11 @@ const ApplicationDetails = () => {
             </p>
           </div>
 
-          <ReviewButton />
+          <ReviewButton
+            applicationId={applicationId}
+            application={application}
+            setApplication={setApplication}
+          />
         </div>
       </div>
     </div>

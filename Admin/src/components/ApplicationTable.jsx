@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 
+
 const ApplicationTable = () => {
   const { axios, navigate } = useAppContext();
 
