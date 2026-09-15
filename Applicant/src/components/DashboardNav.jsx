@@ -64,7 +64,7 @@ const DashboardNav = () => {
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 px-4 pb-4 space-y-3">
           <button
-            onClick={(logout) => navigate("/citizenportal")}
+            onClick={logout}
             className="w-full bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-[#164d23] transition-colors mt-2 cursor-pointer"
           >
             Logout
