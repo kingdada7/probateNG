@@ -161,13 +161,12 @@ function CitizenLogin() {
                       />
                     )}
                   </div>
-                  <a
-                    href=""
+                  <Link
+                    to="/forgot-password"
                     className="text-sm font-semibold text-[#1a5c3a] hover:underline absolute right-10 pt-1"
                   >
-                    {" "}
                     Forgot Password?
-                  </a>
+                  </Link>
                 </div>
                 <button
                   type="submit"

@@ -179,15 +179,13 @@ export const forgotPassword = async (req, res) => {
       .createHash("sha256")
       .update(resetToken)
       .digest("hex");
-console.log("RESET TOKEN:", resetToken);
-console.log("HASHED TOKEN:", hashedToken);
+
     // Token expires in 30 minutes
     user.resetPasswordToken = hashedToken;
     user.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
 
     await user.save();
-console.log("SAVED TOKEN:", user.resetPasswordToken);
-console.log("EXPIRES:", user.resetPasswordExpire);
+
     // Reset URL
     const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
@@ -291,13 +289,12 @@ export const resetPassword = async (req, res) => {
 
     // Hash token received from URL
     const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
-console.log("TOKEN FROM URL:", token);
-console.log("HASHED TOKEN FROM URL:", hashedToken);
+
     const user = await User.findOne({
       resetPasswordToken: hashedToken,
       resetPasswordExpire: { $gt: Date.now() },
     });
-console.log("FOUND USER:", user);
+
     if (!user) {
       return res.status(400).json({
         success: false,
