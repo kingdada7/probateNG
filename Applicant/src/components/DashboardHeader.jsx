@@ -113,7 +113,11 @@ const DashboardHeader = () => {
         />
         <DashboardStatCard
           label="Rejected"
-          value={3}
+          value={
+            applications.filter(
+              (application) => application.status === "Rejected",
+            ).length
+          }
           iconBg="bg-red-50"
           icon={<XCircle size={20} className="text-red-500" />}
           trend={
