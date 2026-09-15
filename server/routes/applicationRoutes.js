@@ -6,7 +6,6 @@ import {
   getAllApplicationsForAdmin,
   getApplicationById,
   getApplications,
-  reviewApplication,
   uploadDocuments,
 } from "../controllers/applicationControllers.js";
 import auth from "../middleware/auth.js";
@@ -50,6 +49,5 @@ applicationRouter.get(
 
 applicationRouter.get("/:applicationId", adminAuth, getApplicationById);
 
-applicationRouter.patch("/:applicationId/review", adminAuth, reviewApplication);
 
 export default applicationRouter;
