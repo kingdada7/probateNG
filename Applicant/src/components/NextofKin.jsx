@@ -25,20 +25,25 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
       ),
     );
   };
+
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-3 mt-6">
-        <FileText className="w-6 h-6 text-[#1a5c3a]" />
-        <h3 className="text-lg font-black text-gray-900">
+    <div className="space-y-5 sm:space-y-6">
+      {/* Section Header */}
+      <div className="mt-4 flex items-center gap-2 sm:mt-6 sm:gap-3">
+        <FileText className="h-5 w-5 shrink-0 text-[#1a5c3a] sm:h-6 sm:w-6" />
+
+        <h3 className="text-base font-black text-gray-900 sm:text-lg">
           Name of Deceased's Next of Kin (NOK)
         </h3>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mt-8">
+      {/* NOK Name + Relationship */}
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2">
+          <label className="mb-2 block text-sm font-bold text-gray-900">
             Full Legal Name
           </label>
+
           <input
             type="text"
             value={nextOfKin.name}
@@ -48,14 +53,16 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
                 name: e.target.value,
               })
             }
-            placeholder="Surname First, Middle Name, Last N"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+            placeholder="Surname First, Middle Name, Last Name"
+            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
           />
         </div>
+
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2">
+          <label className="mb-2 block text-sm font-bold text-gray-900">
             Relationship to Deceased
           </label>
+
           <select
             value={nextOfKin.relationship}
             onChange={(e) =>
@@ -64,9 +71,9 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
                 relationship: e.target.value,
               })
             }
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
+            className="w-full appearance-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-gray-700 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
           >
-             <option value="">Select relationship</option>
+            <option value="">Select relationship</option>
             <option value="Spouse">Spouse</option>
             <option value="Child">Child</option>
             <option value="Parent">Parent</option>
@@ -75,50 +82,21 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
         </div>
       </div>
 
-      {/* <div className="grid grid-cols-2 gap-6 mt-8">
-                      <div>
-                        <label className="block text-sm font-bold text-gray-900 mb-2">
-                          Full Legal Name
-                        </label>
-                        <input
-                          type="text"
-                          value={nextOfKinName}
-                          placeholder="Surname First, Middle Name, Last N"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-bold text-gray-900 mb-2">
-                          Relationship to Deceased
-                        </label>
-                        <select
-                          value={nextOfKinRelationship}
-                          onChange={(e) =>
-                            setNextOfKinRelationship(e.target.value)
-                          }
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
-                        >
-                          <option value="">Select relationship</option>
-                          <option value="spouse">Spouse</option>
-                          <option value="child">Child</option>
-                          <option value="parent">Parent</option>
-                          <option value="sibling">Sibling</option>
-                        </select>
-                      </div>
-                    </div> */}
-
-      <div className="grid grid-cols-2 gap-6 mt-6 p-4 border-b border-gray-200 ">
+      {/* Phone + Address */}
+      <div className="grid grid-cols-1 gap-4 border-b border-gray-200 pb-5 sm:gap-6 sm:pb-6 md:grid-cols-2">
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2">
+          <label className="mb-2 block text-sm font-bold text-gray-900">
             Phone Number
           </label>
+
           <div className="flex gap-2">
             <input
               type="text"
               defaultValue="+234"
               disabled
-              className="w-16 px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-sm text-gray-600 font-medium"
+              className="w-16 shrink-0 rounded-lg border border-gray-300 bg-gray-50 px-3 py-3 text-sm font-medium text-gray-600"
             />
+
             <input
               type="text"
               value={nextOfKin.phone}
@@ -129,33 +107,34 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
                 })
               }
               placeholder="8012345678"
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+              className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
             />
           </div>
         </div>
+
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2">
+          <label className="mb-2 block text-sm font-bold text-gray-900">
             Residential Address
           </label>
+
           <input
             type="text"
-            // value={nextOfKinAddress}
-            // onChange={(e) => setNextOfKinAddress(e.target.value)}
             placeholder="Street name, City, LGA, State"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
           />
         </div>
       </div>
 
-      {/* // children information */}
-      <div>
+      {/* Children Information */}
+      <div className="space-y-5">
         {children.map((child, index) => (
           <div
             key={index}
-            className="grid grid-cols-2 gap-6 mt-8 border-b border-gray-200 pb-6"
+            className="grid grid-cols-1 gap-4 border-b border-gray-200 pb-5 sm:gap-6 sm:pb-6 md:grid-cols-2"
           >
+            {/* Child Name */}
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-2">
+              <label className="mb-2 block text-sm font-bold text-gray-900">
                 Full Name of Child of Deceased (if applicable)
               </label>
 
@@ -165,13 +144,14 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
                 onChange={(e) =>
                   handleChildChange(index, "name", e.target.value)
                 }
-                placeholder="Surname First, Middle Name, Last N"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
+                placeholder="Surname First, Middle Name, Last Name"
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
               />
             </div>
 
+            {/* Child Age */}
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-2">
+              <label className="mb-2 block text-sm font-bold text-gray-900">
                 Age of Child of Deceased (if applicable)
               </label>
 
@@ -182,12 +162,13 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
                   handleChildChange(index, "age", e.target.value)
                 }
                 placeholder="Enter age"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
               />
             </div>
 
+            {/* Mother Name */}
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-2">
+              <label className="mb-2 block text-sm font-bold text-gray-900">
                 Full Name of the Mother (if applicable)
               </label>
 
@@ -198,12 +179,13 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
                   handleChildChange(index, "motherName", e.target.value)
                 }
                 placeholder="Surname First, Middle Name, Last Name"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
               />
             </div>
 
+            {/* Mother Phone */}
             <div>
-              <label className="block text-sm font-bold text-gray-900 mb-2">
+              <label className="mb-2 block text-sm font-bold text-gray-900">
                 Mother Phone Number (if applicable)
               </label>
 
@@ -214,15 +196,17 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
                   handleChildChange(index, "motherPhone", e.target.value)
                 }
                 placeholder="8012345678"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
               />
             </div>
+
+            {/* Remove Child */}
             {children.length > 1 && (
-              <div className="col-span-2">
+              <div className="col-span-1 md:col-span-2">
                 <button
                   type="button"
                   onClick={() => removeChild(index)}
-                  className="text-red-600 font-bold hover:underline"
+                  className="text-sm font-bold text-red-600 transition hover:underline"
                 >
                   Remove Child
                 </button>
@@ -231,10 +215,12 @@ const NextofKin = ({ nextOfKin, setNextOfKin, children, setChildren }) => {
           </div>
         ))}
       </div>
+
+      {/* Add Child */}
       <button
         type="button"
         onClick={addChild}
-        className="mt-4 text-sm text-[#1a5c3a] font-bold hover:underline flex items-center gap-1 cursor-pointer"
+        className="mt-2 flex items-center gap-1 text-sm font-bold text-[#1a5c3a] transition hover:underline"
       >
         + Add another child
       </button>
