@@ -98,7 +98,11 @@ const DashboardHeader = () => {
         />
         <DashboardStatCard
           label="Approved"
-          value={4}
+          value={
+            applications.filter(
+              (application) => application.status === "Approved",
+            ).length
+          }
           iconBg="bg-green-50"
           icon={<BadgeCheck size={20} className="text-[#1a5c2a]" />}
           trend={
