@@ -34,12 +34,12 @@ const Navbar = () => {
           >
             Home
           </a>
-          <a
-            href="#"
+          <Link
+            to="/CitizenLogin"
             className="text-sm text-gray-700 hover:text-[#1a5c2a] font-medium transition-colors"
           >
             Apply for Probate
-          </a>
+          </Link>
           <a
             href="#"
             className="text-sm text-gray-700 hover:text-[#1a5c2a] font-medium transition-colors"
