@@ -35,7 +35,7 @@ const Navbar = () => {
             Home
           </a>
           <Link
-            to="/CitizenLogin"
+            to="/citizenportal"
             className="text-sm text-gray-700 hover:text-[#1a5c2a] font-medium transition-colors"
           >
             Apply for Probate
@@ -81,7 +81,7 @@ const Navbar = () => {
             Home
           </a>
           <Link
-            to="/CitizenLogin"
+            to="/citizenportal"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
             Apply for Probate
