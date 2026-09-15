@@ -63,10 +63,6 @@ const DashboardNav = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 px-4 pb-4 space-y-3">
-          <button className="bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2 rounded-md hover:bg-[#164d23] transition-colors cursor-pointer">
-            john snow
-          </button>
-
           <button
             onClick={(logout) => navigate("/citizenportal")}
             className="w-full bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-[#164d23] transition-colors mt-2 cursor-pointer"
