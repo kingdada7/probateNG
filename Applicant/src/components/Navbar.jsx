@@ -1,7 +1,7 @@
 import { Landmark, Menu, X } from "lucide-react";
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -80,18 +80,18 @@ const Navbar = () => {
           >
             Home
           </a>
-          <a
-            href="#"
+          <Link
+            to="/CitizenLogin"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
             Apply for Probate
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/track"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
             Track Application
-          </a>
+          </Link>
           <button
             onClick={() => navigate("/citizenportal")}
             className="w-full bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-[#164d23] transition-colors mt-2 cursor-pointer"
