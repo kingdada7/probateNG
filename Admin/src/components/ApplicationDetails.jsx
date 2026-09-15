@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useAppContext } from "../context/AppContext";
@@ -17,6 +16,7 @@ import {
   Check,
   X,
 } from "lucide-react";
+import ReviewButton from "./ReviewButton";
 
 const ApplicationDetails = () => {
   const { applicationId } = useParams();
@@ -33,9 +33,7 @@ const ApplicationDetails = () => {
         setLoading(true);
         setError("");
 
-        const { data } = await axios.get(
-          `/api/application/${applicationId}`
-        );
+        const { data } = await axios.get(`/api/application/${applicationId}`);
 
         if (data.success) {
           setApplication(data.application);
@@ -45,13 +43,10 @@ const ApplicationDetails = () => {
       } catch (error) {
         console.error(
           "Failed to fetch application:",
-          error.response?.data || error
+          error.response?.data || error,
         );
 
-        setError(
-          error.response?.data?.message ||
-            "Failed to load application"
-        );
+        setError(error.response?.data?.message || "Failed to load application");
       } finally {
         setLoading(false);
       }
@@ -157,9 +152,7 @@ const ApplicationDetails = () => {
                 </div>
 
                 <div>
-                  <p className="text-sm text-gray-500">
-                    Probate Application
-                  </p>
+                  <p className="text-sm text-gray-500">Probate Application</p>
 
                   <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
                     Application Details
@@ -189,7 +182,7 @@ const ApplicationDetails = () => {
             <div>
               <span
                 className={`inline-flex rounded-full px-4 py-2 text-sm font-semibold ${getStatusStyle(
-                  application.status
+                  application.status,
                 )}`}
               >
                 {application.status || "Draft"}
@@ -204,15 +197,9 @@ const ApplicationDetails = () => {
           title="Applicant Information"
         >
           <InfoGrid>
-            <InfoItem
-              label="Full Name"
-              value={applicant?.applicantFullName}
-            />
+            <InfoItem label="Full Name" value={applicant?.applicantFullName} />
 
-            <InfoItem
-              label="Email"
-              value={applicant?.applicantEmail}
-            />
+            <InfoItem label="Email" value={applicant?.applicantEmail} />
 
             <InfoItem
               label="Phone Number"
@@ -256,10 +243,7 @@ const ApplicationDetails = () => {
             {/* Basic Information */}
             <SubSection title="Basic Information">
               <InfoGrid>
-                <InfoItem
-                  label="Full Name"
-                  value={deceased?.deceasedName}
-                />
+                <InfoItem label="Full Name" value={deceased?.deceasedName} />
 
                 <InfoItem
                   label="Date of Death"
@@ -293,10 +277,7 @@ const ApplicationDetails = () => {
                   value={formatDate(deceased?.dateOfMarriage)}
                 />
 
-                <InfoItem
-                  label="Spouse Name"
-                  value={deceased?.spouseName}
-                />
+                <InfoItem label="Spouse Name" value={deceased?.spouseName} />
 
                 <InfoItem
                   label="Form of Marriage"
@@ -323,20 +304,14 @@ const ApplicationDetails = () => {
             {/* Next of Kin */}
             <SubSection title="Next of Kin">
               <InfoGrid>
-                <InfoItem
-                  label="Name"
-                  value={deceased?.nextOfKin?.name}
-                />
+                <InfoItem label="Name" value={deceased?.nextOfKin?.name} />
 
                 <InfoItem
                   label="Relationship"
                   value={deceased?.nextOfKin?.relationship}
                 />
 
-                <InfoItem
-                  label="Phone"
-                  value={deceased?.nextOfKin?.phone}
-                />
+                <InfoItem label="Phone" value={deceased?.nextOfKin?.phone} />
 
                 <InfoItem
                   label="Address"
@@ -407,9 +382,7 @@ const ApplicationDetails = () => {
 
                 <InfoItem
                   label="Guardian Information"
-                  value={
-                    deceased?.nameAndAddressOfGuardianOfMinorChildren
-                  }
+                  value={deceased?.nameAndAddressOfGuardianOfMinorChildren}
                   fullWidth
                 />
               </InfoGrid>
@@ -417,25 +390,13 @@ const ApplicationDetails = () => {
 
             {/* Family */}
             <SubSection title="Family Information">
-              <FamilyList
-                title="Father"
-                items={deceased?.family?.father}
-              />
+              <FamilyList title="Father" items={deceased?.family?.father} />
 
-              <FamilyList
-                title="Mother"
-                items={deceased?.family?.mother}
-              />
+              <FamilyList title="Mother" items={deceased?.family?.mother} />
 
-              <FamilyList
-                title="Brothers"
-                items={deceased?.family?.brothers}
-              />
+              <FamilyList title="Brothers" items={deceased?.family?.brothers} />
 
-              <FamilyList
-                title="Sisters"
-                items={deceased?.family?.sisters}
-              />
+              <FamilyList title="Sisters" items={deceased?.family?.sisters} />
             </SubSection>
           </div>
         </SectionCard>
@@ -463,9 +424,7 @@ const ApplicationDetails = () => {
           </InfoGrid>
 
           <div className="mt-8">
-            <h3 className="mb-4 text-sm font-semibold text-gray-900">
-              Assets
-            </h3>
+            <h3 className="mb-4 text-sm font-semibold text-gray-900">Assets</h3>
 
             {applicationType?.assetDetails?.length > 0 ? (
               <div className="overflow-x-auto rounded-xl border border-gray-200">
@@ -487,23 +446,21 @@ const ApplicationDetails = () => {
                   </thead>
 
                   <tbody className="divide-y divide-gray-200">
-                    {applicationType.assetDetails.map(
-                      (asset, index) => (
-                        <tr key={asset._id || index}>
-                          <td className="px-4 py-3 text-gray-900">
-                            {asset.category || "Not provided"}
-                          </td>
+                    {applicationType.assetDetails.map((asset, index) => (
+                      <tr key={asset._id || index}>
+                        <td className="px-4 py-3 text-gray-900">
+                          {asset.category || "Not provided"}
+                        </td>
 
-                          <td className="px-4 py-3 text-gray-600">
-                            {asset.description || "Not provided"}
-                          </td>
+                        <td className="px-4 py-3 text-gray-600">
+                          {asset.description || "Not provided"}
+                        </td>
 
-                          <td className="px-4 py-3 font-medium text-gray-900">
-                            {formatCurrency(asset.value)}
-                          </td>
-                        </tr>
-                      )
-                    )}
+                        <td className="px-4 py-3 font-medium text-gray-900">
+                          {formatCurrency(asset.value)}
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -537,20 +494,17 @@ const ApplicationDetails = () => {
                     </thead>
 
                     <tbody className="divide-y divide-gray-200">
-                      {deceased.bankAccounts.map(
-                        (account, index) => (
-                          <tr key={account._id || index}>
-                            <td className="px-4 py-3 text-gray-900">
-                              {account.bankName || "Not provided"}
-                            </td>
+                      {deceased.bankAccounts.map((account, index) => (
+                        <tr key={account._id || index}>
+                          <td className="px-4 py-3 text-gray-900">
+                            {account.bankName || "Not provided"}
+                          </td>
 
-                            <td className="px-4 py-3 text-gray-600">
-                              {account.accountNumber ||
-                                "Not provided"}
-                            </td>
-                          </tr>
-                        )
-                      )}
+                          <td className="px-4 py-3 text-gray-600">
+                            {account.accountNumber || "Not provided"}
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -597,10 +551,7 @@ const ApplicationDetails = () => {
                   fullWidth
                 />
 
-                <InfoItem
-                  label="Rent"
-                  value={deceased?.rent}
-                />
+                <InfoItem label="Rent" value={deceased?.rent} />
 
                 <InfoItem
                   label="Name of Tenant"
@@ -628,25 +579,13 @@ const ApplicationDetails = () => {
                   </h3>
 
                   <InfoGrid>
-                    <InfoItem
-                      label="Name"
-                      value={surety.name}
-                    />
+                    <InfoItem label="Name" value={surety.name} />
 
-                    <InfoItem
-                      label="Phone"
-                      value={surety.phone}
-                    />
+                    <InfoItem label="Phone" value={surety.phone} />
 
-                    <InfoItem
-                      label="Occupation"
-                      value={surety.occupation}
-                    />
+                    <InfoItem label="Occupation" value={surety.occupation} />
 
-                    <InfoItem
-                      label="Bank Details"
-                      value={surety.bankDetails}
-                    />
+                    <InfoItem label="Bank Details" value={surety.bankDetails} />
 
                     <InfoItem
                       label="Property Value"
@@ -683,15 +622,9 @@ const ApplicationDetails = () => {
               url={documents?.deathCertificate}
             />
 
-            <DocumentItem
-              name="Will Document"
-              url={documents?.willDocument}
-            />
+            <DocumentItem name="Will Document" url={documents?.willDocument} />
 
-            <DocumentItem
-              name="Affidavit"
-              url={documents?.affidavit}
-            />
+            <DocumentItem name="Affidavit" url={documents?.affidavit} />
 
             <DocumentItem
               name="Other Supporting Documents"
@@ -706,15 +639,9 @@ const ApplicationDetails = () => {
           title="Application Status"
         >
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <InfoItem
-              label="Current Status"
-              value={application.status}
-            />
+            <InfoItem label="Current Status" value={application.status} />
 
-            <InfoItem
-              label="Current Step"
-              value={application.currentStep}
-            />
+            <InfoItem label="Current Step" value={application.currentStep} />
 
             <InfoItem
               label="Created"
@@ -728,18 +655,19 @@ const ApplicationDetails = () => {
           </div>
         </SectionCard>
         <div className="mt-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-  <div className="mb-5">
-    <h3 className="text-lg font-semibold text-gray-900">
-      Application Review
-    </h3>
+          <div className="mb-5">
+            <h3 className="text-lg font-semibold text-gray-900">
+              Application Review
+            </h3>
 
-    <p className="mt-1 text-sm text-gray-500">
-      Review all submitted information and documents before making a decision.
-    </p>
-  </div>
+            <p className="mt-1 text-sm text-gray-500">
+              Review all submitted information and documents before making a
+              decision.
+            </p>
+          </div>
 
-
-</div>
+          <ReviewButton />
+        </div>
       </div>
     </div>
   );
@@ -757,9 +685,7 @@ const SectionCard = ({ icon, title, children }) => {
           {icon}
         </div>
 
-        <h2 className="text-lg font-bold text-gray-900">
-          {title}
-        </h2>
+        <h2 className="text-lg font-bold text-gray-900">{title}</h2>
       </div>
 
       {children}
@@ -795,9 +721,7 @@ const InfoItem = ({ label, value, fullWidth = false }) => {
       </p>
 
       <p className="break-words text-sm font-medium text-gray-900">
-        {value !== undefined &&
-        value !== null &&
-        String(value).trim() !== ""
+        {value !== undefined && value !== null && String(value).trim() !== ""
           ? value
           : "Not provided"}
       </p>
@@ -816,9 +740,7 @@ const EmptyState = ({ message }) => {
 const FamilyList = ({ title, items = [] }) => {
   return (
     <div className="mb-4 rounded-xl border border-gray-200 p-4">
-      <h4 className="mb-3 font-semibold text-gray-900">
-        {title}
-      </h4>
+      <h4 className="mb-3 font-semibold text-gray-900">{title}</h4>
 
       {items.length > 0 ? (
         <div className="space-y-3">
@@ -827,22 +749,14 @@ const FamilyList = ({ title, items = [] }) => {
               key={person._id || index}
               className="grid grid-cols-1 gap-2 rounded-lg bg-gray-50 p-3 sm:grid-cols-2"
             >
-              <InfoItem
-                label="Name"
-                value={person.name}
-              />
+              <InfoItem label="Name" value={person.name} />
 
-              <InfoItem
-                label="Address"
-                value={person.address}
-              />
+              <InfoItem label="Address" value={person.address} />
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-sm text-gray-500">
-          No information provided.
-        </p>
+        <p className="text-sm text-gray-500">No information provided.</p>
       )}
     </div>
   );
@@ -857,9 +771,7 @@ const DocumentItem = ({ name, url }) => {
         </div>
 
         <div className="min-w-0">
-          <p className="truncate text-sm font-semibold text-gray-900">
-            {name}
-          </p>
+          <p className="truncate text-sm font-semibold text-gray-900">{name}</p>
 
           <p className="text-xs text-gray-500">
             {url ? "Document uploaded" : "Not uploaded"}
@@ -877,13 +789,10 @@ const DocumentItem = ({ name, url }) => {
           View
         </a>
       ) : (
-        <span className="shrink-0 text-xs text-gray-400">
-          N/A
-        </span>
+        <span className="shrink-0 text-xs text-gray-400">N/A</span>
       )}
     </div>
   );
 };
 
 export default ApplicationDetails;
-
