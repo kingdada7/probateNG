@@ -47,7 +47,7 @@ const ApplicationInformationForm = () => {
     <div>
       <form onSubmit={submitHandler} className="col-span-3">
         <div className="col-span-3">
-          <div className="bg-white rounded-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 lg:p-8">
             <div className="flex items-center gap-3 mb-6">
               <Lock className="w-6 h-6 text-[#1a5c3a]" />
               <h2 className="text-2xl font-black text-gray-900">
@@ -56,7 +56,7 @@ const ApplicationInformationForm = () => {
             </div>
 
             <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">
                     Full Legal Name
@@ -87,7 +87,7 @@ const ApplicationInformationForm = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-bold text-gray-900 mb-2">
                     Occupation
@@ -154,7 +154,7 @@ const ApplicationInformationForm = () => {
                   ></textarea>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6 mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                   <div>
                     <label className="block text-sm font-bold text-gray-900 mb-2">
                       Phone Number
