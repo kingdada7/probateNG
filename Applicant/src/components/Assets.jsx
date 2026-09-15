@@ -1,5 +1,5 @@
 import { FileText } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
 
 const Assets = ({
   bankAccounts,
@@ -55,367 +55,424 @@ const Assets = ({
       ),
     }));
   };
+
   return (
-    <div className="space-y-6">
-      {/* //bank and account no */}
-      {bankAccounts.bankDetails.map((account, index) => (
-        <div key={index} className="grid grid-cols-2 gap-6 mt-8">
-          <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2">
-              Name of the Bank
-            </label>
-            <input
-              type="text"
-              value={account.bankName}
-             
-              onChange={(e) =>
-                handleBankChange(index, "bankName", e.target.value)
-              }
-              placeholder="e.g. First Bank, GTBank, Zenith Bank"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-            />
-          </div>
+    <div className="space-y-5 sm:space-y-6">
+      {/* ================= BANK ACCOUNTS ================= */}
+      <div>
+        {bankAccounts.bankDetails.map((account, index) => (
+          <div
+            key={index}
+            className="grid grid-cols-1 gap-4 border-b border-gray-200 pb-5 pt-2 sm:gap-6 sm:pb-6 md:grid-cols-2"
+          >
+            {/* Bank Name */}
+            <div>
+              <label className="mb-2 block text-sm font-bold text-gray-900">
+                Name of the Bank
+              </label>
 
-          <div>
-            <label className="block text-sm font-bold text-gray-900 mb-2">
-              Account Number
-            </label>
-            <input
-              type="text"
-              value={account.accountNumber}
-              onChange={(e) =>
-                handleBankChange(index, "accountNumber", e.target.value)
-              }
-              placeholder="Account Number"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-            />
-          </div>
-
-          {bankAccounts.bankDetails.length > 1 && (
-            <div className="col-span-2">
-              <button
-                type="button"
-                onClick={() => removeBank(index)}
-                className="mt-2 text-sm text-[#dc2626] font-bold hover:underline flex items-center gap-1 cursor-pointer"
-              >
-                - Remove bank account
-              </button>
+              <input
+                type="text"
+                value={account.bankName}
+                onChange={(e) =>
+                  handleBankChange(index, "bankName", e.target.value)
+                }
+                placeholder="e.g. First Bank, GTBank, Zenith Bank"
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+              />
             </div>
-          )}
-        </div>
-      ))}
+
+            {/* Account Number */}
+            <div>
+              <label className="mb-2 block text-sm font-bold text-gray-900">
+                Account Number
+              </label>
+
+              <input
+                type="text"
+                value={account.accountNumber}
+                onChange={(e) =>
+                  handleBankChange(index, "accountNumber", e.target.value)
+                }
+                placeholder="Account Number"
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+              />
+            </div>
+
+            {/* Remove Bank */}
+            {bankAccounts.bankDetails.length > 1 && (
+              <div className="col-span-1 md:col-span-2">
+                <button
+                  type="button"
+                  onClick={() => removeBank(index)}
+                  className="mt-1 flex items-center gap-1 text-sm font-bold text-red-600 hover:underline"
+                >
+                  - Remove bank account
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
 
       <button
         type="button"
         onClick={addBank}
-        className="mt-2 text-sm text-[#1a5c3a] font-bold hover:underline flex items-center gap-1 cursor-pointer"
+        className="flex items-center gap-1 text-sm font-bold text-[#1a5c3a] hover:underline"
       >
         + Add another bank account
       </button>
+
+      {/* ================= PERSONAL CHATTEL ================= */}
       <div>
-        <label className="block text-sm font-bold text-gray-900 mb-2">
-          Personal Chatel
+        <label className="mb-2 block text-sm font-bold text-gray-900">
+          Personal Chattel
         </label>
-        <input
-          type="text"
+
+        <textarea
           value={personalChattel}
           onChange={(e) => setPersonalChattel(e.target.value)}
           placeholder="List any personal chattel (e.g. vehicles, jewelry, electronics) owned by the deceased that may be relevant to the probate application. If there are no personal chattel, please write 'None'."
-          className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+          rows={4}
+          className="w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
         />
       </div>
 
+      {/* ================= INSURANCE ================= */}
       <div>
-        <label className="block text-sm font-bold text-gray-900 mb-2">
+        <label className="mb-2 block text-sm font-bold text-gray-900">
           Insurance Policies
         </label>
-        <input
-          type="text"
+
+        <textarea
           value={insurancePolicy}
           onChange={(e) => setInsurancePolicy(e.target.value)}
           placeholder="List any insurance policies (e.g. life insurance, health insurance) held by the deceased that may be relevant to the probate application. Include the name of the insurance company and policy number if available. If there are no insurance policies, please write 'None'."
-          className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+          rows={4}
+          className="w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
         />
       </div>
 
+      {/* ================= COMPANY SHARES ================= */}
       <div>
-        <label className="block text-sm font-bold text-gray-900 mb-2">
+        <label className="mb-2 block text-sm font-bold text-gray-900">
           Share in Company (if any)
         </label>
-        <input
-          type="text"
+
+        <textarea
           value={companyShare}
           onChange={(e) => setCompanyShare(e.target.value)}
           placeholder="List any shares in companies or businesses owned by the deceased that may be relevant to the probate application. Include the name of the company, type of business, and percentage of ownership if available. If there are no shares in companies, please write 'None'."
-          className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+          rows={4}
+          className="w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mt-8">
+      {/* ================= PENSION ================= */}
+      <div className="grid grid-cols-1 gap-4 border-t border-gray-200 pt-5 sm:gap-6 sm:pt-6 md:grid-cols-2">
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2">
+          <label className="mb-2 block text-sm font-bold text-gray-900">
             Pension Manager
           </label>
+
           <input
             type="text"
             value={pensionManager}
             onChange={(e) => setPensionManager(e.target.value)}
             placeholder="Name of the Pension Manager"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
           />
         </div>
+
         <div>
-          <label className="block text-sm font-bold text-gray-900 mb-2">
+          <label className="mb-2 block text-sm font-bold text-gray-900">
             Pension Account Number
           </label>
+
           <input
             type="text"
             value={pensionAccountNumber}
             onChange={(e) => setPensionAccountNumber(e.target.value)}
             placeholder="Pension Account Number"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
           />
         </div>
       </div>
+
+      {/* ================= PROPERTY ================= */}
       <div>
-        <label className="block text-sm font-bold text-gray-900 mb-2">
+        <label className="mb-2 block text-sm font-bold text-gray-900">
           Landed Property/IES (if any)
         </label>
-        <input
-          type="text"
+
+        <textarea
           value={landedProperty}
           onChange={(e) => setLandedProperty(e.target.value)}
           placeholder="Enter the name of the property/IES"
-          className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+          rows={3}
+          className="w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-bold text-gray-900 mb-2">
+        <label className="mb-2 block text-sm font-bold text-gray-900">
           Address of the property/IES (if any)
         </label>
-        <input
-          type="text"
+
+        <textarea
           value={addressOfProperty}
           onChange={(e) => setAddressOfProperty(e.target.value)}
           placeholder="Enter the address of the property/IES"
-          className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+          rows={3}
+          className="w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-bold text-gray-900 mb-2">
+        <label className="mb-2 block text-sm font-bold text-gray-900">
           Rent per annum (if the property is rented out)
         </label>
+
         <input
           type="text"
           value={rent}
           onChange={(e) => setRent(e.target.value)}
           placeholder="Enter the annual rent amount"
-          className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
         />
       </div>
-      {/* tenant */}
+
+      {/* ================= TENANT ================= */}
       <div>
-        <label className="block text-sm font-bold text-gray-900 mb-2">
+        <label className="mb-2 block text-sm font-bold text-gray-900">
           Name of Tenant (if the property is rented out)
         </label>
+
         <input
           type="text"
           value={nameOfTenant}
           onChange={(e) => setNameOfTenant(e.target.value)}
           placeholder="Enter the name of the tenant"
-          className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
+          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
         />
       </div>
-      {/* sureties */}
-      <div className="border-t border-gray-200 pt-6 ">
-        <div className="flex items-center gap-3 mb-6">
-          <FileText className="w-6 h-6 text-[#1a5c3a]" />
-          <h3 className="text-lg font-black text-gray-900">
+
+      {/* ================= SURETIES ================= */}
+      <div className="border-t border-gray-200 pt-5 sm:pt-6">
+        <div className="mb-5 flex items-center gap-2 sm:mb-6 sm:gap-3">
+          <FileText className="h-5 w-5 shrink-0 text-[#1a5c3a] sm:h-6 sm:w-6" />
+
+          <h3 className="text-base font-black text-gray-900 sm:text-lg">
             Details of Sureties
           </h3>
         </div>
-        <div className="text-[#1a5c3a] font-bold text-3xl mb-2 ">A</div>
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-gray-900 mb-2">
-            Name,Phone Number and Address of the Sureties
-          </label>
-          <input
-            type="text"
-            value={suretyA.details}
-            onChange={(e) =>
-              setSuretyA({
-                ...suretyA,
-                details: e.target.value,
-              })
-            }
-            placeholder="Enter the name, phone number and address of the sureties"
-            className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-          />
+
+        {/* SURETY A */}
+        <div className="space-y-6">
+          <div>
+            <div className="mb-2 text-2xl font-bold text-[#1a5c3a] sm:text-3xl">
+              A
+            </div>
+
+            <label className="mb-2 block text-sm font-bold text-gray-900">
+              Name, Phone Number and Address of the Surety
+            </label>
+
+            <textarea
+              value={suretyA.details}
+              onChange={(e) =>
+                setSuretyA({
+                  ...suretyA,
+                  details: e.target.value,
+                })
+              }
+              placeholder="Enter the name, phone number and address of the surety"
+              rows={3}
+              className="w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-bold text-gray-900">
+              Occupation of Surety
+            </label>
+
+            <input
+              type="text"
+              value={suretyA.occupation}
+              onChange={(e) =>
+                setSuretyA({
+                  ...suretyA,
+                  occupation: e.target.value,
+                })
+              }
+              placeholder="Enter the occupation of the surety"
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-bold text-gray-900">
+              Name and Account Number of the Bank where the Surety has an
+              Account
+            </label>
+
+            <textarea
+              value={suretyA.bankDetails}
+              onChange={(e) =>
+                setSuretyA({
+                  ...suretyA,
+                  bankDetails: e.target.value,
+                })
+              }
+              placeholder="Enter the name and account number of the bank"
+              rows={3}
+              className="w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-bold text-gray-900">
+              Value of Real Property
+            </label>
+
+            <input
+              type="text"
+              value={suretyA.propertyValue}
+              onChange={(e) =>
+                setSuretyA({
+                  ...suretyA,
+                  propertyValue: e.target.value,
+                })
+              }
+              placeholder="Enter the value of the real property"
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-bold text-gray-900">
+              Salary/Income per annum
+            </label>
+
+            <input
+              type="text"
+              value={suretyA.annualIncome}
+              onChange={(e) =>
+                setSuretyA({
+                  ...suretyA,
+                  annualIncome: e.target.value,
+                })
+              }
+              placeholder="Enter the salary/income per annum of the surety"
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+            />
+          </div>
         </div>
 
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-gray-900 mb-2">
-            Occupation of surety
-          </label>
-          <input
-            type="text"
-            value={suretyA.occupation}
-            onChange={(e) =>
-              setSuretyA({
-                ...suretyA,
-                occupation: e.target.value,
-              })
-            }
-            placeholder="Enter the occupation of the surety"
-            className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-          />
-        </div>
+        {/* SURETY B */}
+        <div className="mt-8 border-t border-gray-200 pt-6">
+          <div className="mb-2 text-2xl font-bold text-[#1a5c3a] sm:text-3xl">
+            B
+          </div>
 
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-gray-900 mb-2">
-            Name and Account Number of the Bank where the surety has an account
-          </label>
-          <input
-            type="text"
-            value={suretyA.bankDetails}
-            onChange={(e) =>
-              setSuretyA({
-                ...suretyA,
-                bankDetails: e.target.value,
-              })
-            }
-            placeholder="Enter the name and account number of the bank"
-            className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-          />
-        </div>
+          <div className="space-y-6">
+            <div>
+              <label className="mb-2 block text-sm font-bold text-gray-900">
+                Name, Phone Number and Address of the Surety
+              </label>
 
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-gray-900 mb-2">
-            Value of Real property
-          </label>
-          <input
-            type="text"
-            value={suretyA.propertyValue}
-            onChange={(e) =>
-              setSuretyA({
-                ...suretyA,
-                propertyValue: e.target.value,
-              })
-            }
-            placeholder="Enter the value of the real property"
-            className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-          />
-        </div>
+              <textarea
+                value={suretyB.details}
+                onChange={(e) =>
+                  setSuretyB({
+                    ...suretyB,
+                    details: e.target.value,
+                  })
+                }
+                placeholder="Enter the name, phone number and address of the surety"
+                rows={3}
+                className="w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+              />
+            </div>
 
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-gray-900 mb-2">
-            Salary/Income per annum
-          </label>
-          <input
-            type="text"
-            value={suretyA.annualIncome}
-            onChange={(e) =>
-              setSuretyA({
-                ...suretyA,
-                annualIncome: e.target.value,
-              })
-            }
-            placeholder="Enter the salary/income per annum of the surety"
-            className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-          />
-        </div>
+            <div>
+              <label className="mb-2 block text-sm font-bold text-gray-900">
+                Occupation of Surety
+              </label>
 
-        <div className="text-[#1a5c3a] font-bold text-3xl mb-2 ">B</div>
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-gray-900 mb-2">
-            Name,Phone Number and Address of the Sureties
-          </label>
-          <input
-            type="text"
-            value={suretyB.details}
-            onChange={(e) =>
-              setSuretyB({
-                ...suretyB,
-                details: e.target.value,
-              })
-            }
-            placeholder="Enter the name, phone number and address of the sureties"
-            className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-          />
-        </div>
+              <input
+                type="text"
+                value={suretyB.occupation}
+                onChange={(e) =>
+                  setSuretyB({
+                    ...suretyB,
+                    occupation: e.target.value,
+                  })
+                }
+                placeholder="Enter the occupation of the surety"
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+              />
+            </div>
 
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-gray-900 mb-2">
-            Occupation of surety
-          </label>
-          <input
-            type="text"
-            value={suretyB.occupation}
-            onChange={(e) =>
-              setSuretyB({
-                ...suretyB,
-                occupation: e.target.value,
-              })
-            }
-            placeholder="Enter the occupation of the surety"
-            className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-          />
-        </div>
+            <div>
+              <label className="mb-2 block text-sm font-bold text-gray-900">
+                Name and Account Number of the Bank where the Surety has an
+                Account
+              </label>
 
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-gray-900 mb-2">
-            Name and Account Number of the Bank where the surety has an account
-          </label>
-          <input
-            type="text"
-            value={suretyB.bankDetails}
-            onChange={(e) =>
-              setSuretyB({
-                ...suretyB,
-                bankDetails: e.target.value,
-              })
-            }
-            placeholder="Enter the name and account number of the bank"
-            className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-          />
-        </div>
+              <textarea
+                value={suretyB.bankDetails}
+                onChange={(e) =>
+                  setSuretyB({
+                    ...suretyB,
+                    bankDetails: e.target.value,
+                  })
+                }
+                placeholder="Enter the name and account number of the bank"
+                rows={3}
+                className="w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+              />
+            </div>
 
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-gray-900 mb-2">
-            Value of Real property
-          </label>
-          <input
-            type="text"
-            value={suretyB.propertyValue}
-            onChange={(e) =>
-              setSuretyB({
-                ...suretyB,
-                propertyValue: e.target.value,
-              })
-            }
-            placeholder="Enter the value of the real property"
-            className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-          />
-        </div>
+            <div>
+              <label className="mb-2 block text-sm font-bold text-gray-900">
+                Value of Real Property
+              </label>
 
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-gray-900 mb-2">
-            Salary/Income per annum
-          </label>
-          <input
-            type="text"
-            value={suretyB.annualIncome}
-            onChange={(e) =>
-              setSuretyB({
-                ...suretyB,
-                annualIncome: e.target.value,
-              })
-            }
-            placeholder="Enter the salary/income per annum of the surety"
-            className="w-full px-4 py-8 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
-          />
+              <input
+                type="text"
+                value={suretyB.propertyValue}
+                onChange={(e) =>
+                  setSuretyB({
+                    ...suretyB,
+                    propertyValue: e.target.value,
+                  })
+                }
+                placeholder="Enter the value of the real property"
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-bold text-gray-900">
+                Salary/Income per annum
+              </label>
+
+              <input
+                type="text"
+                value={suretyB.annualIncome}
+                onChange={(e) =>
+                  setSuretyB({
+                    ...suretyB,
+                    annualIncome: e.target.value,
+                  })
+                }
+                placeholder="Enter the salary/income per annum of the surety"
+                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1a5c3a]"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
