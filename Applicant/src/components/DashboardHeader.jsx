@@ -54,10 +54,7 @@ const DashboardHeader = () => {
             <Plus size={16} strokeWidth={2.5} />
             New Probate Application
           </Link>
-          <button className="inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-gray-50 transition-colors whitespace-nowrap shadow-sm">
-            <Search size={15} />
-            View Application Status
-          </button>
+          
         </div>
       </div>
 
