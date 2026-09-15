@@ -27,7 +27,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* <div className="hidden md:flex items-center gap-8">
           <a
             href="#"
             className="text-sm text-gray-700 hover:text-[#1a5c2a] font-medium transition-colors"
@@ -46,7 +46,7 @@ const Navbar = () => {
           >
             Track Application
           </a>
-        </div>
+        </div> */}
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-3">
@@ -74,24 +74,24 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 px-4 pb-4 space-y-3">
-          <a
+          {/* <a
             href="#"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
             Home
-          </a>
-          <Link
+          </a> */}
+          {/* <Link
             to="/citizenportal"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
             Apply for Probate
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             to="/track"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
             Track Application
-          </Link>
+          </Link> */}
           <button
             onClick={() => navigate("/citizenportal")}
             className="w-full bg-[#1a5c2a] text-white text-sm font-semibold px-5 py-2.5 rounded-md hover:bg-[#164d23] transition-colors mt-2 cursor-pointer"

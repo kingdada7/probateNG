@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const HeroSection = () => {
   return (
@@ -28,12 +29,12 @@ const HeroSection = () => {
             your existing application online with full legal transparency.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button className="bg-[#1a5c2a] text-white font-semibold px-6 py-3 rounded-md hover:bg-[#164d23] transition-colors text-sm">
+            <Link to="/citizenportal" className="bg-[#1a5c2a] text-white font-semibold px-6 py-3 rounded-md hover:bg-[#164d23] transition-colors text-sm">
               Apply for Probate
-            </button>
-            <button className="border-2 border-[#1a5c2a] text-[#1a5c2a] font-semibold px-6 py-3 rounded-md hover:bg-[#f0f7f2] transition-colors text-sm">
+            </Link>
+            <Link to="/track" className="border-2 border-[#1a5c2a] text-[#1a5c2a] font-semibold px-6 py-3 rounded-md hover:bg-[#f0f7f2] transition-colors text-sm">
               Track Application
-            </button>
+            </Link>
           </div>
         </div>
       </div>
