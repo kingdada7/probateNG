@@ -11,6 +11,7 @@ import ApplicantInformation from "./pages/ApplicantInformation";
 import DeceasedInfromation from "./pages/DeceasedInfromation";
 import ApplicationType from "./pages/ApplicationType";
 import DocumentsUpload from "./pages/DocumentsUpload";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const App = () => {
   const { token } = useAppContext();
@@ -39,6 +40,7 @@ const App = () => {
         </Route>
 
         <Route path="/citizenregistration" element={<CitizenRegistration />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </div>
   );
