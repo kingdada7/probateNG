@@ -36,37 +36,40 @@ const ResetPassword = () => {
       return;
     }
 
-    try {
-      setLoading(true);
+  
+try {
+  setLoading(true);
 
-      const { data } = await axios.post(
-        `/api/citizen/reset-password/${token}`,
-        {
-          password,
-        },
-      );
-
-      if (data.success) {
-        setSuccess(true);
-        toast.success(data.message || "Password reset successfully");
-
-        setTimeout(() => {
-          navigate("/citizen/login");
-        }, 2500);
-      } else {
-        toast.error(data.message || "Unable to reset password");
-      }
-    } catch (error) {
-      console.error("RESET PASSWORD ERROR:", error);
-
-      toast.error(
-        error.response?.data?.message ||
-          "Something went wrong. Please try again.",
-      );
-    } finally {
-      setLoading(false);
+  const { data } = await axios.post(
+    `/api/citizen/reset-password/${token}`,
+    {
+      password,
+      confirmPassword,
     }
-  };
+  );
+
+  if (data.success) {
+    setSuccess(true);
+    toast.success(data.message || "Password reset successfully");
+
+    setTimeout(() => {
+      navigate("/citizen/login");
+    }, 2500);
+  } else {
+    toast.error(data.message || "Unable to reset password");
+  }
+} catch (error) {
+  console.error("RESET PASSWORD ERROR:", error);
+
+  toast.error(
+    error.response?.data?.message ||
+      "Something went wrong. Please try again."
+  );
+} finally {
+  setLoading(false);
+}
+
+
 
   if (success) {
     return (
@@ -204,15 +207,11 @@ const ResetPassword = () => {
           </div>
         </div>
 
-        {/* Footer
-        <p className="text-center text-xs text-gray-500 mt-6">
-          FCT Customary Court of Appeal
-          <br />
-          Abuja Judicial Division
-        </p> */}
+      
       </div>
     </div>
   );
 };
+}
 
 export default ResetPassword;
