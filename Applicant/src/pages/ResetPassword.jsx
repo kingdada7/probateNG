@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import { Eye, EyeOff, LockKeyhole, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import { useAppContext } from "../context/AppContext";
 
 const ResetPassword = () => {
-  //   const { token } = useParams();
+  const { token } = useParams();
 
-  const { axios, navigate, token } = useAppContext();
+  const { axios, navigate } = useAppContext();
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
