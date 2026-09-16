@@ -2,8 +2,10 @@ import User from "../model/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import Application from "../model/application.js";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const userRegister = async (req, res) => {
   try {
@@ -189,64 +191,62 @@ export const forgotPassword = async (req, res) => {
     // Reset URL
     const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
-    // Email transporter
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `"FCT Probate Registry" <${process.env.EMAIL_USER}>`,
+    const { data, error } = await resend.emails.send({
+      from: "FCT Probate Registry <onboarding@resend.dev>",
       to: user.email,
       subject: "Password Reset Request",
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
-          <h2>Reset Your Password</h2>
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+      <h2>Reset Your Password</h2>
 
-          <p>Hello ${user.fullName},</p>
+      <p>Hello ${user.fullName},</p>
 
-          <p>
-            We received a request to reset your FCT Probate Registry account password.
-          </p>
+      <p>
+        We received a request to reset your FCT Probate Registry account password.
+      </p>
 
-          <p>
-            Click the button below to create a new password:
-          </p>
+      <p>
+        Click the button below to create a new password:
+      </p>
 
-          <a
-            href="${resetUrl}"
-            style="
-              display: inline-block;
-              padding: 12px 20px;
-              background-color: #1a5c3a;
-              color: white;
-              text-decoration: none;
-              border-radius: 5px;
-            "
-          >
-            Reset Password
-          </a>
+      <a
+        href="${resetUrl}"
+        style="
+          display: inline-block;
+          padding: 12px 20px;
+          background-color: #1a5c3a;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+        "
+      >
+        Reset Password
+      </a>
 
-          <p style="margin-top: 20px;">
-            This link will expire in 30 minutes.
-          </p>
+      <p style="margin-top: 20px;">
+        This link will expire in 30 minutes.
+      </p>
 
-          <p>
-            If you did not request a password reset, you can safely ignore this email.
-          </p>
+      <p>
+        If you did not request a password reset, you can safely ignore this email.
+      </p>
 
-          <p>
-            Regards,<br />
-            FCT Probate Registry
-          </p>
-        </div>
-      `,
+      <p>
+        Regards,<br />
+        FCT Probate Registry
+      </p>
+    </div>
+  `,
     });
+
+    if (error) {
+      console.error("RESEND ERROR:", error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Unable to send password reset email",
+      });
+    }
 
     return res.status(200).json({
       success: true,
