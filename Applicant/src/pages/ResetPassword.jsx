@@ -1,14 +1,13 @@
-
 import React, { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router";
 import { Eye, EyeOff, LockKeyhole, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import { useAppContext } from "../context/AppContext";
 
 const ResetPassword = () => {
-  const { token } = useParams();
-  const navigate = useNavigate();
-  const { axios } = useAppContext();
+  //   const { token } = useParams();
+
+  const { axios, navigate, token } = useAppContext();
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -44,7 +43,7 @@ const ResetPassword = () => {
         `/api/citizen/reset-password/${token}`,
         {
           password,
-        }
+        },
       );
 
       if (data.success) {
@@ -62,7 +61,7 @@ const ResetPassword = () => {
 
       toast.error(
         error.response?.data?.message ||
-          "Something went wrong. Please try again."
+          "Something went wrong. Please try again.",
       );
     } finally {
       setLoading(false);
@@ -82,8 +81,8 @@ const ResetPassword = () => {
           </h1>
 
           <p className="text-gray-600 mb-6">
-            Your password has been changed successfully. You can now log in
-            with your new password.
+            Your password has been changed successfully. You can now log in with
+            your new password.
           </p>
 
           <Link
@@ -142,11 +141,7 @@ const ResetPassword = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 >
-                  {showPassword ? (
-                    <EyeOff size={20} />
-                  ) : (
-                    <Eye size={20} />
-                  )}
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
 
@@ -176,9 +171,7 @@ const ResetPassword = () => {
 
                 <button
                   type="button"
-                  onClick={() =>
-                    setShowConfirmPassword(!showConfirmPassword)
-                  }
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 >
                   {showConfirmPassword ? (
@@ -222,4 +215,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword; 
+export default ResetPassword;
