@@ -193,7 +193,7 @@ export const forgotPassword = async (req, res) => {
 
     const { data, error } = await resend.emails.send({
       from: "FCT Probate Registry <onboarding@resend.dev>",
-      to: "mofetoluwadada27@gmail.com",
+      to: "mofetoluwadada27@gmail.com", 
       subject: "Password Reset Request",
       html: `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
