@@ -1,7 +1,7 @@
 import { Landmark, Menu, X } from "lucide-react";
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const ApplicationNavbar = () => {
   const navigate = useNavigate();
@@ -28,18 +28,18 @@ const ApplicationNavbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          <a
-            href="#"
+          <Link
+            to="/"
             className="text-sm text-gray-700 hover:text-[#1a5c2a] font-medium transition-colors"
           >
             Home
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/citizenportal"
             className="text-sm text-gray-700 hover:text-[#1a5c2a] font-medium transition-colors"
           >
             Dashboard
-          </a>
+          </Link>
           <a
             href="#"
             className="text-sm text-gray-700 hover:text-[#1a5c2a] font-medium transition-colors"
