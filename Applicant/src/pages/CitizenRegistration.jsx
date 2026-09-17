@@ -150,7 +150,7 @@ function CitizenRegistration() {
                     <input
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      type="password"
+                      type={hideConfirmPassword ? "password" : "text"}
                       placeholder="Confirm your password"
                       className="w-full pl-11 pr-4 py-3 rounded-lg border border-[#d0e7d8] dark:border-[#2a4433] bg-[#f8fcf9] text-[#0e1b13]  placeholder:text-[#4e9769]/60 focus:ring-2 focus:ring-[#0b602a]/20 focus:border-[#0b602a] transition-all outline-none"
                     />
