@@ -1,15 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Mail,
-  Key,
-  User,
-  LockKeyhole,
-  ShieldCheck,
-  LogIn,
-  Eye,
-  EyeOff,
-  Landmark,
-} from "lucide-react";
+import React, { useState } from "react";
+import { Mail, User, LockKeyhole, Eye, EyeOff } from "lucide-react";
 import { MdOutlineLockReset } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
 // import { InfinitySpin } from "react-loader-spinner";
@@ -42,6 +32,12 @@ function CitizenRegistration() {
         password,
         confirmPassword,
       });
+
+      if (data.success) {
+        toast.success(data.message || "Account created successfully");
+
+        navigate("/citizenportal");
+      }
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
     }
