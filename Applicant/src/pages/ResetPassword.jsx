@@ -36,40 +36,38 @@ const ResetPassword = () => {
       return;
     }
 
-  
-try {
-  setLoading(true);
+    try {
+      setLoading(true);
 
-  const { data } = await axios.post(
-    `/api/citizen/reset-password/${token}`,
-    {
-      password,
-      confirmPassword,
+      const { data } = await axios.post(
+        `/api/citizen/reset-password/${token}`,
+        {
+          password,
+          confirmPassword,
+        },
+      );
+
+      if (data.success) {
+        setSuccess(true);
+        toast.success(data.message || "Password reset successfully");
+
+        setTimeout(() => {
+          navigate("/citizen/login");
+        }, 2500);
+      } else {
+        toast.error(data.message || "Unable to reset password");
+      }
+    } catch (error) {
+      console.error("RESET PASSWORD ERROR:", error);
+
+      toast.error(
+        error.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      );
+    } finally {
+      setLoading(false);
     }
-  );
-
-  if (data.success) {
-    setSuccess(true);
-    toast.success(data.message || "Password reset successfully");
-
-    setTimeout(() => {
-      navigate("/citizen/login");
-    }, 2500);
-  } else {
-    toast.error(data.message || "Unable to reset password");
-  }
-} catch (error) {
-  console.error("RESET PASSWORD ERROR:", error);
-
-  toast.error(
-    error.response?.data?.message ||
-      "Something went wrong. Please try again."
-  );
-} finally {
-  setLoading(false);
-}
-
-
+  };
 
   if (success) {
     return (
@@ -206,12 +204,9 @@ try {
             </Link>
           </div>
         </div>
-
-      
       </div>
     </div>
   );
 };
-}
 
 export default ResetPassword;
