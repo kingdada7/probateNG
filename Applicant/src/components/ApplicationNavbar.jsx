@@ -11,9 +11,9 @@ const ApplicationNavbar = () => {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 shrink-0">
+        <Link to="/" className="flex items-center gap-3 shrink-0">
           <div className="w-9 h-9 flex items-center justify-center">
-            {" "}
+       
             <Landmark className="text-[#1a5c2a]" />
           </div>
           <div>
@@ -24,7 +24,7 @@ const ApplicationNavbar = () => {
               Abuja Judicial Division
             </div>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
@@ -64,24 +64,24 @@ const ApplicationNavbar = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 px-4 pb-4 space-y-3">
-          <a
-            href="#"
+          <Link
+            to="/"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
             Home
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/citizenportal"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
             Dashboard
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/citizenportal/support"
             className="block text-sm text-gray-700 font-medium py-2 border-b border-gray-50"
           >
             Support
-          </a>
+          </Link>
         </div>
       )}
     </header>
