@@ -32,9 +32,9 @@ const HeroSection = () => {
             <Link to="/citizenportal" className="bg-[#1a5c2a] text-white font-semibold px-6 py-3 rounded-md hover:bg-[#164d23] transition-colors text-sm">
               Apply for Probate
             </Link>
-            <Link to="/track" className="border-2 border-[#1a5c2a] text-[#1a5c2a] font-semibold px-6 py-3 rounded-md hover:bg-[#f0f7f2] transition-colors text-sm">
+            {/* <Link to="/track" className="border-2 border-[#1a5c2a] text-[#1a5c2a] font-semibold px-6 py-3 rounded-md hover:bg-[#f0f7f2] transition-colors text-sm">
               Track Application
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
