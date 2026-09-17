@@ -129,9 +129,7 @@ function ForgotPassword() {
 
                   <p className="text-sm text-gray-600 leading-6">
                     If an account exists with{" "}
-                    <span className="font-semibold text-gray-800">
-                      {email}
-                    </span>
+                    <span className="font-semibold text-gray-800">{email}</span>
                     , we've sent you a password reset link.
                   </p>
 
@@ -152,7 +150,7 @@ function ForgotPassword() {
               {/* Back to login */}
               <div className="mt-6 text-center border-t border-gray-100 pt-5">
                 <Link
-                  to="/citizenlogin"
+                  to="/citizenportal"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-[#1a5c3a] hover:underline"
                 >
                   <ArrowLeft className="w-4 h-4" />

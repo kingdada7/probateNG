@@ -52,7 +52,7 @@ const ResetPassword = () => {
         toast.success(data.message || "Password reset successfully");
 
         setTimeout(() => {
-          navigate("/citizen/login");
+          navigate("/citizenportal");
         }, 2500);
       } else {
         toast.error(data.message || "Unable to reset password");
