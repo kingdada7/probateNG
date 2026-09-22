@@ -9,8 +9,11 @@ import {
 
 import StatCard from "../components/StatCard";
 import ApplicationDashboardTable from "../components/ApplicationDashboardTable";
+import { useAppContext } from "../context/AppContext";
+
 
 const HodDashboard = () => {
+    const { admin, axios } = useAppContext();
   return (
     <div className="min-h-screen bg-[#f4f7f6]">
 
@@ -42,11 +45,11 @@ const HodDashboard = () => {
           <div className="flex items-center gap-3">
             <div className="text-right">
               <p className="text-[14px] font-bold text-[#243047]">
-                Hon. Justice A. Bello
+                {admin?.fullName} 
               </p>
 
               <p className="text-[10px] font-bold text-[#d2a900]">
-                SUPERADMIN
+                {admin?.role}
               </p>
             </div>
 
