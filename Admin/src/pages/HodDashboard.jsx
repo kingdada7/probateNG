@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Bell,
   Users,
@@ -14,6 +14,25 @@ import { useAppContext } from "../context/AppContext";
 
 const HodDashboard = () => {
     const { admin, axios } = useAppContext();
+  const [applications, setApplications] = useState([]);
+
+  useEffect(() => {
+    const getApplications = async () => {
+      try {
+        const { data } = await axios.get("/api/application/get-applications");
+
+        if (data.success) {
+          setApplications(data.applications);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getApplications();
+  }, []);
+
+
   return (
     <div className="min-h-screen bg-[#f4f7f6]">
 
@@ -82,7 +101,9 @@ const HodDashboard = () => {
             iconBg="bg-[#f9f3df]"
             iconColor="text-[#d4aa19]"
             title="Pending Approvals"
-            value="03"
+            value={applications.filter(
+              (application) => application.status === "Pending Review",
+            ).length}
             valueColor="text-[#e32e2e]"
             badge="Action Required"
             badgeColor="bg-[#ffe0e0] text-[#e12e2e]"
