@@ -61,7 +61,7 @@ const StaffLogin = () => {
   return (
     <div className="p-8 bg-linear-to-l from-green-50 to-green-25 ">
       <h2 className="text-2xl font-black text-gray-900 mb-2 text-center pb-6">
-        Admin Login{" "}
+        Staff Login
       </h2>
 
       <form className="space-y-4 ">
@@ -129,9 +129,9 @@ const StaffLogin = () => {
       </form>
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-700">
-          Don't have an account?{" "}
+          Don't have an account?
           <Link
-            to="/staffregister"
+            to="/admin/staffregister"
             className="text-[#1a5c3a] font-semibold hover:underline"
           >
             Register here
