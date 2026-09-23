@@ -34,6 +34,10 @@ const adminSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    lastActive: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamps: true },
 );

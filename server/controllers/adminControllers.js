@@ -212,11 +212,19 @@ export const reviewApplication = async (req, res) => {
   }
 };
 
+
 export const staffRegister = async (req, res) => {
   try {
-    const { fullName, email, password, confirmPassword, staffId, department } =
-      req.body;
+    const {
+      fullName,
+      email,
+      password,
+      confirmPassword,
+      staffId,
+      department,
+    } = req.body;
 
+    // Check required fields
     if (
       !fullName?.trim() ||
       !email?.trim() ||
@@ -230,8 +238,6 @@ export const staffRegister = async (req, res) => {
       });
     }
 
-   
-
     // Check password confirmation
     if (password !== confirmPassword) {
       return res.status(400).json({
@@ -239,6 +245,7 @@ export const staffRegister = async (req, res) => {
       });
     }
 
+    // Normalize email
     const normalizedEmail = email.toLowerCase().trim();
 
     // Validate email
@@ -250,22 +257,36 @@ export const staffRegister = async (req, res) => {
       });
     }
 
-    // Check if staff already exists
-    const existingStaff = await Admin.findOne({
-      email: normalizedEmail,
-    });
-
-    if (existingStaff) {
-      return res.status(400).json({
-        message: "Staff with this email already exists",
-      });
-    }
-
-    // Password validation
+    // Validate password length
     if (password.length < 8) {
       return res.status(400).json({
         message: "Password must be at least 8 characters",
       });
+    }
+
+    // Normalize staff ID
+    const normalizedStaffId = staffId.trim();
+
+    // Check if email or staff ID already exists
+    const existingStaff = await Admin.findOne({
+      $or: [
+        { email: normalizedEmail },
+        { staffId: normalizedStaffId },
+      ],
+    });
+
+    if (existingStaff) {
+      if (existingStaff.email === normalizedEmail) {
+        return res.status(400).json({
+          message: "Staff with this email already exists",
+        });
+      }
+
+      if (existingStaff.staffId === normalizedStaffId) {
+        return res.status(400).json({
+          message: "Staff ID already exists",
+        });
+      }
     }
 
     // Hash password
@@ -276,7 +297,7 @@ export const staffRegister = async (req, res) => {
       fullName: fullName.trim(),
       email: normalizedEmail,
       password: hashedPassword,
-      staffId: staffId.trim(),
+      staffId: normalizedStaffId,
       role: "staff",
       department: department.trim(),
     });
@@ -289,6 +310,7 @@ export const staffRegister = async (req, res) => {
         email: staff.email,
         staffId: staff.staffId,
         department: staff.department,
+        role: staff.role,
       },
     });
   } catch (error) {
