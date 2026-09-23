@@ -30,6 +30,10 @@ const adminSchema = new mongoose.Schema(
       enum: ["staff", "hod"],
       required: true,
     },
+    department: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true },
 );
