@@ -1,4 +1,10 @@
-import { LayoutDashboard, Users, ShieldUser, Landmark } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  ShieldUser,
+  Landmark,
+  LogOut,
+} from "lucide-react";
 import React from "react";
 import { NavLink } from "react-router";
 
@@ -49,6 +55,15 @@ const SideBar = () => {
           </NavLink>
         ))}
       </nav>
+      {/* Logout */}{" "}
+      <div className="mt-auto px-2">
+        <button
+          // onClick={handleLogout}
+          className="w-full flex items-center gap-4 h-12 px-4 rounded-md text-sm font-medium text-white/90 hover:bg-red-500/20 hover:text-white transition-all duration-200"
+        >
+          <LogOut size={19} strokeWidth={2} /> <span>Logout</span>{" "}
+        </button>
+      </div>
     </aside>
   );
 };
