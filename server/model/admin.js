@@ -23,6 +23,8 @@ const adminSchema = new mongoose.Schema(
     staffId: {
       type: String,
       required: true,
+      unique: true,
+      trim: true,
     },
 
     role: {
