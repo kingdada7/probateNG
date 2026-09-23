@@ -7,8 +7,10 @@ import {
 } from "lucide-react";
 import React from "react";
 import { NavLink } from "react-router";
+import { useAppContext } from "../context/AppContext";
 
 const SideBar = () => {
+  const { setToken, setAdmin, navigate, axios } = useAppContext();
   const links = [
     {
       name: "Dashboard",
@@ -32,6 +34,16 @@ const SideBar = () => {
       to: "/hoddashboard/bank-approvals",
     },
   ];
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    delete axios.defaults.headers.common["Authorization"];
+
+    setToken(null);
+    setAdmin(null);
+
+    navigate("/admin");
+  };
 
   return (
     <aside className="w-64 min-h-screen bg-[#086b2f] py-6">
@@ -58,8 +70,8 @@ const SideBar = () => {
       {/* Logout */}{" "}
       <div className="mt-auto px-2">
         <button
-          // onClick={handleLogout}
-          className="w-full flex items-center gap-4 h-12 px-4 rounded-md text-sm font-medium text-white/90 hover:bg-red-500/20 hover:text-white transition-all duration-200"
+          onClick={logout}
+          className="w-full flex items-center gap-4 h-12 px-4 rounded-md text-sm font-medium text-white/90 hover:bg-red-500/20 hover:text-white transition-all duration-200 cursor-pointer"
         >
           <LogOut size={19} strokeWidth={2} /> <span>Logout</span>{" "}
         </button>
