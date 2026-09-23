@@ -214,7 +214,7 @@ export const reviewApplication = async (req, res) => {
 
 export const staffRegister = async (req, res) => {
   try {
-    const { fullName, email, password, confirmPassword, staffId, inviteCode } =
+    const { fullName, email, password, confirmPassword, staffId, department } =
       req.body;
 
     if (
@@ -223,19 +223,14 @@ export const staffRegister = async (req, res) => {
       !password ||
       !confirmPassword ||
       !staffId?.trim() ||
-      !inviteCode
+      !department?.trim()
     ) {
       return res.status(400).json({
         message: "All fields are required",
       });
     }
 
-    // Check invite code
-    if (inviteCode !== process.env.HOD_INVITE_CODE) {
-      return res.status(401).json({
-        message: "Invalid invite code",
-      });
-    }
+   
 
     // Check password confirmation
     if (password !== confirmPassword) {
@@ -255,14 +250,14 @@ export const staffRegister = async (req, res) => {
       });
     }
 
-    // Check if HOD already exists
-    const existingHOD = await Admin.findOne({
+    // Check if staff already exists
+    const existingStaff = await Admin.findOne({
       email: normalizedEmail,
     });
 
-    if (existingHOD) {
+    if (existingStaff) {
       return res.status(400).json({
-        message: "HOD with this email already exists",
+        message: "Staff with this email already exists",
       });
     }
 
@@ -276,26 +271,28 @@ export const staffRegister = async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create HOD
-    const hod = await Admin.create({
+    // Create staff
+    const staff = await Admin.create({
       fullName: fullName.trim(),
       email: normalizedEmail,
       password: hashedPassword,
       staffId: staffId.trim(),
-      role: "hod",
+      role: "staff",
+      department: department.trim(),
     });
 
     return res.status(201).json({
-      message: "HOD registered successfully",
-      hod: {
-        id: hod._id,
-        fullName: hod.fullName,
-        email: hod.email,
-        staffId: hod.staffId,
+      message: "Staff registered successfully",
+      staff: {
+        id: staff._id,
+        fullName: staff.fullName,
+        email: staff.email,
+        staffId: staff.staffId,
+        department: staff.department,
       },
     });
   } catch (error) {
-    console.error("Error during HOD registration:", error);
+    console.error("Error during staff registration:", error);
 
     return res.status(500).json({
       message: "Internal server error",
