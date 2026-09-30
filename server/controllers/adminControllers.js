@@ -321,3 +321,59 @@ export const staffRegister = async (req, res) => {
     });
   }
 };
+
+export const staffLogin = async (req, res) => {
+try {
+    const { email, password } = req.body;
+
+    if (!email?.trim() || !password) {
+      return res.status(400).json({
+        message: "Email and password are required",
+      });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // Find staff by email
+    const staff = await Admin.findOne({ email: normalizedEmail });
+    if (!staff) {
+      return res.status(401).json({
+        success: false,
+        message: "invalid email or password",
+      });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, staff.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    const token = jwt.sign(
+      { id: staff._id, role: staff.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      },
+    );
+
+    return res.status(200).json({
+      message: "Login successful",
+      token,
+      staff: {
+        id: staff._id,
+        fullName: staff.fullName,
+        email: staff.email,
+        role: staff.role,
+      },
+    });
+  } catch (error) {
+    console.error("Error during staff login:", error);
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+}

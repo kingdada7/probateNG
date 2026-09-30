@@ -7,6 +7,7 @@ import connectDB from "./config/db.js";
 import userRouter from "./routes/userRoutes.js";
 import applicationRouter from "./routes/applicationRoutes.js";
 import adminRouter from "./routes/adminRoutes.js";
+import staffRouter from "./routes/staffRoutes.js";
 
 connectDB();
 
@@ -31,6 +32,7 @@ app.get("/", (req, res) => res.send("API is working"));
 app.use("/api/citizen", userRouter);
 app.use("/api/application", applicationRouter);
 app.use("/api/hodadmin", adminRouter);
+app.use("/api/staff", staffRouter);
 
 const PORT = process.env.PORT || 5000;
 
