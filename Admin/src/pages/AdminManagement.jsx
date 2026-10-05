@@ -12,11 +12,12 @@ import {
   Mail,
   BadgeCheck,
 } from "lucide-react";
+import toast from "react-hot-toast";
 
 import { useAppContext } from "../context/AppContext";
 
 const StaffManagement = () => {
-  const { admin, fetchPendingStaff, updateStaffStatus } = useAppContext();
+  const { admin, fetchAllStaff, updateStaffStatus } = useAppContext();
 
   const [staff, setStaff] = useState([]);
   const [search, setSearch] = useState("");
@@ -33,19 +34,21 @@ const StaffManagement = () => {
     (item) => item.status === "rejected",
   ).length;
 
+  const pendingStaff = staff.filter((item) => item.status === "pending");
+
   /* ================= FETCH STAFF ================= */
 
   const loadStaff = async () => {
     try {
       setLoading(true);
 
-      const data = await fetchPendingStaff();
+      const data = await fetchAllStaff();
 
       if (data.success) {
         setStaff(data.staff);
       }
     } catch (error) {
-      console.error("Error loading staff:", error);
+      toast.error("Error loading staff:", error);
     } finally {
       setLoading(false);
     }
@@ -72,10 +75,14 @@ const StaffManagement = () => {
       const data = await updateStaffStatus(staffId, status);
 
       if (data.success) {
-        setStaff((current) => current.filter((item) => item._id !== staffId));
+        setStaff((current) =>
+          current.map((item) =>
+            item._id === staffId ? { ...item, status } : item,
+          ),
+        );
       }
     } catch (error) {
-      console.error("Error updating staff:", error);
+      toast.error("Error updating staff:", error);
     } finally {
       setProcessingId(null);
     }
@@ -86,14 +93,14 @@ const StaffManagement = () => {
   const filteredStaff = useMemo(() => {
     const query = search.toLowerCase().trim();
 
-    if (!query) return staff;
+    if (!query) return pendingStaff;
 
-    return staff.filter((item) =>
+    return pendingStaff.filter((item) =>
       [item.fullName, item.email, item.staffId, item.department].some((value) =>
         value?.toLowerCase().includes(query),
       ),
     );
-  }, [staff, search]);
+  }, [pendingStaff, search]);
 
   return (
     <div className="min-h-screen bg-[#f4f7f6]">
@@ -181,9 +188,9 @@ const StaffManagement = () => {
                     Pending Staff Requests
                   </h2>
 
-                  {staff.length > 0 && (
+                  {pendingCount > 0 && (
                     <span className="rounded-full bg-[#fff0f0] px-2 py-0.5 text-[10px] font-bold text-[#d73535]">
-                      {staff.length}
+                      {pendingCount}
                     </span>
                   )}
                 </div>
