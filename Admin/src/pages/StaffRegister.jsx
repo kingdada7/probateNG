@@ -4,6 +4,7 @@ import { IoShieldCheckmark } from "react-icons/io5";
 
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 const StaffRegister = () => {
   const { axios, navigate } = useAppContext();
