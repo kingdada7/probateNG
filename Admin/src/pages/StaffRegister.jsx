@@ -100,8 +100,8 @@ const StaffRegister = () => {
                     </label>
                     <input
                       type="text"
-                      //   value={fullname}
-                      //   onChange={(e) => setFullname(e.target.value)}
+                        value={fullname}
+                        onChange={(e) => setFullname(e.target.value)}
                       placeholder="Enter full legal name"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-500"
                     />
@@ -113,8 +113,8 @@ const StaffRegister = () => {
                     </label>
                     <input
                       type="text"
-                      //   value={staffId}
-                      //   onChange={(e) => setStaffId(e.target.value)}
+                        value={staffId}
+                        onChange={(e) => setStaffId(e.target.value)}
                       placeholder="FCT/CRT/XXXX"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-500"
                     />
@@ -127,8 +127,8 @@ const StaffRegister = () => {
                     </label>
                     <input
                       type="email"
-                      //   value={email}
-                      //   onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       placeholder="official@fctcourt.gov.ng"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-500"
                     />
@@ -139,10 +139,11 @@ const StaffRegister = () => {
                       Department/Division
                     </label>
                     <select
-                      //   value={division}
-                      //   onChange={(e) => setDivision(e.target.value)}
+                      value={department}
+                      onChange={(e) => setDepartment(e.target.value)}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700 appearance-none"
                     >
+                    
                       <option value="">Select Department/Division</option>
                       <option value="judicial">Judicial Division</option>
                       <option value="administrative">
@@ -160,8 +161,8 @@ const StaffRegister = () => {
                   <div className="relative">
                     <input
                       type={hidePassword ? "password" : "text"}
-                      //   value={password}
-                      //   onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••••"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700"
                     />
@@ -185,8 +186,8 @@ const StaffRegister = () => {
                   <div className="relative">
                     <input
                       type={hideConfirmPassword ? "password" : "text"}
-                      //   value={confirmPassword}
-                      //   onChange={(e) => setConfirmPassword(e.target.value)}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="••••••••••"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm text-gray-700"
                     />
