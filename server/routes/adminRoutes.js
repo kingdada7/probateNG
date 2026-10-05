@@ -1,15 +1,13 @@
 import express from "express";
 import {
-  approveStaff,
   getAdmin,
   hodLogin,
   hodRegister,
-  rejectStaff,
   reviewApplication,
+  updateStaffStatus,
 } from "../controllers/adminControllers.js";
 
 import adminAuth from "../middleware/adminAuth.js";
-
 
 const adminRouter = express.Router();
 
@@ -25,7 +23,6 @@ adminRouter.patch(
   reviewApplication,
 );
 
-adminRouter.patch("/staff/:staffId/approve", adminAuth, approveStaff);
-adminRouter.patch("/staff/:staffId/reject", adminAuth, rejectStaff);
+adminRouter.patch("/staff/:staffId/status", adminAuth, updateStaffStatus);
 
 export default adminRouter;
