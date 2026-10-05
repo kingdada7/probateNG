@@ -5,7 +5,7 @@ import AdminLogin from "./pages/AdminLogin";
 import StaffRegister from "./pages/StaffRegister";
 import HodRegister from "./pages/HodRegister";
 import HodDashboard from "./pages/HodDashboard";
-// import StaffDashboard from "./pages/StaffDashboard";
+import StaffDashboard from "./pages/StaffDashboard";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./pages/AdminLayout";
@@ -71,14 +71,14 @@ const App = () => {
           />
 
           {/* STAFF */}
-          {/* <Route
+          <Route
           path="staff"
           element={
             <ProtectedRoute allowedRole="staff">
               <StaffDashboard />
             </ProtectedRoute>
           }
-        /> */}
+        />
         </Route>
 
         {/* Unknown route */}

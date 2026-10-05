@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { CiLock } from "react-icons/ci";
 import { MdAlternateEmail } from "react-icons/md";
 import { Link } from "react-router";
+import { useAppContext } from "../context/AppContext";
 
 const StaffLogin = () => {
  const { axios, navigate ,setToken} = useAppContext();
@@ -46,7 +47,7 @@ const handleLogin = async (e) => {
         Staff Login
       </h2>
 
-      <form className="space-y-4 ">
+      <form className="space-y-4 " onSubmit={handleLogin}>
         <div>
           <label className="block text-sm font-bold text-gray-900 mb-2">
             Official Email Address
