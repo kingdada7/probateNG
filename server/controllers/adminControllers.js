@@ -552,3 +552,26 @@ export const updateStaffStatus = async (req, res) => {
   }
 };
 
+
+export const getPendingStaff = async (req, res) => {
+  try {
+    const pendingStaff = await Admin.find({
+      role: "staff",
+      status: "pending",
+    }).select("-password");
+
+    return res.status(200).json({
+      success: true,
+      count: pendingStaff.length,
+      staff: pendingStaff,
+    });
+  } catch (error) {
+    console.error("Error fetching pending staff:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
