@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getAdmin,
+  getAllStaff,
   getPendingStaff,
   hodLogin,
   hodRegister,
@@ -27,5 +28,7 @@ adminRouter.patch(
 adminRouter.patch("/staff/:staffId/status", adminAuth, updateStaffStatus);
 
 adminRouter.get("/staff/pending", adminAuth, getPendingStaff);
+
+adminRouter.get("/staff", adminAuth, getAllStaff);
 
 export default adminRouter;
