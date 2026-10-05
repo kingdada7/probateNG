@@ -292,7 +292,7 @@ export const staffRegister = async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create staff
+    // Create staff account
     const staff = await Admin.create({
       fullName: fullName.trim(),
       email: normalizedEmail,
@@ -300,10 +300,11 @@ export const staffRegister = async (req, res) => {
       staffId: normalizedStaffId,
       role: "staff",
       department: department.trim(),
+      status: "pending",
     });
 
     return res.status(201).json({
-      message: "Staff registered successfully",
+      message: "Registration successful. Your account is awaiting HOD approval.",
       staff: {
         id: staff._id,
         fullName: staff.fullName,
@@ -311,6 +312,7 @@ export const staffRegister = async (req, res) => {
         staffId: staff.staffId,
         department: staff.department,
         role: staff.role,
+        status: staff.status,
       },
     });
   } catch (error) {
@@ -321,6 +323,8 @@ export const staffRegister = async (req, res) => {
     });
   }
 };
+
+
 
 export const staffLogin = async (req, res) => {
 try {
