@@ -120,6 +120,7 @@ export const AppProvider = ({ children }) => {
     logout,
     fetchPendingStaff,
     updateStaffStatus,
+    fetchAllStaff,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
