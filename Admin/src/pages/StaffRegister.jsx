@@ -6,72 +6,47 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 
 const StaffRegister = () => {
-  const [loading, setLoading] = useState(true);
-
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [hideConfirmPassword, setHideConfirmPassword] = useState(false);
-  const [division, setDivision] = useState("");
+  const { axios, navigate } = useAppContext();
+  const [hidePassword, setHidePassword] = useState(true);
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
-  const [staffId, setStaffId] = useState("");
   const [password, setPassword] = useState("");
-  const [hidePassword, setHidePassword] = useState(false);
+  const [staffId, setStaffId] = useState("");
+  const [department, setDepartment] = useState("");
+  const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const [error, setError] = useState("");
-  // const { updateUser } = React.useContext(UserContext);
-  const navigate = useNavigate();
 
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
+  const handleRegister = async (e) => {
+    e.preventDefault();
 
-  //     if (!fullname.trim()) return setError("Please enter your full name");
-  //     if (!email.trim()) return setError("Please enter your email address");
-  //     if (!validateEmail(email))
-  //       return setError("Please enter a valid email address");
-  //     if (!password) return setError("Please enter a password");
-  //     if (password !== confirmPassword) return setError("Passwords do not match");
-  //     if (!division) return setError("Please select your department/division");
-  //     if (password.length < 8)
-  //       return setError("Password must be at least 8 characters long");
-  //     if (!staffId.trim()) return setError("Please enter your staff ID");
+    
+    if (password !== confirmPassword) {
+      return toast.error("Passwords do not match");
+    }
 
-  //     try {
-  //       setError("");
 
-  //       // 1️ Register user
-  //       const response = await axiosInstance.post(API_ENDPOINT.AUTH.REGISTER, {
-  //         email,
-  //         password,
-  //         name: fullname,
-  //         role: "standard-admin",
-  //         staffId,
-  //         division
-  //       });
+    try {
+      const { data } = await axios.post("/api/staff/staffregister", {
+        fullName: fullname,
+        email,
+        password,
+        confirmPassword,
+        staffId,
+        department
 
-  //       const { token } = response.data;
+       
+      });
 
-  //       if (!token) throw new Error("Registration failed");
+      toast.success(data.message);
+      navigate("/admin");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Registration failed");
+    }
+  };
 
-  //       // 2️Send admin request AFTER success
-  //       await axiosInstance.post(
-  //         "/api/admin/request",
-  //         {},
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         },
-  //       );
-
-  //       alert("Request submitted. Await approval.");
-  //       navigate("/adminlogin");
-  //     } catch (error) {
-  //       setError(
-  //         error.response?.data?.message ||
-  //           error.message ||
-  //           "Something went wrong",
-  //       );
-  //     }
-  //   };
+  
   return (
     <div>
       <main className="flex-1 flex items-center justify-center px-6 py-12 bg-white">
