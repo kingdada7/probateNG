@@ -420,3 +420,36 @@ export const staffLogin = async (req, res) => {
   }
 };
 
+export const approveStaff = async (req, res) => {
+  try {
+    const staff = await Admin.findOneAndUpdate(
+      {
+        _id: req.params.staffId,
+        role: "staff",
+        status: "pending",
+      },
+      {
+        status: "approved",
+      },
+      { new: true }
+    );
+
+    if (!staff) {
+      return res.status(404).json({
+        message: "Pending staff member not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Staff approved successfully",
+      staff,
+    });
+  } catch (error) {
+    console.error("Error approving staff:", error);
+
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
