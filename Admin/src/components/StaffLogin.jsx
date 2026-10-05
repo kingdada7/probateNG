@@ -5,58 +5,40 @@ import { MdAlternateEmail } from "react-icons/md";
 import { Link } from "react-router";
 
 const StaffLogin = () => {
+ const { axios, navigate ,setToken} = useAppContext();
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  //   const { updateUser } = React.useContext(UserContext);
-  //   const navigate = useNavigate();
 
-  //   const handleLogin = async (e) => {
-  //     e.preventDefault();
 
-  //     if (!email.trim()) {
-  //       setError("Please enter your email address");
-  //       return;
-  //     }
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-  //     if (!validateEmail(email)) {
-  //       setError("Please enter a valid email address");
-  //       return;
-  //     }
+  try {
+    const { data } = await axios.post("/api/staff/stafflogin", {
+      email,
+      password,
+    });
 
-  //     if (!password) {
-  //       setError("Please enter a password");
-  //       return;
-  //     }
+    // Store authentication token
+    setToken(data.token);
+    localStorage.setItem("adminToken", data.token);
 
-  //     try {
-  //       // setLoading(true);
-  //       setError("");
+    // Store actual staff role
+    localStorage.setItem("role", data.staff.role);
 
-  //       const response = await axiosInstance.post(API_ENDPOINT.AUTH.LOGIN, {
-  //         email,
-  //         password,
-  //       });
+    toast.success(data.message);
 
-  //       const { role } = response.data;
+    navigate("/admin/dashboard/staff");
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message || "Login failed"
+    );
+  }
+};
 
-  //       updateUser(response.data);
-  //       updateUser(response.data);
-
-  //       if (role === "standard-admin") {
-  //         navigate("/admin/dashboard");
-  //       }
-  //     } catch (error) {
-  //       if (error.response?.data?.message) {
-  //         setError(error.response.data.message);
-  //       } else {
-  //         setError("An error occurred during login.");
-  //       }
-  //     } finally {
-  //       //setLoading(false);
-  //     }
-  //   };
+  
 
   return (
     <div className="p-8 bg-linear-to-l from-green-50 to-green-25 ">
