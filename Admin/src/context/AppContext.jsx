@@ -31,67 +31,77 @@ export const AppProvider = ({ children }) => {
       localStorage.removeItem("adminToken");
     }
   }, [token]);
-const fetchAdmin = async () => {
-  try {
-    const { data } = await axios.get("/api/hodadmin/me");
+  const fetchAdmin = async () => {
+    try {
+      const { data } = await axios.get("/api/hodadmin/me");
 
-    if (data.success) {
-      setAdmin(data.admin);
+      if (data.success) {
+        setAdmin(data.admin);
+      }
+    } catch (error) {
+      console.error(
+        "Error fetching admin:",
+        error.response?.data || error.message,
+      );
+
+      setAdmin(null);
+
+      if (error.response?.status === 401) {
+        setToken(null);
+      }
     }
-  } catch (error) {
-    console.error(
-      "Error fetching admin:",
-      error.response?.data || error.message
-    );
-
-    setAdmin(null);
-
-    if (error.response?.status === 401) {
-      setToken(null);
-    }
-  }
-};
+  };
   useEffect(() => {
     if (token) {
       fetchAdmin();
     }
   }, [token]);
 
-
-
-
   const fetchPendingStaff = async () => {
-  try {
-    const { data } = await axios.get("/api/hodadmin/staff/pending");
+    try {
+      const { data } = await axios.get("/api/hodadmin/staff/pending");
 
-    return data;
-  } catch (error) {
-    console.error(
-      "Error fetching pending staff:",
-      error.response?.data || error.message
-    );
+      return data;
+    } catch (error) {
+      console.error(
+        "Error fetching pending staff:",
+        error.response?.data || error.message,
+      );
 
-    throw error;
-  }
-};
+      throw error;
+    }
+  };
 
-const updateStaffStatus = async (staffId, status) => {
-  try {
-    const { data } = await axios.patch(
-      `/api/hodadmin/staff/${staffId}/status`,
-      { status }
-    );
+  const updateStaffStatus = async (staffId, status) => {
+    try {
+      const { data } = await axios.patch(
+        `/api/hodadmin/staff/${staffId}/status`,
+        { status },
+      );
 
-    return data;
-  } catch (error) {
-    console.error(
-      "Error updating staff status:",
-      error.response?.data || error.message
-    );
+      return data;
+    } catch (error) {
+      console.error(
+        "Error updating staff status:",
+        error.response?.data || error.message,
+      );
 
-    throw error;
-  }
-};
+      throw error;
+    }
+  };
+
+  const fetchAllStaff = async () => {
+    try {
+      const { data } = await axios.get("/api/hodadmin/staff");
+      return data;
+    } catch (error) {
+      console.error(
+        "Error fetching all staff:",
+        error.response?.data || error.message,
+      );
+      throw error;
+    }
+  };
 
   const logout = () => {
     setToken(null);
@@ -109,7 +119,7 @@ const updateStaffStatus = async (staffId, status) => {
     fetchAdmin,
     logout,
     fetchPendingStaff,
-    updateStaffStatus
+    updateStaffStatus,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
