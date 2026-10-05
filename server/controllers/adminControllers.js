@@ -212,17 +212,10 @@ export const reviewApplication = async (req, res) => {
   }
 };
 
-
 export const staffRegister = async (req, res) => {
   try {
-    const {
-      fullName,
-      email,
-      password,
-      confirmPassword,
-      staffId,
-      department,
-    } = req.body;
+    const { fullName, email, password, confirmPassword, staffId, department } =
+      req.body;
 
     // Check required fields
     if (
@@ -269,10 +262,7 @@ export const staffRegister = async (req, res) => {
 
     // Check if email or staff ID already exists
     const existingStaff = await Admin.findOne({
-      $or: [
-        { email: normalizedEmail },
-        { staffId: normalizedStaffId },
-      ],
+      $or: [{ email: normalizedEmail }, { staffId: normalizedStaffId }],
     });
 
     if (existingStaff) {
@@ -304,7 +294,8 @@ export const staffRegister = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: "Registration successful. Your account is awaiting HOD approval.",
+      message:
+        "Registration successful. Your account is awaiting HOD approval.",
       staff: {
         id: staff._id,
         fullName: staff.fullName,
@@ -323,9 +314,6 @@ export const staffRegister = async (req, res) => {
     });
   }
 };
-
-
-
 
 export const staffLogin = async (req, res) => {
   try {
@@ -350,10 +338,7 @@ export const staffLogin = async (req, res) => {
     }
 
     // Check password
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      staff.password
-    );
+    const isPasswordValid = await bcrypt.compare(password, staff.password);
 
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -394,7 +379,7 @@ export const staffLogin = async (req, res) => {
       process.env.JWT_SECRET,
       {
         expiresIn: "1d",
-      }
+      },
     );
 
     return res.status(200).json({
@@ -431,7 +416,7 @@ export const approveStaff = async (req, res) => {
       {
         status: "approved",
       },
-      { new: true }
+      { new: true },
     );
 
     if (!staff) {
@@ -453,7 +438,6 @@ export const approveStaff = async (req, res) => {
   }
 };
 
-
 export const rejectStaff = async (req, res) => {
   try {
     const staff = await Admin.findOneAndUpdate(
@@ -465,7 +449,7 @@ export const rejectStaff = async (req, res) => {
       {
         status: "rejected",
       },
-      { new: true }
+      { new: true },
     );
 
     if (!staff) {
@@ -486,7 +470,6 @@ export const rejectStaff = async (req, res) => {
     });
   }
 };
-
 
 export const updateStaffStatus = async (req, res) => {
   try {
@@ -552,6 +535,28 @@ export const updateStaffStatus = async (req, res) => {
   }
 };
 
+export const getAllStaff = async (req, res) => {
+  try {
+    const staff = await Admin.find({
+      role: "staff",
+    })
+      .select("-password")
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      count: staff.length,
+      staff,
+    });
+  } catch (error) {
+    console.error("Error fetching staff:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
 
 export const getPendingStaff = async (req, res) => {
   try {
@@ -574,4 +579,3 @@ export const getPendingStaff = async (req, res) => {
     });
   }
 };
-

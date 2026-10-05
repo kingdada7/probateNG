@@ -4,6 +4,7 @@ import { CiLock } from "react-icons/ci";
 import { MdAlternateEmail } from "react-icons/md";
 import { Link } from "react-router";
 import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 const StaffLogin = () => {
  const { axios, navigate ,setToken} = useAppContext();
