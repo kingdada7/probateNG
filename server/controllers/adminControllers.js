@@ -326,8 +326,9 @@ export const staffRegister = async (req, res) => {
 
 
 
+
 export const staffLogin = async (req, res) => {
-try {
+  try {
     const { email, password } = req.body;
 
     if (!email?.trim() || !password) {
@@ -340,31 +341,64 @@ try {
 
     // Find staff by email
     const staff = await Admin.findOne({ email: normalizedEmail });
+
     if (!staff) {
       return res.status(401).json({
         success: false,
-        message: "invalid email or password",
+        message: "Invalid email or password",
       });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, staff.password);
+    // Check password
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      staff.password
+    );
 
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
-        message: "Invalid credentials",
+        message: "Invalid email or password",
       });
     }
 
+    // Check account approval status
+    if (staff.status === "pending") {
+      return res.status(403).json({
+        success: false,
+        message: "Your account is awaiting HOD approval.",
+      });
+    }
+
+    if (staff.status === "rejected") {
+      return res.status(403).json({
+        success: false,
+        message: "Your staff registration has been rejected.",
+      });
+    }
+
+    // Only approved staff can receive a token
+    if (staff.status !== "approved") {
+      return res.status(403).json({
+        success: false,
+        message: "Your account is not approved.",
+      });
+    }
+
+    // Generate JWT
     const token = jwt.sign(
-      { id: staff._id, role: staff.role },
+      {
+        id: staff._id,
+        role: staff.role,
+      },
       process.env.JWT_SECRET,
       {
         expiresIn: "1d",
-      },
+      }
     );
 
     return res.status(200).json({
+      success: true,
       message: "Login successful",
       token,
       staff: {
@@ -372,12 +406,17 @@ try {
         fullName: staff.fullName,
         email: staff.email,
         role: staff.role,
+        department: staff.department,
+        status: staff.status,
       },
     });
   } catch (error) {
     console.error("Error during staff login:", error);
+
     return res.status(500).json({
+      success: false,
       message: "Internal server error",
     });
   }
-}
+};
+
