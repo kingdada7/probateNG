@@ -55,8 +55,8 @@ const handleLogin = async (e) => {
             <MdAlternateEmail className="absolute left-3.5 top-3.5 w-5 h-5 text-gray-400" />
 
             <input
-              //   value={email}
-              //   onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="e.g. name.surname@judiciary.gov.ng"
               className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm placeholder-gray-400"
@@ -74,8 +74,8 @@ const handleLogin = async (e) => {
           </div>
           <div className="relative">
             <input
-              //   value={password}
-              //   onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               type={hidePassword ? "password" : "text"}
               placeholder="Enter your password "
               className="w-full px-11 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1a5c3a] focus:border-transparent text-sm"
