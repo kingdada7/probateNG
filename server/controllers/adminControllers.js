@@ -486,3 +486,69 @@ export const rejectStaff = async (req, res) => {
     });
   }
 };
+
+
+export const updateStaffStatus = async (req, res) => {
+  try {
+    const { staffId } = req.params;
+    const { status } = req.body;
+
+    // Validate status
+    if (!status) {
+      return res.status(400).json({
+        success: false,
+        message: "Status is required",
+      });
+    }
+
+    const allowedStatuses = ["approved", "rejected"];
+
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: "Status must be either approved or rejected",
+      });
+    }
+
+    // Find pending staff
+    const staff = await Admin.findOne({
+      _id: staffId,
+      role: "staff",
+      status: "pending",
+    });
+
+    if (!staff) {
+      return res.status(404).json({
+        success: false,
+        message: "Pending staff member not found",
+      });
+    }
+
+    // Update status
+    staff.status = status;
+
+    await staff.save();
+
+    return res.status(200).json({
+      success: true,
+      message: `Staff ${status} successfully`,
+      staff: {
+        id: staff._id,
+        fullName: staff.fullName,
+        email: staff.email,
+        staffId: staff.staffId,
+        department: staff.department,
+        role: staff.role,
+        status: staff.status,
+      },
+    });
+  } catch (error) {
+    console.error("Error updating staff status:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
