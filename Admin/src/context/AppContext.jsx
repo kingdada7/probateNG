@@ -57,6 +57,42 @@ const fetchAdmin = async () => {
     }
   }, [token]);
 
+
+
+
+  const fetchPendingStaff = async () => {
+  try {
+    const { data } = await axios.get("/api/hodadmin/staff/pending");
+
+    return data;
+  } catch (error) {
+    console.error(
+      "Error fetching pending staff:",
+      error.response?.data || error.message
+    );
+
+    throw error;
+  }
+};
+
+const updateStaffStatus = async (staffId, status) => {
+  try {
+    const { data } = await axios.patch(
+      `/api/hodadmin/staff/${staffId}/status`,
+      { status }
+    );
+
+    return data;
+  } catch (error) {
+    console.error(
+      "Error updating staff status:",
+      error.response?.data || error.message
+    );
+
+    throw error;
+  }
+};
+
   const logout = () => {
     setToken(null);
     setAdmin(null);
@@ -72,6 +108,8 @@ const fetchAdmin = async () => {
     setAdmin,
     fetchAdmin,
     logout,
+    fetchPendingStaff,
+    updateStaffStatus
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
