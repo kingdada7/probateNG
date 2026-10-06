@@ -1,6 +1,7 @@
 import fs from "fs";
 import { toFile } from "@imagekit/nodejs";
 import Application from "../model/application.js";
+import Admin from "../model/admin.js";
 import { uploadFile } from "../utils/uploadFIle.js";
 
 export const applicantInformation = async (req, res) => {
@@ -241,25 +242,25 @@ export const uploadDocuments = async (req, res) => {
 
     if (files?.deathCertificate) {
       application.documentUpload.deathCertificate = await uploadFile(
-        files.deathCertificate[0]
+        files.deathCertificate[0],
       );
     }
 
     if (files?.otherSupporting) {
       application.documentUpload.otherSupporting = await uploadFile(
-        files.otherSupporting[0]
+        files.otherSupporting[0],
       );
     }
 
     if (files?.willDocument) {
       application.documentUpload.willDocument = await uploadFile(
-        files.willDocument[0]
+        files.willDocument[0],
       );
     }
 
     if (files?.affidavit) {
       application.documentUpload.affidavit = await uploadFile(
-        files.affidavit[0]
+        files.affidavit[0],
       );
     }
 
@@ -307,8 +308,7 @@ export const getApplications = async (req, res) => {
 
 export const getAllApplicationsForAdmin = async (req, res) => {
   try {
-    const applications = await Application.find()
-      .sort({ createdAt: -1 });
+    const applications = await Application.find().sort({ createdAt: -1 });
 
     return res.status(200).json({
       success: true,
@@ -323,7 +323,6 @@ export const getAllApplicationsForAdmin = async (req, res) => {
     });
   }
 };
-
 
 export const assignApplication = async (req, res) => {
   try {
@@ -376,9 +375,6 @@ export const assignApplication = async (req, res) => {
   }
 };
 
-
-
-
 export const getApplicationById = async (req, res) => {
   try {
     const { applicationId } = req.params;
@@ -405,7 +401,3 @@ export const getApplicationById = async (req, res) => {
     });
   }
 };
-
-
-
-
