@@ -9,50 +9,47 @@ const ApplicationTable = () => {
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [showAssignModal, setShowAssignModal] = useState(false);
 
-
   useEffect(() => {
-  const getData = async () => {
-    try {
-      const token = localStorage.getItem("adminToken");
+    const getData = async () => {
+      try {
+        const token = localStorage.getItem("adminToken");
 
-      if (!token) {
-        console.error("No admin token found");
-        return;
-      }
+        if (!token) {
+          console.error("No admin token found");
+          return;
+        }
 
-      const [applicationsResponse, staffResponse] = await Promise.all([
-        axios.get("/api/application/get-admin-applications", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }),
+        const [applicationsResponse, staffResponse] = await Promise.all([
+          axios.get("/api/application/get-admin-applications", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
 
-        axios.get("/api/hodadmin/staff", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }),
-      ]);
+          axios.get("/api/hodadmin/staff", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+        ]);
 
-      if (applicationsResponse.data.success) {
-        setApplications(
-          applicationsResponse.data.applications || [],
+        if (applicationsResponse.data.success) {
+          setApplications(applicationsResponse.data.applications || []);
+        }
+
+        if (staffResponse.data.success) {
+          setStaff(staffResponse.data.staff || []);
+        }
+      } catch (error) {
+        console.error(
+          "Error fetching HOD data:",
+          error.response?.data || error,
         );
       }
+    };
 
-      if (staffResponse.data.success) {
-        setStaff(staffResponse.data.staff || []);
-      }
-    } catch (error) {
-      console.error(
-        "Error fetching HOD data:",
-        error.response?.data || error,
-      );
-    }
-  };
-
-  getData();
-}, [axios]);
+    getData();
+  }, [axios]);
 
   const handleViewApplication = (applicationId) => {
     navigate(`/admin/dashboard/applications/${applicationId}`);
@@ -197,9 +194,29 @@ const ApplicationTable = () => {
                 <td className="px-6 py-4">{statusBadge(app.status)}</td>
 
                 <td className="px-6 py-4">
-                  <button className="text-sm font-bold hover:underline whitespace-nowrap">
-                    View Details
-                  </button>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleViewApplication(app._id);
+                      }}
+                      className="text-sm font-bold hover:underline whitespace-nowrap"
+                    >
+                      View Details
+                    </button>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+
+                        setSelectedApplication(app);
+                        setShowAssignModal(true);
+                      }}
+                      className="text-sm font-semibold text-green-700 hover:underline whitespace-nowrap"
+                    >
+                      {app.assignedTo ? "Reassign" : "Assign"}
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
