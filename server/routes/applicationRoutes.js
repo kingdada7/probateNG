@@ -49,12 +49,12 @@ applicationRouter.get(
   getAllApplicationsForAdmin,
 );
 
-applicationRouter.get("/:applicationId", adminAuth, getApplicationById);
+// Logged-in staff gets their assigned applications
+applicationRouter.get("/my-assigned", adminAuth, getMyAssignedApplications);
 
 // HOD assigns/reassigns an application to a staff member
 applicationRouter.patch("/:applicationId/assign", adminAuth, assignApplication);
 
-// Logged-in staff gets their assigned applications
-applicationRouter.get("/my-assigned", adminAuth, getMyAssignedApplications);
+applicationRouter.get("/:applicationId", adminAuth, getApplicationById);
 
 export default applicationRouter;
