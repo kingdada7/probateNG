@@ -325,6 +325,59 @@ export const getAllApplicationsForAdmin = async (req, res) => {
 };
 
 
+const assignApplication = async (req, res) => {
+  try {
+    const { applicationId } = req.params;
+    const { staffId } = req.body;
+
+    if (!staffId) {
+      return res.status(400).json({
+        success: false,
+        message: "Staff ID is required",
+      });
+    }
+
+    const application = await Application.findById(applicationId);
+
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    const staff = await Admin.findById(staffId);
+
+    if (!staff) {
+      return res.status(404).json({
+        success: false,
+        message: "Staff member not found",
+      });
+    }
+
+    application.assignedTo = staff._id;
+    application.assignedBy = req.admin._id;
+    application.assignedAt = new Date();
+
+    await application.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Application assigned successfully",
+      application,
+    });
+  } catch (error) {
+    console.error("Assign application error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to assign application",
+    });
+  }
+};
+
+
+
 
 export const getApplicationById = async (req, res) => {
   try {
@@ -352,4 +405,7 @@ export const getApplicationById = async (req, res) => {
     });
   }
 };
+
+
+
 
