@@ -1,11 +1,21 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
 import SideBar from "./SideBar";
-
+import { useAppContext } from "../context/AppContext";
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
+
+  const { admin } = useAppContext();
+
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [location.pathname]);
+
+  const dashboardTitle =
+    admin?.role === "hod" ? "HOD Dashboard" : "Staff Dashboard";
 
   return (
     <div className="min-h-screen bg-[#f4f7f6]">
@@ -14,12 +24,13 @@ const AdminLayout = () => {
         <button
           onClick={() => setSidebarOpen(true)}
           className="rounded-lg p-2 text-gray-700 hover:bg-gray-100"
+          aria-label="Open sidebar"
         >
           <Menu size={24} />
         </button>
 
         <h1 className="text-lg font-bold text-[#086b2f]">
-          HOD Dashboard
+          {dashboardTitle}
         </h1>
 
         <div className="h-8 w-8 rounded-full bg-[#dcece2]" />
@@ -55,7 +66,7 @@ const AdminLayout = () => {
       </aside>
 
       {/* Main */}
-      <main className="min-h-screen lg:ml-[298px]">
+      <main className="min-h-screen pt-16 lg:ml-[298px] lg:pt-0">
         <Outlet />
       </main>
     </div>
