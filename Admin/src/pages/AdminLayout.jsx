@@ -33,7 +33,6 @@ const AdminLayout = () => {
           {dashboardTitle}
         </h1>
 
-        <div className="h-8 w-8 rounded-full bg-[#dcece2]" />
       </header>
 
       {/* Mobile Overlay */}
