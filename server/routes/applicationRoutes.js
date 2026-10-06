@@ -7,6 +7,7 @@ import {
   getAllApplicationsForAdmin,
   getApplicationById,
   getApplications,
+  getMyAssignedApplications,
   uploadDocuments,
 } from "../controllers/applicationControllers.js";
 import auth from "../middleware/auth.js";
@@ -52,5 +53,8 @@ applicationRouter.get("/:applicationId", adminAuth, getApplicationById);
 
 // HOD assigns/reassigns an application to a staff member
 applicationRouter.patch("/:applicationId/assign", adminAuth, assignApplication);
+
+// Logged-in staff gets their assigned applications
+applicationRouter.get("/my-assigned", adminAuth, getMyAssignedApplications);
 
 export default applicationRouter;
