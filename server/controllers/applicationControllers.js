@@ -379,7 +379,7 @@ export const assignApplication = async (req, res) => {
 
 
 
-const getMyAssignedApplications = async (req, res) => {
+ export const getMyAssignedApplications = async (req, res) => {
   try {
     const applications = await Application.find({
       assignedTo: req.admin._id,
