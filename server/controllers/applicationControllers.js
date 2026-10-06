@@ -375,6 +375,33 @@ export const assignApplication = async (req, res) => {
   }
 };
 
+
+
+
+
+const getMyAssignedApplications = async (req, res) => {
+  try {
+    const applications = await Application.find({
+      assignedTo: req.admin._id,
+    })
+      .populate("assignedTo", "fullName email staffId")
+      .sort({ assignedAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      applications,
+    });
+  } catch (error) {
+    console.error("Get assigned applications error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch assigned applications",
+    });
+  }
+};
+
+
 export const getApplicationById = async (req, res) => {
   try {
     const { applicationId } = req.params;
