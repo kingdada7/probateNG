@@ -345,7 +345,7 @@ export const assignApplication = async (req, res) => {
       });
     }
 
-    const staff = await Admin.findById(staffId);
+    const staff = await Admin.findOne({staffId});
 
     if (!staff) {
       return res.status(404).json({
