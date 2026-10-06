@@ -325,7 +325,7 @@ export const getAllApplicationsForAdmin = async (req, res) => {
 };
 
 
-const assignApplication = async (req, res) => {
+export const assignApplication = async (req, res) => {
   try {
     const { applicationId } = req.params;
     const { staffId } = req.body;
