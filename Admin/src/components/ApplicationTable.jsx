@@ -262,6 +262,17 @@ const ApplicationTable = () => {
           No applications found.
         </div>
       )}
+
+      {showAssignModal && (
+        <AssignApplicationModal
+          application={selectedApplication}
+          staff={staff}
+          onClose={() => {
+            setShowAssignModal(false);
+            setSelectedApplication(null);
+          }}
+        />
+      )}
     </div>
   );
 };
