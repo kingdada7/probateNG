@@ -1,6 +1,6 @@
 import React from "react";
 import { Bell } from "lucide-react";
-import { useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../context/AppContext";
 
 const StaffDashboardHeader = () => {
   const { admin } = useAppContext();

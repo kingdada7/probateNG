@@ -46,6 +46,10 @@ const adminSchema = new mongoose.Schema(
       enum: ["pending", "approved", "rejected"],
       default: "pending",
     },
+
+
+
+    
   },
   { timestamps: true },
 );

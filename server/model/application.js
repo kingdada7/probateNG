@@ -251,6 +251,23 @@ const applicationSchema = new mongoose.Schema(
       trim: true,
     },
 
+    assignedTo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Admin",
+      default: null,
+    },
+
+    assignedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Admin",
+      default: null,
+    },
+
+    assignedAt: {
+      type: Date,
+      default: null,
+    },
+
     currentStep: {
       type: Number,
       default: 1,
