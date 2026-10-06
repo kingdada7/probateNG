@@ -2,6 +2,7 @@ import express from "express";
 import {
   applicantInformation,
   applicationType,
+  assignApplication,
   deceasedInformation,
   getAllApplicationsForAdmin,
   getApplicationById,
@@ -49,5 +50,7 @@ applicationRouter.get(
 
 applicationRouter.get("/:applicationId", adminAuth, getApplicationById);
 
+// HOD assigns/reassigns an application to a staff member
+applicationRouter.patch("/:applicationId/assign", adminAuth, assignApplication);
 
 export default applicationRouter;
