@@ -19,19 +19,23 @@ const ApplicationTable = () => {
           return;
         }
 
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+
         const [applicationsResponse, staffResponse] = await Promise.all([
           axios.get("/api/application/get-admin-applications", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers,
           }),
 
           axios.get("/api/hodadmin/staff", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers,
           }),
         ]);
+
+        console.log("APPLICATIONS:", applicationsResponse.data);
+
+        console.log("STAFF:", staffResponse.data);
 
         if (applicationsResponse.data.success) {
           setApplications(applicationsResponse.data.applications || []);
@@ -50,7 +54,6 @@ const ApplicationTable = () => {
 
     getData();
   }, [axios]);
-
   const handleViewApplication = (applicationId) => {
     navigate(`/admin/dashboard/applications/${applicationId}`);
   };
@@ -208,7 +211,6 @@ const ApplicationTable = () => {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-
                         setSelectedApplication(app);
                         setShowAssignModal(true);
                       }}
