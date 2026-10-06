@@ -3,6 +3,8 @@ import {
   Users,
   ShieldUser,
   Landmark,
+  FileText,
+  ClipboardList,
   LogOut,
 } from "lucide-react";
 import React from "react";
@@ -10,8 +12,17 @@ import { NavLink } from "react-router";
 import { useAppContext } from "../context/AppContext";
 
 const SideBar = () => {
-  const { setToken, setAdmin, navigate, axios } = useAppContext();
-  const links = [
+  const {
+    admin,
+    setToken,
+    setAdmin,
+    navigate,
+    axios,
+  } = useAppContext();
+
+  const isHOD = admin?.role === "hod";
+
+  const hodLinks = [
     {
       name: "Dashboard",
       icon: LayoutDashboard,
@@ -35,6 +46,27 @@ const SideBar = () => {
     },
   ];
 
+  const staffLinks = [
+    {
+      name: "Dashboard",
+      icon: LayoutDashboard,
+      to: "/admin/dashboard/staff",
+      end: true,
+    },
+    {
+      name: "Applications",
+      icon: FileText,
+      to: "/admin/dashboard/applications",
+    },
+    {
+      name: "Assigned Applications",
+      icon: ClipboardList,
+      to: "/admin/dashboard/assigned-applications",
+    },
+  ];
+
+  const links = isHOD ? hodLinks : staffLinks;
+
   const logout = () => {
     localStorage.removeItem("token");
     delete axios.defaults.headers.common["Authorization"];
@@ -46,18 +78,18 @@ const SideBar = () => {
   };
 
   return (
-    <aside className="w-64 min-h-screen bg-[#086b2f] py-6">
-      <nav className="flex flex-col gap-1 px-2">
+    <aside className="flex min-h-screen w-full flex-col bg-[#086b2f] py-6">
+      {/* Navigation */}
+      <nav className="flex flex-1 flex-col gap-1 px-2">
         {links.map(({ name, icon: Icon, to, end }) => (
           <NavLink
             key={name}
             to={to}
             end={end}
             className={({ isActive }) =>
-              `relative flex items-center gap-4 h-12 px-4 rounded-md text-sm font-medium transition-all duration-200
-              ${
+              `relative flex h-12 items-center gap-4 rounded-md px-4 text-sm font-medium transition-all duration-200 ${
                 isActive
-                  ? "bg-[#237d47] text-white before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:bg-yellow-400 before:rounded-l-md"
+                  ? "bg-[#237d47] text-white before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:rounded-l-md before:bg-yellow-400"
                   : "text-white/90 hover:bg-white/10"
               }`
             }
@@ -67,13 +99,15 @@ const SideBar = () => {
           </NavLink>
         ))}
       </nav>
-      {/* Logout */}{" "}
+
+      {/* Logout */}
       <div className="mt-auto px-2">
         <button
           onClick={logout}
-          className="w-full flex items-center gap-4 h-12 px-4 rounded-md text-sm font-medium text-white/90 hover:bg-red-500/20 hover:text-white transition-all duration-200 cursor-pointer"
+          className="flex h-12 w-full cursor-pointer items-center gap-4 rounded-md px-4 text-sm font-medium text-white/90 transition-all duration-200 hover:bg-red-500/20 hover:text-white"
         >
-          <LogOut size={19} strokeWidth={2} /> <span>Logout</span>{" "}
+          <LogOut size={19} strokeWidth={2} />
+          <span>Logout</span>
         </button>
       </div>
     </aside>
