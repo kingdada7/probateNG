@@ -1,11 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 
-
 const ApplicationTable = () => {
   const { axios, navigate } = useAppContext();
 
   const [applications, setApplications] = useState([]);
+  const [staff, setStaff] = useState([]);
+  const [selectedApplication, setSelectedApplication] = useState(null);
+  const [showAssignModal, setShowAssignModal] = useState(false);
+
+
+  useEffect(() => {
+  const getData = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
+
+      if (!token) {
+        console.error("No admin token found");
+        return;
+      }
+
+      const [applicationsResponse, staffResponse] = await Promise.all([
+        axios.get("/api/application/get-admin-applications", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
+
+        axios.get("/api/hodadmin/staff", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
+      ]);
+
+      if (applicationsResponse.data.success) {
+        setApplications(
+          applicationsResponse.data.applications || [],
+        );
+      }
+
+      if (staffResponse.data.success) {
+        setStaff(staffResponse.data.staff || []);
+      }
+    } catch (error) {
+      console.error(
+        "Error fetching HOD data:",
+        error.response?.data || error,
+      );
+    }
+  };
+
+  getData();
+}, [axios]);
 
   const handleViewApplication = (applicationId) => {
     navigate(`/admin/dashboard/applications/${applicationId}`);

@@ -103,6 +103,33 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+const fetchAllApplicationsForAdmin = async () => {
+  try {
+    const token = localStorage.getItem("adminToken");
+
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/api/application/get-admin-applications`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Fetch admin applications error:",
+      error.response?.data || error.message,
+    );
+
+    throw error;
+  }
+};
+
+
+
+
   const logout = () => {
     setToken(null);
     setAdmin(null);
@@ -121,6 +148,7 @@ export const AppProvider = ({ children }) => {
     fetchPendingStaff,
     updateStaffStatus,
     fetchAllStaff,
+    fetchAllApplicationsForAdmin,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
