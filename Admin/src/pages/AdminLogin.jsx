@@ -2,16 +2,10 @@ import React from "react";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { IoShieldCheckmark } from "react-icons/io5";
 import { CiLock } from "react-icons/ci";
-
-import { Eye, EyeOff, Key } from "lucide-react";
-
-import { Link, useNavigate } from "react-router";
-
-import { MdAlternateEmail } from "react-icons/md";
-
 import { useEffect, useState } from "react";
 import HodLogin from "../components/HodLogin";
 import StaffLogin from "../components/StaffLogin";
+import loginImage from "../assets/download.jpeg";
 
 const AdminLogin = ({ tier }) => {
   const [adminTier, setAdminTier] = useState(tier || "standard");
@@ -24,9 +18,9 @@ const AdminLogin = ({ tier }) => {
             <div className="inline-flex items-center justify-center mb-6">
               <div className="w-24 h-24  rounded-sm flex items-center justify-center">
                 <img
-                  className="w-16 h-16 object-cover mx-auto "
-                  src="/src/assets/download.jpeg"
-                  alt=""
+                  className="w-16 h-16 object-cover mx-auto"
+                  src={loginImage}
+                  alt="FCT Customary Court of Nigeria"
                 />
               </div>
             </div>
