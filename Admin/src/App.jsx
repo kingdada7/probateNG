@@ -13,6 +13,7 @@ import { Toaster } from "react-hot-toast";
 import UserMangement from "./pages/UserMangement";
 import AdminManagement from "./pages/AdminManagement";
 import ApplicationDetails from "./components/ApplicationDetails";
+import AssignedApplications from "./pages/AssignedApplications";
 
 const App = () => {
   return (
@@ -72,13 +73,17 @@ const App = () => {
 
           {/* STAFF */}
           <Route
-          path="staff"
-          element={
-            <ProtectedRoute allowedRole="staff">
-              <StaffDashboard />
-            </ProtectedRoute>
-          }
-        />
+            path="staff"
+            element={
+              <ProtectedRoute allowedRole="staff">
+                <StaffDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/dashboard/assigned-applications"
+            element={<AssignedApplications />}
+          />
         </Route>
 
         {/* Unknown route */}

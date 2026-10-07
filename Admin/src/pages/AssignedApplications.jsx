@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Search, Eye, FileText } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
 
-const StaffAssignedApplications = () => {
+const AssignedApplications = () => {
   const { axios, navigate } = useAppContext();
 
   const [applications, setApplications] = useState([]);
@@ -246,4 +246,4 @@ const StaffAssignedApplications = () => {
   );
 };
 
-export default StaffAssignedApplications;
+export default AssignedApplications;
