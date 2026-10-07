@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ClipboardList,
   Clock3,
@@ -11,31 +11,84 @@ import ActionRequired from "../components/ActionRequired";
 import RecentActivity from "../components/RecentActivity";
 import QuickActions from "../components/QuickActions";
 import StaffStatCard from "../components/StaffStatCard";
+import { useAppContext } from "../context/AppContext";
 
 
 const StaffDashboard = () => {
+
+  const { axios } = useAppContext();
+
+const [applications, setApplications] = useState([]);
+const [loading, setLoading] = useState(true);
+
+
+useEffect(() => {
+  const fetchAssignedApplications = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
+
+      if (!token) {
+        console.error("No admin token found");
+        return;
+      }
+
+      const { data } = await axios.get(
+        "/api/application/my-assigned",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (data.success) {
+        setApplications(data.applications || []);
+      }
+    } catch (error) {
+      console.error(
+        "Error fetching assigned applications:",
+        error.response?.data || error,
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchAssignedApplications();
+}, [axios]);
+
+const assignedCount = applications.length;
+
+const pendingReviewCount = applications.filter(
+  (app) => app.status === "Pending Review",
+).length;
+
+const completedCount = applications.filter(
+  (app) => app.status === "Approved",
+).length;
+
   const stats = [
     {
       title: "Assigned to Me",
-      value: 24,
+      value: assignedCount,
       description: "+3 this week",
       icon: ClipboardList,
     },
     {
       title: "Pending Review",
-      value: 8,
+      value: pendingReviewCount,
       description: "4 due today",
       icon: Clock3,
     },
-    {
-      title: "Awaiting Documents",
-      value: 5,
-      description: "2 updated today",
-      icon: FileWarning,
-    },
+    // {
+    //   title: "Awaiting Documents",
+    //   value: 5,
+    //   description: "2 updated today",
+    //   icon: FileWarning,
+    // },
     {
       title: "Completed",
-      value: 37,
+      value: completedCount,
       description: "+6 this week",
       icon: CheckCircle2,
     },
