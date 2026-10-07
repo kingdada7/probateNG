@@ -60,8 +60,8 @@ const HodRegister = () => {
               <div className="w-24 h-24  rounded-sm flex items-center justify-center">
                 <img
                   className="w-16 h-16 object-cover mx-auto"
-                  src="/src/assets/download.jpeg"
-                  alt=""
+                  src={loginImage}
+                  alt="FCT Customary Court of Nigeria"
                 />
               </div>
             </div>
