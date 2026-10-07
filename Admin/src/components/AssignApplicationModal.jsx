@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, UserCheck } from "lucide-react";
-import { useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../context/AppContext";
 
 const AssignApplicationModal = ({
   application,

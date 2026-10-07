@@ -127,6 +127,29 @@ const fetchAllApplicationsForAdmin = async () => {
   }
 };
 
+const fetchMyAssignedApplications = async () => {
+  try {
+    const token = localStorage.getItem("adminToken");
+
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/api/application/my-assigned`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Fetch my assigned applications error:",
+      error.response?.data || error.message,
+    );
+
+    throw error;
+  }
+};
 
 
 
@@ -149,6 +172,7 @@ const fetchAllApplicationsForAdmin = async () => {
     updateStaffStatus,
     fetchAllStaff,
     fetchAllApplicationsForAdmin,
+    fetchMyAssignedApplications
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
