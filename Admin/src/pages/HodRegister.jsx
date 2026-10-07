@@ -59,7 +59,7 @@ const HodRegister = () => {
             <div className="inline-flex items-center justify-center mb-6">
               <div className="w-24 h-24  rounded-sm flex items-center justify-center">
                 <img
-                  className="w-16 h-16 object-cover mx-auto"
+                  className="h-16 w-16 object-contain mx-auto"
                   src={loginImage}
                   alt="FCT Customary Court of Nigeria"
                 />
