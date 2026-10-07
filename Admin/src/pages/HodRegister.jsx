@@ -9,9 +9,10 @@ import { Eye, EyeOff, Key } from "lucide-react";
 import { PiUserCheck } from "react-icons/pi";
 import { MdAlternateEmail } from "react-icons/md";
 import { useEffect, useState } from "react";
-import { Link, } from "react-router";
+import { Link } from "react-router";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
+import loginImage from "../assets/download.jpeg";
 
 const HodRegister = () => {
   const { axios, navigate } = useAppContext();
@@ -28,11 +29,9 @@ const HodRegister = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    
     if (password !== confirmPassword) {
       return toast.error("Passwords do not match");
     }
-
 
     try {
       const { data } = await axios.post("/api/hodadmin/hodregister", {
@@ -60,7 +59,7 @@ const HodRegister = () => {
             <div className="inline-flex items-center justify-center mb-6">
               <div className="w-24 h-24  rounded-sm flex items-center justify-center">
                 <img
-                  className="w-16 h-16 object-cover mx-auto "
+                  className="w-16 h-16 object-cover mx-auto"
                   src="/src/assets/download.jpeg"
                   alt=""
                 />
