@@ -53,11 +53,11 @@ const SideBar = () => {
       to: "/admin/dashboard/staff",
       end: true,
     },
-    {
-      name: "Applications",
-      icon: FileText,
-      to: "/admin/dashboard/applications",
-    },
+    // {
+    //   name: "Applications",
+    //   icon: FileText,
+    //   to: "/admin/dashboard/applications",
+    // },
     {
       name: "Assigned Applications",
       icon: ClipboardList,
