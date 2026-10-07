@@ -22,7 +22,7 @@ const StaffDashboardHeader = () => {
         </p>
 
         <h1 className="mt-1 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-          Good morning, {admin?.fullName?.split(" ")[0] || "Staff"} 👋
+          Good morning, {admin?.fullName?.split(" ")[0] || "Staff"} 
         </h1>
 
         <p className="mt-1 text-sm text-gray-500">
