@@ -17,6 +17,7 @@ app.use(
   cors({
     origin: [
       "https://probatengcitzenportal.vercel.app",
+      "https://probateng-admin.vercel.app",
       "http://localhost:5173",
       "http://localhost:5174",
     ],
