@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import AssignApplicationModal from "./AssignApplicationModal";
 
-
 const ApplicationTable = () => {
   const { axios, navigate } = useAppContext();
 
@@ -11,6 +10,7 @@ const ApplicationTable = () => {
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [showAssignModal, setShowAssignModal] = useState(false);
 
+  // ================= FETCH APPLICATIONS + STAFF =================
   useEffect(() => {
     const getData = async () => {
       try {
@@ -29,18 +29,15 @@ const ApplicationTable = () => {
           axios.get("/api/application/get-admin-applications", {
             headers,
           }),
-
           axios.get("/api/hodadmin/staff", {
             headers,
           }),
         ]);
 
-        console.log("APPLICATIONS:", applicationsResponse.data);
-
-        console.log("STAFF:", staffResponse.data);
-
         if (applicationsResponse.data.success) {
-          setApplications(applicationsResponse.data.applications || []);
+          setApplications(
+            applicationsResponse.data.applications || [],
+          );
         }
 
         if (staffResponse.data.success) {
@@ -56,77 +53,43 @@ const ApplicationTable = () => {
 
     getData();
   }, [axios]);
+
+  // ================= VIEW APPLICATION =================
   const handleViewApplication = (applicationId) => {
     navigate(`/admin/dashboard/applications/${applicationId}`);
   };
 
-  useEffect(() => {
-    const getApplications = async () => {
-      try {
-        const token = localStorage.getItem("adminToken");
-
-        console.log("ADMIN TOKEN:", token);
-
-        if (!token) {
-          console.error("No admin token found");
-          return;
-        }
-
-        const { data } = await axios.get(
-          "/api/application/get-admin-applications",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-
-        console.log("APPLICATION API DATA:", data);
-
-        if (data.success) {
-          setApplications(data.applications || []);
-        }
-      } catch (error) {
-        console.error(
-          "Error fetching applications:",
-          error.response?.data || error,
-        );
-      }
-    };
-
-    getApplications();
-  }, [axios]);
-
+  // ================= STATUS BADGE =================
   function statusBadge(status) {
     switch (status) {
       case "Draft":
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gray-50 text-gray-600 border border-gray-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0"></span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 text-[11px] font-semibold text-gray-600 sm:px-3 sm:text-xs">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gray-400" />
             Draft
           </span>
         );
 
       case "Pending Review":
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-700 sm:px-3 sm:text-xs">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />
             Pending Review
           </span>
         );
 
       case "Approved":
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 shrink-0"></span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-green-200 bg-green-50 px-2.5 py-1 text-[11px] font-semibold text-green-700 sm:px-3 sm:text-xs">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-green-500" />
             Approved
           </span>
         );
 
       case "Rejected":
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600 border border-red-200">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-semibold text-red-600 sm:px-3 sm:text-xs">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" />
             Rejected
           </span>
         );
@@ -137,39 +100,50 @@ const ApplicationTable = () => {
   }
 
   return (
-    <div>
-      <div className="flex items-center justify-between px-6 py-5">
-        <h2 className="text-lg font-bold text-gray-900">
-          Recent Application Activity
-        </h2>
+    <div className="w-full overflow-hidden bg-white">
 
-        <button className="text-sm font-semibold hover:underline">
+      {/* ================= HEADER ================= */}
+      <div className="flex flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5">
+        <div>
+          <h2 className="text-base font-bold text-gray-900 sm:text-lg">
+            Recent Application Activity
+          </h2>
+
+          <p className="mt-0.5 text-xs text-gray-500 sm:text-sm">
+            Review and manage probate applications
+          </p>
+        </div>
+
+        <button
+          type="button"
+          className="self-start text-xs font-semibold text-gray-700 transition hover:underline sm:text-sm"
+        >
           View All
         </button>
       </div>
 
-      {/* Desktop Table */}
-      <div className="hidden sm:block overflow-x-auto">
-        <table className="w-full">
+      {/* ================= DESKTOP TABLE ================= */}
+      <div className="hidden w-full overflow-x-auto sm:block">
+        <table className="w-full min-w-[760px]">
           <thead>
-            <tr className="border-b border-gray-100 cursor-pointer hover:bg-gray-50">
-              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+            <tr className="border-b border-gray-100">
+              <th className="whitespace-nowrap px-4 py-3.5 text-left text-[10px] font-semibold uppercase tracking-widest text-gray-400 md:px-6">
                 Reference ID
               </th>
 
-              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+              <th className="whitespace-nowrap px-4 py-3.5 text-left text-[10px] font-semibold uppercase tracking-widest text-gray-400 md:px-6">
                 Application Name
               </th>
 
-              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+              <th className="whitespace-nowrap px-4 py-3.5 text-left text-[10px] font-semibold uppercase tracking-widest text-gray-400 md:px-6">
                 Submission Date
               </th>
 
-              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+              <th className="whitespace-nowrap px-4 py-3.5 text-left text-[10px] font-semibold uppercase tracking-widest text-gray-400 md:px-6">
                 Status
               </th>
 
-              <th className="px-6 py-3.5 text-left text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
+              <th className="whitespace-nowrap px-4 py-3.5 text-left text-[10px] font-semibold uppercase tracking-widest text-gray-400 md:px-6">
                 Action
               </th>
             </tr>
@@ -180,43 +154,56 @@ const ApplicationTable = () => {
               <tr
                 key={app._id}
                 onClick={() => handleViewApplication(app._id)}
-                className="transition-colors cursor-pointer  hover:bg-gray-50"
+                className="cursor-pointer transition-colors hover:bg-gray-50"
               >
-                <td className="px-6 py-4 font-mono text-xs text-gray-500 whitespace-nowrap">
-                  {app._id}
+                {/* Reference */}
+                <td className="max-w-[180px] px-4 py-4 font-mono text-[11px] text-gray-500 md:px-6 md:text-xs">
+                  <span className="block truncate">
+                    {app._id}
+                  </span>
                 </td>
 
-                <td className="px-6 py-4 text-sm font-semibold text-gray-800 whitespace-nowrap">
-                  {app.deceased?.deceasedName
-                    ? `Estate of Late ${app.deceased.deceasedName}`
-                    : "Probate Application"}
+                {/* Application */}
+                <td className="max-w-[250px] px-4 py-4 md:px-6">
+                  <span className="block truncate text-sm font-semibold text-gray-800">
+                    {app.deceased?.deceasedName
+                      ? `Estate of Late ${app.deceased.deceasedName}`
+                      : "Probate Application"}
+                  </span>
                 </td>
 
-                <td className="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
+                {/* Date */}
+                <td className="whitespace-nowrap px-4 py-4 text-xs text-gray-600 md:px-6 sm:text-sm">
                   {new Date(app.createdAt).toLocaleDateString()}
                 </td>
 
-                <td className="px-6 py-4">{statusBadge(app.status)}</td>
+                {/* Status */}
+                <td className="px-4 py-4 md:px-6">
+                  {statusBadge(app.status)}
+                </td>
 
-                <td className="px-6 py-4">
+                {/* Actions */}
+                <td className="px-4 py-4 md:px-6">
                   <div className="flex items-center gap-3">
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleViewApplication(app._id);
                       }}
-                      className="text-sm font-bold hover:underline whitespace-nowrap"
+                      className="whitespace-nowrap text-xs font-bold text-gray-700 hover:underline sm:text-sm"
                     >
                       View Details
                     </button>
 
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedApplication(app);
                         setShowAssignModal(true);
                       }}
-                      className="text-sm font-semibold text-green-700 hover:underline whitespace-nowrap"
+                      className="whitespace-nowrap text-xs font-semibold text-green-700 hover:underline sm:text-sm"
                     >
                       {app.assignedTo ? "Reassign" : "Assign"}
                     </button>
@@ -228,46 +215,97 @@ const ApplicationTable = () => {
         </table>
       </div>
 
-      {/* Mobile Cards */}
-      <div className="sm:hidden divide-y divide-gray-100">
+      {/* ================= MOBILE CARDS ================= */}
+      <div className="divide-y divide-gray-100 sm:hidden">
         {applications.map((app) => (
-          <div key={app._id} className="px-5 py-4 space-y-2.5">
+          <div
+            key={app._id}
+            className="px-4 py-4 transition-colors hover:bg-gray-50"
+          >
+            {/* Top */}
             <div className="flex items-start justify-between gap-3">
-              <div>
-                <div className="text-sm font-bold text-gray-800">
+              <div className="min-w-0">
+                <h3 className="truncate text-sm font-bold text-gray-800">
                   {app.deceased?.deceasedName
                     ? `Estate of Late ${app.deceased.deceasedName}`
                     : "Probate Application"}
-                </div>
+                </h3>
 
-                <div className="font-mono text-[11px] text-gray-400 mt-0.5">
+                <p className="mt-1 truncate font-mono text-[10px] text-gray-400">
                   {app._id}
-                </div>
+                </p>
               </div>
 
-              {statusBadge(app.status)}
+              <div className="shrink-0">
+                {statusBadge(app.status)}
+              </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-gray-500">
-                {new Date(app.createdAt).toLocaleDateString()}
-              </span>
+            {/* Details */}
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <div>
+                <p className="text-[10px] uppercase tracking-wide text-gray-400">
+                  Submitted
+                </p>
 
-              <button className="text-sm font-bold hover:underline">
+                <p className="mt-0.5 text-xs text-gray-600">
+                  {new Date(app.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+
+              {app.assignedTo && (
+                <div className="text-right">
+                  <p className="text-[10px] uppercase tracking-wide text-gray-400">
+                    Assigned
+                  </p>
+
+                  <p className="mt-0.5 text-xs font-medium text-gray-700">
+                    {app.assignedTo.fullName || "Staff"}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Actions */}
+            <div className="mt-4 flex items-center gap-4 border-t border-gray-100 pt-3">
+              <button
+                type="button"
+                onClick={() => handleViewApplication(app._id)}
+                className="text-xs font-bold text-gray-700 hover:underline"
+              >
                 View Details
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedApplication(app);
+                  setShowAssignModal(true);
+                }}
+                className="text-xs font-semibold text-green-700 hover:underline"
+              >
+                {app.assignedTo ? "Reassign" : "Assign"}
               </button>
             </div>
           </div>
         ))}
       </div>
 
+      {/* ================= EMPTY STATE ================= */}
       {applications.length === 0 && (
-        <div className="px-6 py-10 text-center text-gray-500">
-          No applications found.
+        <div className="px-5 py-12 text-center sm:px-6">
+          <p className="text-sm font-medium text-gray-600">
+            No applications found.
+          </p>
+
+          <p className="mt-1 text-xs text-gray-400">
+            Applications submitted by citizens will appear here.
+          </p>
         </div>
       )}
 
-      {showAssignModal && (
+      {/* ================= ASSIGN MODAL ================= */}
+      {showAssignModal && selectedApplication && (
         <AssignApplicationModal
           application={selectedApplication}
           staff={staff}
