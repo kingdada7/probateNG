@@ -5,6 +5,7 @@ import { useAppContext } from "../context/AppContext";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import loginImage from "../assets/download.jpeg";
 
 const StaffRegister = () => {
   const { axios, navigate } = useAppContext();
@@ -19,34 +20,30 @@ const StaffRegister = () => {
 
   const [error, setError] = useState("");
 
+  const handleRegister = async (e) => {
+    e.preventDefault();
 
-const handleRegister = async (e) => {
-  e.preventDefault();
+    if (password !== confirmPassword) {
+      return toast.error("Passwords do not match");
+    }
 
-  if (password !== confirmPassword) {
-    return toast.error("Passwords do not match");
-  }
+    try {
+      const { data } = await axios.post("/api/staff/staffregister", {
+        fullName: fullname,
+        email,
+        password,
+        confirmPassword,
+        staffId,
+        department,
+      });
 
-  try {
-    const { data } = await axios.post("/api/staff/staffregister", {
-      fullName: fullname,
-      email,
-      password,
-      confirmPassword,
-      staffId,
-      department,
-    });
+      toast.success(data.message);
 
-    toast.success(data.message);
-
-    navigate("/admin");
-  } catch (error) {
-    toast.error(
-      error.response?.data?.message || "Registration failed"
-    );
-  }
-};
-
+      navigate("/admin");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Registration failed");
+    }
+  };
 
   return (
     <div>
@@ -56,7 +53,7 @@ const handleRegister = async (e) => {
             <div className="inline-flex items-center justify-center mb-6">
               <div className="w-24 h-24  rounded-sm flex items-center justify-center">
                 <img
-                  className="w-16 h-16 object-cover mx-auto "
+                  className="w-16 h-16 object-cover mx-auto"
                   src="/src/assets/download.jpeg"
                   alt=""
                 />
@@ -92,7 +89,6 @@ const handleRegister = async (e) => {
             </div>
             <div className="p-8 space-y-6">
               <form className="space-y-4" onSubmit={handleRegister}>
-              
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-bold text-gray-900 mb-2">
